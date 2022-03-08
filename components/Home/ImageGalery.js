@@ -1,4 +1,4 @@
-import React, {useState, useEffect, memo} from "react";
+import React, {useEffect, memo} from "react";
 import {
 	Text,
 	View,
@@ -19,8 +19,9 @@ import {
 	setPreviewVisible,
 } from "../features/imageLibrary/imageSlice";
 import PreviewImages from "./PreviewImages";
+import {formatDataForGrid} from "../../Helpers/formatDataForGrid";
 
-function AddListing(props) {
+function ImageGalery(props) {
 	const warnTextVisible = useSelector((state) => {
 		return state.readImage.warnTextVisible;
 	});
@@ -51,6 +52,7 @@ function AddListing(props) {
 	useEffect(() => {
 		getPhotos()
 			.then((res) => {
+				res = formatDataForGrid(res, numColumns);
 				dispatch(readFromLibrary(res));
 			})
 			.catch((err) => console.log(err));
@@ -64,7 +66,7 @@ function AddListing(props) {
 	const renderItem = ({item}) => {
 		return <ImageItem source={item.uri} id={item.id} />;
 	};
-	// console.log(savedIds);
+
 	return (
 		<View style={styles.screen}>
 			<View style={styles.topContainer}>
@@ -133,4 +135,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default memo(AddListing);
+export default memo(ImageGalery);
