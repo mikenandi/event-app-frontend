@@ -1,77 +1,74 @@
 import React, {memo} from "react";
 import {View, Text, Image, StyleSheet} from "react-native";
-import Card from "../Card";
 import color from "../colors";
 import {Entypo} from "@expo/vector-icons";
 import {add_comma} from "../../Helpers/addCommaToNumber";
+import {Body, BodyS, Caption, HeadingS} from "../Typography";
+import {MaterialIcons} from "@expo/vector-icons";
 
 function Listing(props) {
 	var price = props.price;
 
 	return (
-		<Card style={styles.card}>
+		<View style={styles.card}>
+			<View style={styles.locationContainer}>
+				<MaterialIcons name='location-pin' size={16} color={color.dimblack} />
+				<BodyS style={styles.location}>
+					2011 Morehouse Dr NW, Atlanta, GA 30314
+				</BodyS>
+			</View>
 			<View style={styles.topContainer}>
-				<Image
-					source={require("../../assets/house3.jpeg")}
-					style={styles.propetyImage}
-				/>
-				<View style={styles.detailsContainer}>
-					<Text style={styles.priceValue}>
-						<Text style={styles.curencyName}>TZS</Text> {add_comma(price)}
-					</Text>
-					<Text style={styles.location}>
-						<Entypo name='location-pin' size={15} color={color.primary} />
-						lorem lorem lorem lorem
-					</Text>
+				<View>
+					<Image
+						source={require("../../assets/house3.jpeg")}
+						style={styles.propetyImage}
+					/>
+					<View style={styles.rentalStatusText} />
+					<BodyS style={styles.propertyType}>apartment</BodyS>
+				</View>
 
-					<View style={styles.avatarTenantNameContainer}>
-						<Image
-							source={require("../../assets/mike.jpg")}
-							style={styles.avatar}
-						/>
-						<Text style={styles.tenantName}>Mwakipembe S.</Text>
-					</View>
+				<View style={styles.detailsContainer}>
+					<Body style={styles.price}>TZS {add_comma(price)}</Body>
+					<Entypo name='dots-three-vertical' size={14} color={color.dimblack} />
+				</View>
+
+				<View style={styles.amenityContainer}>
+					<Caption style={styles.amenitynumber}>3 Rooms</Caption>
+					<Entypo name='dot-single' size={10} color={color.dimblack} />
+					<Caption style={styles.amenitynumber}>2 Bathrooms</Caption>
 				</View>
 			</View>
-			<View style={styles.startEndRentContainer}>
-				<View style={styles.nameContainer}>
-					<Text style={styles.nameText}>START</Text>
-					<Text style={styles.startDate}>10.10.2021</Text>
-				</View>
-				<View style={styles.leftDaysContainer}>
-					<Text style={styles.endLabel}>END</Text>
-					<Text style={styles.endDate}>10.4.2022</Text>
-				</View>
-			</View>
-		</Card>
+		</View>
 	);
 }
 
 const styles = StyleSheet.create({
 	card: {
-		width: "95%",
 		backgroundColor: "white",
-		marginHorizontal: 8,
-		marginVertical: 4,
-		padding: 10,
-		borderRadius: 10,
+		marginBottom: 5,
 	},
 	topContainer: {
-		flexDirection: "row",
 		marginBottom: 10,
 	},
-	propetyImage: {flex: 1, width: 120, height: 120, borderRadius: 10},
-	detailsContainer: {flex: 1, marginLeft: 8, marginVertical: 12},
-	curencyName: {
-		fontSize: 14,
+	propetyImage: {flex: 1, width: "100%", height: 200},
+	detailsContainer: {
+		marginHorizontal: 10,
+		marginVertical: 5,
+		flexDirection: "row",
+		justifyContent: "space-between",
 	},
-	priceValue: {
-		fontSize: 24,
-		color: color.dimblack,
-	},
+
 	location: {
-		color: "gray",
-		fontSize: 12,
+		color: color.dimblack,
+		marginLeft: 3,
+	},
+	locationContainer: {
+		flexDirection: "row",
+		alignItems: "center",
+		paddingTop: 10,
+		paddingBottom: 10,
+		marginLeft: 12,
+		alignItems: "center",
 	},
 	left: {
 		color: "crimson",
@@ -97,51 +94,44 @@ const styles = StyleSheet.create({
 		fontSize: 12,
 		fontWeight: "700",
 	},
-	statusIcon: {
-		marginLeft: 15,
+	rentalStatusText: {
+		position: "absolute",
+		padding: 6,
+		backgroundColor: color.primary,
+		borderRadius: 6,
+		left: 10,
+		top: 10,
 	},
-	startEndRentContainer: {
-		padding: 3,
-		borderTopWidth: 1,
-		borderTopColor: color.grey,
+	amenity: {
 		flexDirection: "row",
+		marginHorizontal: 12,
+		alignItems: "baseline",
 	},
-	nameContainer: {
-		flex: 1,
-	},
-	leftDaysContainer: {
-		flex: 1,
-	},
-	nameText: {
+	amenitynumber: {
 		color: color.dimblack,
-		marginLeft: 15,
+		marginHorizontal: 4,
+		textTransform: "lowercase",
 	},
-	startDate: {
-		color: color.dimblack,
-		fontWeight: "700",
-		marginLeft: 15,
-	},
-	endLabel: {
-		color: color.dimblack,
-		marginLeft: 30,
-	},
-	endDate: {color: color.dimblack, fontWeight: "700", marginLeft: 30},
-	avatar: {
-		width: 35,
-		height: 35,
-		borderRadius: 17.5,
-	},
-	avatarTenantNameContainer: {
-		marginTop: 10,
+	amenityContainer: {
 		flexDirection: "row",
-		paddingVertical: 5,
-		paddingHorizontal: 2,
+		alignItems: "center",
+		marginLeft: 10,
 	},
-	tenantName: {
-		marginLeft: 4,
-		marginTop: 8,
-		color: color.dimblack,
+	dotsepator: {
+		textAlign: "center",
+	},
+	price: {
+		textTransform: "capitalize",
 		fontWeight: "bold",
+	},
+	propertyType: {
+		position: "absolute",
+		backgroundColor: "white",
+		textTransform: "capitalize",
+		padding: 5,
+		borderRadius: 2,
+		right: 3,
+		bottom: 3,
 	},
 });
 

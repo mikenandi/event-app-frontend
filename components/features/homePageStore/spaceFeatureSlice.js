@@ -1,58 +1,59 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
-	roomCount: "1",
+	bedRoomCount: "1",
+	bathRoomCount: "1",
 	masterBedroom: false,
-	showYesMasterBedroom: false,
-	showNoMasterBedroom: false,
+	dinningArea: false,
+	kitchenSpace: false,
 };
 
 export const spaceFeatureSlice = createSlice({
 	name: "space feautes actions",
 	initialState,
 	reducers: {
-		changedText: (state, action) => {
-			state.roomCount = action.payload;
+		addBedRoom: (state) => {
+			let value = Number(state.bedRoomCount) + 1;
+			state.bedRoomCount = value.toString();
 		},
-		addRoom: (state) => {
-			let value = Number(state.roomCount) + 1;
-			state.roomCount = value.toString();
+		minusBedRoom: (state) => {
+			let value = Number(state.bedRoomCount) - 1;
+			if (value < 1) state.bedRoomCount;
+			else state.bedRoomCount = value.toString();
 		},
-		minusRoom: (state) => {
-			let value = Number(state.roomCount) - 1;
-			if (value < 1) {
-				state.roomCount;
-			} else {
-				state.roomCount = value.toString();
-			}
+		addBathRoom: (state) => {
+			let value = Number(state.bathRoomCount) + 1;
+			state.bathRoomCount = value.toString();
 		},
-		yesMasterBedroom: (state) => {
-			if (state.masterBedroom) {
-				state.masterBedroom = false;
-				state.showYesMasterBedroom = false;
-			} else {
-				state.masterBedroom = true;
-				state.showYesMasterBedroom = true;
-			}
+		minusBathRoom: (state) => {
+			let value = Number(state.bathRoomCount) - 1;
+			if (value < 1) state.bathRoomCount;
+			else state.bathRoomCount = value.toString();
 		},
-		noMasterBedroom: (state) => {
-			if (state.masterBedroom) {
-				state.masterBedroom = false;
-				state.showNoMasterBedroom = true;
-			} else {
-				state.masterBedroom = false;
-				state.showNoMasterBedroom = false;
-			}
+		masterBedroomStatus: (state) => {
+			if (state.masterBedroom) state.masterBedroom = false;
+			else state.masterBedroom = true;
+		},
+		dinningAreaStatus: (state) => {
+			if (state.dinningArea) state.dinningArea = false;
+			else state.dinningArea = true;
+		},
+		kitchenSpaceStatus: (state) => {
+			if (state.kitchenSpace) state.kitchenSpace = false;
+			else state.kitchenSpace = true;
 		},
 	},
 });
 
 export const {
 	changedText,
-	addRoom,
-	minusRoom,
-	yesMasterBedroom,
-	noMasterBedroom,
+	addBedRoom,
+	minusBedRoom,
+	addBathRoom,
+	minusBathRoom,
+	masterBedroomStatus,
+	dinningAreaStatus,
+	kitchenSpaceStatus,
 } = spaceFeatureSlice.actions;
 
 export default spaceFeatureSlice.reducer;

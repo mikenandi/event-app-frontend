@@ -1,22 +1,15 @@
 import React, {memo} from "react";
-import {
-	View,
-	Text,
-	StyleSheet,
-	FlatList,
-	TouchableOpacity,
-	Modal,
-} from "react-native";
+import {View, StyleSheet, Modal} from "react-native";
 import color from "../colors";
-import {Ionicons} from "@expo/vector-icons";
+import {Entypo} from "@expo/vector-icons";
 import {useDispatch} from "react-redux";
-import {
-	hidePropertyType,
-	showFeatures,
-} from "../features/homePageStore/homePageSlice";
-import {propertyTypes} from "./propertyTypes";
+import {hidePropertyType} from "../features/homePageStore/homePageSlice";
 import {useSelector} from "react-redux";
 import Features from "./Features";
+import {HeadingS, Body} from "../Typography";
+import TypeApartment from "./TypeApartment";
+import TypeHouse from "./TypeHouse";
+import TypeRoom from "./TypeRoom";
 
 function PropertyType(props) {
 	const featureVisible = useSelector((state) => {
@@ -29,42 +22,28 @@ function PropertyType(props) {
 		dispatch(hidePropertyType());
 	};
 
-	const handleShowFeatures = () => {
-		dispatch(showFeatures());
-	};
-
-	const renderItem = ({item}) => {
-		return (
-			<TouchableOpacity activeOpacity={0.5} onPress={handleShowFeatures}>
-				<View style={styles.typeContainer}>
-					<Text style={styles.typeText}>{item.type}</Text>
-				</View>
-			</TouchableOpacity>
-		);
-	};
-
 	return (
 		<View style={styles.screen}>
 			<View style={styles.topContainer}>
-				<Ionicons
-					name='arrow-back-outline'
-					size={28}
+				<Entypo
+					name='cross'
+					size={30}
 					onPress={handleBackToHomePage}
 					style={styles.backArrow}
 				/>
 			</View>
 			<View style={styles.bottomContainer}>
 				<View style={styles.questionContainer}>
-					<Text style={styles.questionText}>
+					<HeadingS style={styles.questionText}>
 						What kind of a property do you have?
-					</Text>
+					</HeadingS>
 				</View>
-				<FlatList
-					data={propertyTypes}
-					keyExtractor={(item) => item.id}
-					renderItem={renderItem}
-					contentContainerStyle={styles.spacingContainer}
-				/>
+
+				<View style={styles.typesContainer}>
+					<TypeApartment />
+					<TypeHouse />
+					<TypeRoom />
+				</View>
 			</View>
 			<Modal visible={featureVisible} transparent={false}>
 				<Features />
@@ -73,7 +52,7 @@ function PropertyType(props) {
 	);
 }
 const styles = StyleSheet.create({
-	screen: {flex: 1},
+	screen: {flex: 1, backgroundColor: color.primary},
 	topContainer: {
 		backgroundColor: color.primary,
 		paddingHorizontal: 8,
@@ -86,34 +65,21 @@ const styles = StyleSheet.create({
 		color: color.dimblack,
 	},
 	questionText: {
-		fontSize: 30,
-		fontWeight: "700",
 		color: "white",
-	},
-	typeContainer: {
-		margin: 5,
-		borderWidth: 1,
-		padding: 10,
-		borderColor: color.whitegrey,
-		width: "95%",
-	},
-	typeText: {
-		fontSize: 22,
-		color: color.dimblack,
-		fontWeight: "700",
-	},
-	bottomContainer: {},
-	spacingContainer: {
-		paddingBottom: 80,
-		justifyContent: "center",
-		paddingTop: 15,
-		paddingHorizontal: 10,
+
+		textTransform: "lowercase",
 	},
 	questionContainer: {
-		borderBottomWidth: 2,
-		borderBottomColor: color.primary,
 		backgroundColor: color.primary,
-		padding: 10,
+		paddingVertical: 20,
+		paddingHorizontal: 10,
+	},
+	typesContainer: {
+		backgroundColor: "white",
+		borderTopRightRadius: 25,
+		borderTopLeftRadius: 25,
+		height: "100%",
+		paddingTop: 30,
 	},
 });
 

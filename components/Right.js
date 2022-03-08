@@ -33,14 +33,14 @@ export default function Right(props) {
 			<MaterialIcons
 				name='search'
 				size={28}
-				color={color.dimblack}
+				color='black'
 				style={styles.iconSearch}
 				onPress={handleSearchVisible}
 			/>
 			<AntDesign
 				name='plussquareo'
 				size={26}
-				color={color.dimblack}
+				color='black'
 				style={styles.iconPlus}
 				onPress={handlePropertyTypeVisible}
 			/>

@@ -29,10 +29,10 @@ export default function Request(props) {
 			</View>
 			<View style={styles.buttonContainer}>
 				<View style={styles.rejectButton}>
-					<Text style={styles.rejectText}>Reject</Text>
+					<Text style={styles.rejectText}>REJECT</Text>
 				</View>
 				<View style={styles.acceptButton}>
-					<Text style={styles.acceptText}>Accept</Text>
+					<Text style={styles.acceptText}>ACCEPT</Text>
 				</View>
 			</View>
 		</Card>

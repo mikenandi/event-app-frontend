@@ -4,26 +4,29 @@ import {AntDesign} from "@expo/vector-icons";
 import color from "../colors";
 import {useDispatch} from "react-redux";
 import {useSelector} from "react-redux";
-import {addRoom, minusRoom} from "../features/homePageStore/spaceFeatureSlice";
+import {
+	addBathRoom,
+	minusBathRoom,
+} from "../features/homePageStore/spaceFeatureSlice";
+import {BodyS, Body} from "../Typography";
 
 function Bathrooms(props) {
 	const roomCount = useSelector((state) => {
-		return state.spaceFeatures.roomCount;
+		return state.spaceFeatures.bathRoomCount;
 	});
-
 	const dispatch = useDispatch();
 
 	const handleAddRoom = () => {
-		dispatch(addRoom());
+		dispatch(addBathRoom());
 	};
 
 	const handleMinusRoom = () => {
-		dispatch(minusRoom());
+		dispatch(minusBathRoom());
 	};
-
+	console.log(roomCount);
 	return (
 		<View style={styles.questionContainer}>
-			<Text style={styles.questionText}>Bathrooms</Text>
+			<Body>Bathrooms</Body>
 			<View style={styles.numberContainer}>
 				<AntDesign
 					name='minus'
@@ -31,7 +34,7 @@ function Bathrooms(props) {
 					onPress={handleMinusRoom}
 					color={color.dimblack}
 				/>
-				<Text style={styles.roomsCountText}>{roomCount}</Text>
+				<Body style={styles.roomsCountText}>{roomCount}</Body>
 
 				<AntDesign
 					name='plus'
@@ -51,7 +54,6 @@ const styles = StyleSheet.create({
 	roomsCountText: {
 		marginHorizontal: 10,
 		padding: 5,
-		fontSize: 20,
 	},
 	questionContainer: {
 		flexDirection: "row",
@@ -59,11 +61,6 @@ const styles = StyleSheet.create({
 		justifyContent: "space-around",
 		margin: 5,
 		padding: 10,
-		width: "95%",
-	},
-	questionText: {
-		fontSize: 16,
-		color: color.dimblack,
 	},
 });
 

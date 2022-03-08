@@ -1,10 +1,9 @@
 import {Text, View, StyleSheet} from "react-native";
-import color from "./colors";
-
+import {HeadingS} from "./Typography";
 export default function Logo(props) {
 	return (
 		<View style={styles.container}>
-			<Text style={styles.titleText}>{props.title}</Text>
+			<HeadingS style={styles.titleText}>{props.title}</HeadingS>
 		</View>
 	);
 }
@@ -14,9 +13,6 @@ const styles = StyleSheet.create({
 		marginLeft: 10,
 	},
 	titleText: {
-		color: color.dimblack,
-		fontSize: 18,
-		fontFamily: "serif",
-		fontWeight: "700",
+		color: "black",
 	},
 });

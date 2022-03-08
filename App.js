@@ -39,7 +39,7 @@ function MyTabs() {
 							color={color}
 						/>
 					),
-					headerLeft: () => <Left title='My properties' />,
+					headerLeft: () => <Left title='gudsurvey' />,
 					headerRight: () => <Right />,
 				}}
 			/>

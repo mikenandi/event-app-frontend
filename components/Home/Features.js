@@ -1,13 +1,5 @@
-import React, {memo, useState} from "react";
-import {
-	View,
-	Text,
-	StyleSheet,
-	TouchableOpacity,
-	Pressable,
-	TextInput,
-	Modal,
-} from "react-native";
+import React, {memo} from "react";
+import {View, StyleSheet} from "react-native";
 import color from "../colors";
 import {Ionicons} from "@expo/vector-icons";
 import {useDispatch} from "react-redux";
@@ -15,11 +7,11 @@ import {hideFeatures} from "../features/homePageStore/homePageSlice";
 import Bathrooms from "./Bathrooms";
 import Bedrooms from "./BedRooms";
 import MasterBedroom from "./MasterBedroom";
-import Map from "../MapView";
-import {GooglePlacesAutocomplete} from "react-native-google-places-autocomplete";
+import {ButtonText, HeadingS, Body} from "../Typography";
+import KitchenSpace from "./KitchenSpace";
+import DiningArea from "./DiningArea";
 
 function Features(props) {
-	const [showMap, setShowMap] = useState(false);
 	const dispatch = useDispatch();
 
 	const handleHideFeatures = () => {
@@ -35,36 +27,29 @@ function Features(props) {
 					onPress={handleHideFeatures}
 					style={styles.backArrow}
 				/>
-				<Text style={styles.nextText}>Next</Text>
+				<ButtonText style={styles.nextText}>Next</ButtonText>
+			</View>
+			<View style={styles.titleContainer}>
+				<HeadingS style={styles.titleText}>
+					Tell us more about the space you have?
+				</HeadingS>
 			</View>
 			<View style={styles.bottomContainer}>
-				<View style={styles.titleContainer}>
-					<Text style={styles.titleText}>
-						Tell us more about the space you have?
-					</Text>
-				</View>
-				{/* <Bedrooms />
+				<Bedrooms />
 				<Bathrooms />
 
-				<View>
+				<View style={styles.spaceSpecificContainer}>
+					<Body style={styles.spaceSpecificText}>space specifics</Body>
 					<MasterBedroom />
-				</View> */}
-				<View>
-					<Text
-						style={styles.showMapButton}
-						onPress={() => setShowMap(!showMap)}>
-						Pick from map
-					</Text>
+					<KitchenSpace />
+					<DiningArea />
 				</View>
-				<Modal transparent={false} visible={showMap} animationType='fade'>
-					<Map />
-				</Modal>
 			</View>
 		</View>
 	);
 }
 const styles = StyleSheet.create({
-	screen: {flex: 1},
+	screen: {flex: 1, backgroundColor: color.primary},
 	topContainer: {
 		backgroundColor: color.primary,
 		paddingHorizontal: 8,
@@ -77,8 +62,6 @@ const styles = StyleSheet.create({
 		color: color.dimblack,
 	},
 	titleText: {
-		fontSize: 30,
-		fontWeight: "700",
 		color: "white",
 	},
 	titleContainer: {
@@ -89,22 +72,26 @@ const styles = StyleSheet.create({
 	},
 	nextText: {
 		backgroundColor: "white",
-		paddingVertical: 5,
+		paddingVertical: 10,
 		paddingHorizontal: 10,
 		color: color.dimblack,
-		fontSize: 20,
 		fontWeight: "700",
 		borderRadius: 3,
 		marginRight: 10,
 	},
-	showMapButton: {
-		margin: 20,
-		fontSize: 18,
-		width: 140,
-		height: 40,
-		padding: 5,
-		textAlign: "center",
-		backgroundColor: color.secondary,
+	bottomContainer: {
+		backgroundColor: "white",
+		height: "100%",
+		borderTopRightRadius: 30,
+		borderTopLeftRadius: 30,
+		paddingTop: 25,
+	},
+	spaceSpecificText: {
+		marginVertical: 5,
+		fontWeight: "bold",
+	},
+	spaceSpecificContainer: {
+		marginHorizontal: 45,
 	},
 });
 
