@@ -11,12 +11,12 @@ function Listing(props) {
 
 	return (
 		<View style={styles.card}>
-			<View style={styles.locationContainer}>
+			{/* <View style={styles.locationContainer}>
 				<MaterialIcons name='location-pin' size={16} color={color.dimblack} />
 				<BodyS style={styles.location}>
 					2011 Morehouse Dr NW, Atlanta, GA 30314
 				</BodyS>
-			</View>
+			</View> */}
 			<View style={styles.topContainer}>
 				<View>
 					<Image
@@ -28,7 +28,10 @@ function Listing(props) {
 				</View>
 
 				<View style={styles.detailsContainer}>
-					<Body style={styles.price}>TZS {add_comma(price)}</Body>
+					<View>
+						<Body style={styles.price}>TZS {add_comma(price)}</Body>
+						<Caption style={styles.location}>Sinza,Dar Es Salaam</Caption>
+					</View>
 					<Entypo name='dots-three-vertical' size={14} color={color.dimblack} />
 				</View>
 
@@ -36,6 +39,8 @@ function Listing(props) {
 					<Caption style={styles.amenitynumber}>3 Rooms</Caption>
 					<Entypo name='dot-single' size={10} color={color.dimblack} />
 					<Caption style={styles.amenitynumber}>2 Bathrooms</Caption>
+					<Entypo name='dot-single' size={10} color={color.dimblack} />
+					<Caption style={styles.amenitynumber}>Furnished</Caption>
 				</View>
 			</View>
 		</View>
@@ -46,11 +51,12 @@ const styles = StyleSheet.create({
 	card: {
 		backgroundColor: "white",
 		marginBottom: 5,
+		marginTop: 2,
 	},
 	topContainer: {
 		marginBottom: 10,
 	},
-	propetyImage: {flex: 1, width: "100%", height: 200},
+	propetyImage: {flex: 1, width: "100%", height: 240},
 	detailsContainer: {
 		marginHorizontal: 10,
 		marginVertical: 5,
