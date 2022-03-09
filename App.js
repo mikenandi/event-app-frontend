@@ -10,11 +10,11 @@ import Requests from "./components/Requests";
 import Payments from "./components/Payment";
 import color from "./components/colors";
 import {StatusBar, Text} from "react-native";
-import Left from "./components/Left";
-import Right from "./components/Right";
+import Left from "./components/TopBar/Left";
+import Right from "./components/TopBar/Right";
 import Profile from "./components/Profile";
 import {Provider} from "react-redux";
-import {store} from "./components/features";
+import {store} from "./components/Store";
 
 const Tab = createBottomTabNavigator();
 

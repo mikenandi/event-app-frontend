@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {
 	saveSelectedIds,
 	removeSelectedId,
-} from "../features/imageLibrary/imageSlice";
+} from "../Store/imageLibrary/imageSlice";
 
 function ImageItem(props) {
 	const [selected, setSelected] = useState(false);

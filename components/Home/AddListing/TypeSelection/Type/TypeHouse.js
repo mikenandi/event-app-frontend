@@ -1,13 +1,10 @@
 import React, {memo} from "react";
 import {View, StyleSheet, TouchableOpacity} from "react-native";
-import color from "../colors";
-
+import color from "../../../../colors";
 import {MaterialIcons} from "@expo/vector-icons";
-
 import {useDispatch} from "react-redux";
-import {showFeatures} from "../features/homePageStore/homePageSlice";
-
-import {Body} from "../Typography";
+import {showFeatures} from "../../../../Store/homePageStore/modalSlice";
+import {Body} from "../../../../Typography";
 
 function TypeHouse(props) {
 	const dispatch = useDispatch();

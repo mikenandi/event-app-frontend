@@ -9,7 +9,7 @@ import {
 import {useState} from "react";
 import Card from "../Card";
 import {Foundation} from "@expo/vector-icons";
-import TenantProfile from "../TenantProfile";
+import TenantProfile from "./TenantProfile";
 import color from "../colors";
 
 export default function Transaction(props) {

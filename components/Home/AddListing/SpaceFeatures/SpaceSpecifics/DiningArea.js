@@ -1,15 +1,15 @@
 import React, {memo} from "react";
 import {View, StyleSheet, Pressable} from "react-native";
-import color from "../colors";
+import color from "../../../../colors";
 import {useDispatch} from "react-redux";
-import {dinningAreaStatus} from "../features/homePageStore/spaceFeatureSlice";
+import {dinningAreaStatus} from "../../../../Store/homePageStore/spaceFeatureSlice";
 import {useSelector} from "react-redux";
 import {MaterialIcons} from "@expo/vector-icons";
-import {BodyS} from "../Typography";
+import {BodyS} from "../../../../Typography";
 
 function DiningArea(props) {
 	const show = useSelector((state) => {
-		return state.spaceFeatures.dinningArea;
+		return state.spaceFeature.dinningArea;
 	});
 
 	const dispatch = useDispatch();

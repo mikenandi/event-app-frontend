@@ -1,17 +1,17 @@
 import React, {memo} from "react";
 import {View, Text, StyleSheet} from "react-native";
 import {AntDesign} from "@expo/vector-icons";
-import color from "../colors";
+import color from "../../../../../colors";
 import {useDispatch, useSelector} from "react-redux";
 import {
 	addBedRoom,
 	minusBedRoom,
-} from "../features/homePageStore/spaceFeatureSlice";
-import {Body, BodyS} from "../Typography";
+} from "../../../../../Store/homePageStore/spaceFeatureSlice";
+import {Body, BodyS} from "../../../../../Typography";
 
 function AddRooms(props) {
 	const roomCount = useSelector((state) => {
-		return state.spaceFeatures.bedRoomCount;
+		return state.spaceFeature.bedRoomCount;
 	});
 	const dispatch = useDispatch();
 

@@ -1,15 +1,15 @@
 import React, {memo} from "react";
 import {View, StyleSheet} from "react-native";
-import color from "../colors";
+import color from "../../../colors";
 import {Ionicons} from "@expo/vector-icons";
 import {useDispatch} from "react-redux";
-import {hideFeatures} from "../features/homePageStore/homePageSlice";
-import Bathrooms from "./Bathrooms";
-import Bedrooms from "./BedRooms";
-import MasterBedroom from "./MasterBedroom";
-import {ButtonText, HeadingS, Body} from "../Typography";
-import KitchenSpace from "./KitchenSpace";
-import DiningArea from "./DiningArea";
+import {hideFeatures} from "../../../Store/homePageStore/modalSlice";
+import Bathrooms from "./RoomCount/Bathrooms";
+import Bedrooms from "./RoomCount/BedRooms";
+import MasterBedroom from "./SpaceSpecifics/MasterBedroom";
+import {ButtonText, HeadingS, Body} from "../../../Typography";
+import KitchenSpace from "./SpaceSpecifics/KitchenSpace";
+import DiningArea from "./SpaceSpecifics/DiningArea";
 
 function Features(props) {
 	const dispatch = useDispatch();

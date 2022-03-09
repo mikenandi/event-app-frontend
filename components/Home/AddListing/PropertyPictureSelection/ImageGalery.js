@@ -8,18 +8,18 @@ import {
 	Modal,
 } from "react-native";
 import {Ionicons} from "@expo/vector-icons";
-import {getPhotos} from "../../Helpers/getPhotos";
-import ImageItem from "./ImageItem";
-import color from "../colors";
+import {getPhotos} from "../../../../Helpers/getPhotos";
+import ImageItem from "../ImageItem";
+import color from "../../../colors";
 import {useSelector} from "react-redux";
 import {useDispatch} from "react-redux";
 import {
 	clearPhotos,
 	readFromLibrary,
 	setPreviewVisible,
-} from "../features/imageLibrary/imageSlice";
+} from "../Store/imageLibrary/imageSlice";
 import PreviewImages from "./PreviewImages";
-import {formatDataForGrid} from "../../Helpers/formatDataForGrid";
+import {formatDataForGrid} from "../../../../Helpers/formatDataForGrid";
 
 function ImageGalery(props) {
 	const warnTextVisible = useSelector((state) => {

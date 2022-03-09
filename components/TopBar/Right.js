@@ -1,23 +1,19 @@
-import {View, Text, StyleSheet, Modal} from "react-native";
+import {memo} from "react";
+import {View, StyleSheet, Modal} from "react-native";
 import {MaterialIcons} from "@expo/vector-icons";
 import {AntDesign} from "@expo/vector-icons";
-import color from "../components/colors";
-import Search from "./Home/Search";
-import AddListing from "./Home/AddListing";
-import {
-	showSearch,
-	showPropertyType,
-} from "./features/homePageStore/homePageSlice";
+import Search from "../Home/SearchModal/Search";
+import {showSearch, showPropertyType} from "../Store/homePageStore/modalSlice";
 import {useSelector, useDispatch} from "react-redux";
-import PropertyType from "./Home/PropertyType";
+import PropertyType from "../Home/AddListing/TypeSelection/PropertyType";
 
-export default function Right(props) {
+function Right(props) {
 	const searchVisible = useSelector((state) => {
-		return state.homePage.searchVisible;
+		return state.showModal.searchVisible;
 	});
 
 	const propertyTypeVisible = useSelector((state) => {
-		return state.homePage.propertyTypeVisible;
+		return state.showModal.propertyTypeVisible;
 	});
 
 	const dispatch = useDispatch();
@@ -68,3 +64,5 @@ const styles = StyleSheet.create({
 		marginRight: 25,
 	},
 });
+
+export default memo(Right);

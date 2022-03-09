@@ -2,7 +2,7 @@ import {View, Text, Image, StyleSheet} from "react-native";
 import {MaterialIcons} from "@expo/vector-icons";
 import {Ionicons} from "@expo/vector-icons";
 import {FontAwesome5} from "@expo/vector-icons";
-import color from "../components/colors";
+import color from "../colors";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 
 export default function TenantProfile(props) {
@@ -17,7 +17,7 @@ export default function TenantProfile(props) {
 						style={styles.backButton}
 					/>
 					<Image
-						source={require("../assets/mike.jpg")}
+						source={require("./../../assets/mike.jpg")}
 						style={styles.avatarBig}
 					/>
 				</View>

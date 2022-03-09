@@ -1,9 +1,9 @@
-import {Text, View, StyleSheet} from "react-native";
-import {HeadingS} from "./Typography";
+import {View, StyleSheet} from "react-native";
+import {HeadingS} from "../Typography";
 export default function Logo(props) {
 	return (
 		<View style={styles.container}>
-			<HeadingS style={styles.titleText}>{props.title}</HeadingS>
+			<HeadingS style={styles.titleText}>gudsurvey</HeadingS>
 		</View>
 	);
 }

@@ -1,33 +1,33 @@
 import React, {memo} from "react";
-import {View, StyleSheet, Pressable} from "react-native";
-import color from "../colors";
+import {View, Text, StyleSheet, Pressable} from "react-native";
+import color from "../../../../colors";
 import {useDispatch} from "react-redux";
-import {kitchenSpaceStatus} from "../features/homePageStore/spaceFeatureSlice";
+import {masterBedroomStatus} from "../../../../Store/homePageStore/spaceFeatureSlice";
 import {useSelector} from "react-redux";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
-import {BodyS} from "../Typography";
+import {BodyS} from "../../../../Typography";
 
-function KitchenSpace(props) {
+function MasterBedroom(props) {
 	const show = useSelector((state) => {
-		return state.spaceFeatures.kitchenSpace;
+		return state.spaceFeature.masterBedroom;
 	});
 
 	const dispatch = useDispatch();
 
 	const handleActive = () => {
-		dispatch(kitchenSpaceStatus());
+		dispatch(masterBedroomStatus());
 	};
 
 	return (
 		<Pressable activeOpacity={0.5} onPress={handleActive}>
 			<View style={styles.typeContainer}>
 				<MaterialCommunityIcons
-					name='stove'
+					name='bed-king'
 					size={24}
 					color={show ? color.secondary : color.grey}
 					style={show ? styles.activeIcon : styles.inactiveIcon}
 				/>
-				<BodyS style={styles.typeText}>kitchen space</BodyS>
+				<BodyS style={styles.typeText}>Master bedroom</BodyS>
 			</View>
 		</Pressable>
 	);
@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "center",
 	},
-
 	inactiveIcon: {
 		marginRight: 10,
 		padding: 9,
@@ -60,4 +59,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default memo(KitchenSpace);
+export default memo(MasterBedroom);

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {View, FlatList, StyleSheet} from "react-native";
-import List from "./List2";
+import List from "./List";
 import DATA from "../data";
 
 export default function Listings() {

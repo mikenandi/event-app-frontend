@@ -1,19 +1,19 @@
 import React, {memo} from "react";
 import {View, StyleSheet, Modal} from "react-native";
-import color from "../colors";
+import color from "../../../colors";
 import {Entypo} from "@expo/vector-icons";
 import {useDispatch} from "react-redux";
-import {hidePropertyType} from "../features/homePageStore/homePageSlice";
+import {hidePropertyType} from "../../../Store/homePageStore/modalSlice";
 import {useSelector} from "react-redux";
-import Features from "./Features";
-import {HeadingS, Body} from "../Typography";
-import TypeApartment from "./TypeApartment";
-import TypeHouse from "./TypeHouse";
-import TypeRoom from "./TypeRoom";
+import Features from "../SpaceFeatures/Features";
+import {HeadingS, Body} from "../../../Typography";
+import TypeApartment from "./Type/TypeApartment";
+import TypeHouse from "./Type/TypeHouse";
+import TypeRoom from "./Type/TypeRoom";
 
 function PropertyType(props) {
 	const featureVisible = useSelector((state) => {
-		return state.homePage.featureVisible;
+		return state.showModal.featureVisible;
 	});
 
 	const dispatch = useDispatch();

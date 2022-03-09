@@ -6,9 +6,9 @@ import {
 	clearSelectedImages,
 	getSelectedImages,
 	setPreviewVisible,
-} from "../features/imageLibrary/imageSlice";
+} from "../Store/imageLibrary/imageSlice";
 import {Ionicons} from "@expo/vector-icons";
-import color from "../colors";
+import color from "../../../colors";
 import {useEffect} from "react";
 import PreveiwImageItem from "./PreveiwImageItem";
 
