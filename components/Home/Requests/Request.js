@@ -1,7 +1,8 @@
 import {View, Text, StyleSheet, Image} from "react-native";
-import Card from "../Card";
-import color from "../colors";
-import {add_comma} from "../../Helpers/addCommaToNumber";
+import Card from "../../Card";
+import color from "../../colors";
+import {add_comma} from "../../../Helpers/addCommaToNumber";
+import {ButtonText, Body, BodyS, Caption} from "../../Typography";
 
 export default function Request(props) {
 	var price = props.price;
@@ -10,29 +11,27 @@ export default function Request(props) {
 			<View style={styles.detailsContainer}>
 				<View style={styles.avatarContainer}>
 					<Image
-						source={require("../../assets/mike.jpg")}
+						source={require("../../../assets/mike.jpg")}
 						style={styles.avatar}
 					/>
 				</View>
 				<View style={styles.requestDetails}>
-					<Text style={styles.name}>{props.tenantName}</Text>
+					<BodyS style={styles.name}>{props.tenantName}</BodyS>
 					<View style={styles.ageGenderContainer}>
-						<Text style={styles.ageGenderText}>Male | 24</Text>
+						<Caption style={styles.ageGenderText}>Male | 24</Caption>
 					</View>
 				</View>
 				<View style={styles.offerContainer}>
-					<Text style={styles.offerPriceText}>
-						<Text style={styles.currencyName}>TZS</Text> {add_comma(price)}
-					</Text>
-					<Text style={styles.durationText}>For 6 months</Text>
+					<Body style={styles.offerPriceText}>TZS {add_comma(price)}</Body>
+					<Caption style={styles.durationText}>For 6 months</Caption>
 				</View>
 			</View>
 			<View style={styles.buttonContainer}>
 				<View style={styles.rejectButton}>
-					<Text style={styles.rejectText}>REJECT</Text>
+					<ButtonText style={styles.rejectText}>REJECT</ButtonText>
 				</View>
 				<View style={styles.acceptButton}>
-					<Text style={styles.acceptText}>ACCEPT</Text>
+					<ButtonText style={styles.acceptText}>ACCEPT</ButtonText>
 				</View>
 			</View>
 		</Card>
@@ -55,13 +54,11 @@ const styles = StyleSheet.create({
 	},
 	avatarContainer: {
 		flex: 1,
-
 		alignItems: "center",
 		justifyContent: "center",
 	},
 	name: {
-		color: color.dimblack,
-		fontWeight: "bold",
+		textTransform: "capitalize",
 	},
 
 	requestDetails: {flex: 2},
@@ -73,7 +70,7 @@ const styles = StyleSheet.create({
 		marginBottom: 15,
 	},
 	ageGenderText: {
-		color: "gray",
+		color: color.dimblack,
 		marginLeft: 4,
 	},
 	occupationText: {
@@ -85,46 +82,40 @@ const styles = StyleSheet.create({
 		flex: 2,
 	},
 	offerPriceText: {
-		fontSize: 24,
-		color: color.dimblack,
+		fontWeight: "bold",
 	},
 	durationText: {
-		color: "gray",
+		color: color.dimblack,
 	},
 	currencyName: {
 		fontSize: 14,
 	},
 	buttonContainer: {
 		flexDirection: "row",
-		justifyContent: "space-between",
+		justifyContent: "space-around",
 		marginBottom: 6,
 	},
 	rejectButton: {
-		flex: 1,
 		backgroundColor: color.whitegrey,
-		marginRight: 25,
-		padding: 8,
+		marginRight: 15,
+		padding: 2,
 		alignItems: "center",
 		justifyContent: "center",
 		borderRadius: 5,
+		width: 100,
 	},
 	acceptButton: {
-		flex: 1,
 		borderRadius: 5,
-		padding: 8,
+		padding: 4,
 		alignItems: "center",
 		justifyContent: "center",
 		backgroundColor: color.primary,
 		marginRight: 10,
+		width: 100,
+		height: 30,
 	},
-	rejectText: {
-		fontSize: 14,
-		fontWeight: "700",
-		color: color.dimblack,
-	},
+	rejectText: {},
 	acceptText: {
-		fontSize: 14,
-		fontWeight: "700",
 		color: "white",
 	},
 });

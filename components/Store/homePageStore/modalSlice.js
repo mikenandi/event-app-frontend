@@ -5,6 +5,7 @@ const initialState = {
 	searchVisible: false,
 	propertyTypeVisible: false,
 	featureVisible: false,
+	requestVisible: false,
 };
 
 export const homePageSlice = createSlice({
@@ -29,6 +30,12 @@ export const homePageSlice = createSlice({
 		hideFeatures: (state) => {
 			state.featureVisible = false;
 		},
+		showRequest: (state) => {
+			state.requestVisible = true;
+		},
+		hideRequest: (state) => {
+			state.requestVisible = false;
+		},
 	},
 });
 
@@ -39,6 +46,8 @@ export const {
 	hidePropertyType,
 	showFeatures,
 	hideFeatures,
+	showRequest,
+	hideRequest,
 } = homePageSlice.actions;
 
 export default homePageSlice.reducer;

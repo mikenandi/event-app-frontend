@@ -1,11 +1,18 @@
 import {memo} from "react";
 import {View, StyleSheet, Modal} from "react-native";
-import {MaterialIcons} from "@expo/vector-icons";
+import {MaterialIcons, EvilIcons} from "@expo/vector-icons";
 import {AntDesign} from "@expo/vector-icons";
-import Search from "../Home/SearchModal/Search";
-import {showSearch, showPropertyType} from "../Store/homePageStore/modalSlice";
+import Search from "../Home/SearchModal";
+import {
+	showSearch,
+	showPropertyType,
+	showRequest,
+} from "../Store/homePageStore/modalSlice";
 import {useSelector, useDispatch} from "react-redux";
-import PropertyType from "../Home/AddListing/TypeSelection/PropertyType";
+import PropertyType from "../Home/AddListing/TypeSelection";
+import {Caption} from "../Typography";
+import color from "../colors";
+import Request from "../Home/Requests";
 
 function Right(props) {
 	const searchVisible = useSelector((state) => {
@@ -16,6 +23,10 @@ function Right(props) {
 		return state.showModal.propertyTypeVisible;
 	});
 
+	const requestVisible = useSelector((state) => {
+		return state.showModal.requestVisible;
+	});
+
 	const dispatch = useDispatch();
 
 	const handleSearchVisible = () => {
@@ -24,9 +35,25 @@ function Right(props) {
 	const handlePropertyTypeVisible = () => {
 		dispatch(showPropertyType());
 	};
+
+	const handleShowRequests = () => {
+		dispatch(showRequest());
+	};
+
 	return (
 		<View style={styles.container}>
-			<MaterialIcons
+			<View>
+				<EvilIcons
+					name='bell'
+					size={28}
+					color='black'
+					style={styles.iconSearch}
+					onPress={handleShowRequests}
+				/>
+				<View style={styles.notifyText} />
+			</View>
+
+			<EvilIcons
 				name='search'
 				size={28}
 				color='black'
@@ -35,11 +62,12 @@ function Right(props) {
 			/>
 			<AntDesign
 				name='plussquareo'
-				size={26}
+				size={24}
 				color='black'
 				style={styles.iconPlus}
 				onPress={handlePropertyTypeVisible}
 			/>
+
 			<Modal transparent={false} visible={searchVisible}>
 				<Search />
 			</Modal>
@@ -48,6 +76,9 @@ function Right(props) {
 				animationType='fade'
 				visible={propertyTypeVisible}>
 				<PropertyType />
+			</Modal>
+			<Modal transparent={false} animationType='fade' visible={requestVisible}>
+				<Request />
 			</Modal>
 		</View>
 	);
@@ -61,7 +92,15 @@ const styles = StyleSheet.create({
 		marginRight: 20,
 	},
 	iconSearch: {
-		marginRight: 25,
+		marginRight: 20,
+	},
+	notifyText: {
+		position: "absolute",
+		padding: 6,
+		backgroundColor: color.primary,
+		borderRadius: 6,
+		right: 23,
+		top: 0,
 	},
 });
 

@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View} from "react-native";
 import {FontAwesome5} from "@expo/vector-icons";
 import {FontAwesome} from "@expo/vector-icons";
-import color from "../components/colors";
+import color from "../colors";
 
 export default function Dashbord(props) {
 	return (

@@ -1,7 +1,7 @@
 import {StyleSheet} from "react-native";
-import Card from "../components/Card";
-import Summary from "../components/Summary";
-import Total from "../components/Total";
+import Card from "../Card";
+import Summary from "./Summary";
+import Total from "./Total";
 
 export default function Dashbord(props) {
 	return (

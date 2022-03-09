@@ -1,6 +1,6 @@
 import React from "react";
 import {View, Text, Image, StyleSheet} from "react-native";
-import Card from "../components/Card";
+import Card from "../Card";
 
 export default function Listings() {
 	return (

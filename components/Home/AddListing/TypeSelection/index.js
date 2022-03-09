@@ -5,7 +5,7 @@ import {Entypo} from "@expo/vector-icons";
 import {useDispatch} from "react-redux";
 import {hidePropertyType} from "../../../Store/homePageStore/modalSlice";
 import {useSelector} from "react-redux";
-import Features from "../SpaceFeatures/Features";
+import Features from "../SpaceFeatures";
 import {HeadingS, Body} from "../../../Typography";
 import TypeApartment from "./Type/TypeApartment";
 import TypeHouse from "./Type/TypeHouse";

@@ -6,7 +6,7 @@ import {MaterialIcons} from "@expo/vector-icons";
 import {Ionicons} from "@expo/vector-icons";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import Home from "./components/Home";
-import Requests from "./components/Requests";
+import Requests from "./components/Home/Requests";
 import Payments from "./components/Payment";
 import color from "./components/colors";
 import {StatusBar, Text} from "react-native";
@@ -43,7 +43,7 @@ function MyTabs() {
 					headerRight: () => <Right />,
 				}}
 			/>
-			<Tab.Screen
+			{/* <Tab.Screen
 				name='gudsurvey'
 				component={Requests}
 				options={{
@@ -54,7 +54,7 @@ function MyTabs() {
 					),
 					headerLeft: () => <Left title='Tenant requests' />,
 				}}
-			/>
+			/> */}
 
 			<Tab.Screen
 				name='Payments'

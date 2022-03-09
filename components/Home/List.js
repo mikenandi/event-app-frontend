@@ -11,12 +11,6 @@ function Listing(props) {
 
 	return (
 		<View style={styles.card}>
-			{/* <View style={styles.locationContainer}>
-				<MaterialIcons name='location-pin' size={16} color={color.dimblack} />
-				<BodyS style={styles.location}>
-					2011 Morehouse Dr NW, Atlanta, GA 30314
-				</BodyS>
-			</View> */}
 			<View style={styles.topContainer}>
 				<View>
 					<Image
