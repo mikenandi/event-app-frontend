@@ -53,11 +53,9 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
 	},
 	propetyImage: {
-		flex: 1, 
-		width: "98%", 
+		flex: 1,
+		width: "100%",
 		height: 240,
-		marginLeft: 4,
-		borderRadius: 6
 	},
 	detailsContainer: {
 		marginHorizontal: 10,
