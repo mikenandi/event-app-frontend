@@ -4,8 +4,10 @@ const initialState = {
 	addListingVisible: false,
 	searchVisible: false,
 	propertyTypeVisible: false,
-	featureVisible: false,
+	secondStepVisible: false,
 	requestVisible: false,
+	thirdStepVisible: false,
+	roomSecondStepVisible: false,
 };
 
 export const homePageSlice = createSlice({
@@ -25,16 +27,28 @@ export const homePageSlice = createSlice({
 			state.propertyTypeVisible = false;
 		},
 		showFeatures: (state) => {
-			state.featureVisible = true;
+			state.secondStepVisible = true;
 		},
 		hideFeatures: (state) => {
-			state.featureVisible = false;
+			state.secondStepVisible = false;
 		},
 		showRequest: (state) => {
 			state.requestVisible = true;
 		},
 		hideRequest: (state) => {
 			state.requestVisible = false;
+		},
+		showThirdStep: (state) => {
+			state.thirdStepVisible = true;
+		},
+		hideThirdStep: (state) => {
+			state.thirdStepVisible = false;
+		},
+		showRoomSecondStep: (state) => {
+			state.roomSecondStepVisible = true;
+		},
+		hideRoomSecondStep: (state) => {
+			state.roomSecondStepVisible = false;
 		},
 	},
 });
@@ -48,6 +62,10 @@ export const {
 	hideFeatures,
 	showRequest,
 	hideRequest,
+	showThirdStep,
+	hideThirdStep,
+	showRoomSecondStep,
+	hideRoomSecondStep,
 } = homePageSlice.actions;
 
 export default homePageSlice.reducer;

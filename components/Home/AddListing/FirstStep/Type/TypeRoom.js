@@ -1,17 +1,26 @@
 import React, {memo} from "react";
-import {View, StyleSheet, TouchableOpacity} from "react-native";
+import {View, StyleSheet, TouchableOpacity, Modal} from "react-native";
 import color from "../../../../colors";
 import {Fontisto} from "@expo/vector-icons";
-import {useDispatch} from "react-redux";
-import {showFeatures} from "../../../../Store/homePageStore/modalSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {
+	showRoomSecondStep,
+	showThirdStep,
+} from "../../../../Store/homePageStore/modalSlice";
 import {Body} from "../../../../Typography";
+import {typeRoom} from "../../../../Store/homePageStore/propertyTypesSlice";
+import RoomSecondStep from "../../RoomSecondStep";
 
 function TypeRoom(props) {
 	const dispatch = useDispatch();
 
 	const handleShowFeatures = () => {
-		dispatch(showFeatures());
+		dispatch(typeRoom());
+		dispatch(showRoomSecondStep());
 	};
+	const visible = useSelector((state) => {
+		return state.showModal.roomSecondStepVisible;
+	});
 
 	return (
 		<TouchableOpacity activeOpacity={0.5} onPress={handleShowFeatures}>
@@ -24,6 +33,9 @@ function TypeRoom(props) {
 				/>
 				<Body style={styles.typeText}>Room</Body>
 			</View>
+			<Modal transparent={false} animationType='slide' visible={visible}>
+				<RoomSecondStep />
+			</Modal>
 		</TouchableOpacity>
 	);
 }

@@ -3,7 +3,7 @@ import {View, StyleSheet} from "react-native";
 import color from "../../../colors";
 import {Ionicons} from "@expo/vector-icons";
 import {useDispatch} from "react-redux";
-import {hideFeatures} from "../../../Store/homePageStore/modalSlice";
+import {hideRoomSecondStep} from "../../../Store/homePageStore/modalSlice";
 import MasterBedroom from "./SpaceSpecifics/MasterBedroom";
 import {ButtonText, HeadingS, Body} from "../../../Typography";
 import KitchenSpace from "./SpaceSpecifics/KitchenSpace";
@@ -13,7 +13,7 @@ function Features(props) {
 	const dispatch = useDispatch();
 
 	const handleHideFeatures = () => {
-		dispatch(hideFeatures());
+		dispatch(hideRoomSecondStep());
 	};
 
 	return (
@@ -29,13 +29,13 @@ function Features(props) {
 			</View>
 			<View style={styles.titleContainer}>
 				<HeadingS style={styles.titleText}>
-					How many rooms does your house have?
+					What words describes better the room that you have ?
 				</HeadingS>
 			</View>
 			<View style={styles.bottomContainer}>
-				<MasterBedroom />
+				{/* <MasterBedroom />
 				<DiningArea />
-				<KitchenSpace />
+				<KitchenSpace /> */}
 			</View>
 		</View>
 	);

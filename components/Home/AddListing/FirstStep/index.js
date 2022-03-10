@@ -5,15 +5,16 @@ import {Entypo} from "@expo/vector-icons";
 import {useDispatch} from "react-redux";
 import {hidePropertyType} from "../../../Store/homePageStore/modalSlice";
 import {useSelector} from "react-redux";
-import Features from "../SecondStep";
+import SecondStep from "../SecondStep";
 import {HeadingS} from "../../../Typography";
 import TypeApartment from "./Type/TypeApartment";
 import TypeHouse from "./Type/TypeHouse";
 import TypeRoom from "./Type/TypeRoom";
+import ThirdStep from "../ThirdStep";
 
 function PropertyType(props) {
 	const featureVisible = useSelector((state) => {
-		return state.showModal.featureVisible;
+		return state.showModal.secondStepVisible;
 	});
 
 	const dispatch = useDispatch();
@@ -45,8 +46,8 @@ function PropertyType(props) {
 					<TypeRoom />
 				</View>
 			</View>
-			<Modal visible={featureVisible} transparent={false}>
-				<Features />
+			<Modal visible={featureVisible} transparent={false} animationType='slide'>
+				<SecondStep />
 			</Modal>
 		</View>
 	);

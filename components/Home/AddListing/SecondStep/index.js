@@ -1,18 +1,34 @@
-import React, {memo} from "react";
-import {View, StyleSheet} from "react-native";
+import React, {memo, useEffect} from "react";
+import {View, StyleSheet, TouchableOpacity, Modal} from "react-native";
 import color from "../../../colors";
 import {Ionicons} from "@expo/vector-icons";
-import {useDispatch} from "react-redux";
-import {hideFeatures} from "../../../Store/homePageStore/modalSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {
+	hideFeatures,
+	showThirdStep,
+} from "../../../Store/homePageStore/modalSlice";
 import Bathrooms from "./RoomCount/Bathrooms";
 import Bedrooms from "./RoomCount/BedRooms";
 import {ButtonText, HeadingS} from "../../../Typography";
+import ThirdStep from "../ThirdStep";
 
 function Features(props) {
+	const type = useSelector((state) => {
+		return state.propertyType.propertyType;
+	});
+
+	const thirdStepVisible = useSelector((state) => {
+		return state.showModal.thirdStepVisible;
+	});
+
 	const dispatch = useDispatch();
 
 	const handleHideFeatures = () => {
 		dispatch(hideFeatures());
+	};
+
+	const handleNextStep = () => {
+		dispatch(showThirdStep());
 	};
 
 	return (
@@ -24,17 +40,25 @@ function Features(props) {
 					onPress={handleHideFeatures}
 					style={styles.backArrow}
 				/>
-				<ButtonText style={styles.nextText}>Next</ButtonText>
+				<TouchableOpacity activeOpacity={0.9} onPress={handleNextStep}>
+					<ButtonText style={styles.nextText}>Next</ButtonText>
+				</TouchableOpacity>
 			</View>
 			<View style={styles.titleContainer}>
 				<HeadingS style={styles.titleText}>
-					How many rooms does your house have?
+					How many rooms does your {type} have?
 				</HeadingS>
 			</View>
 			<View style={styles.bottomContainer}>
 				<Bedrooms />
 				<Bathrooms />
 			</View>
+			<Modal
+				transparent={false}
+				visible={thirdStepVisible}
+				animationType='slide'>
+				<ThirdStep />
+			</Modal>
 		</View>
 	);
 }
@@ -75,7 +99,7 @@ const styles = StyleSheet.create({
 		height: "100%",
 		borderTopRightRadius: 30,
 		borderTopLeftRadius: 30,
-		paddingTop: 50,
+		paddingTop: 20,
 	},
 	spaceSpecificText: {
 		marginVertical: 5,

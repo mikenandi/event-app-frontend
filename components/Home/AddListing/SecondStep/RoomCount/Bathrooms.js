@@ -23,24 +23,24 @@ function Bathrooms(props) {
 	const handleMinusRoom = () => {
 		dispatch(minusBathRoom());
 	};
-	console.log(roomCount);
+
 	return (
-		<View style={styles.questionContainer}>
-			<HeadingS>Bathrooms</HeadingS>
+		<View style={styles.container}>
+			<Body style={styles.description}>Number of bathrooms</Body>
 			<View style={styles.numberContainer}>
 				<AntDesign
-					name='minuscircleo'
+					name='minus'
 					size={30}
 					onPress={handleMinusRoom}
-					color={color.dimblack}
+					color='black'
 					style={styles.addminusIcon}
 				/>
 				<HeadingS style={styles.roomsCountText}>{roomCount}</HeadingS>
 				<AntDesign
-					name='pluscircleo'
+					name='plus'
 					size={30}
 					onPress={handleAddRoom}
-					color={color.dimblack}
+					color='black'
 					style={styles.addminusIcon}
 				/>
 			</View>
@@ -51,19 +51,25 @@ const styles = StyleSheet.create({
 	numberContainer: {
 		flexDirection: "row",
 		alignItems: "center",
+		borderWidth: 1,
+		padding: 10,
+		width: "70%",
+		borderRadius: 5,
+		justifyContent: "space-around",
+		borderColor: color.dimblack,
 	},
 	roomsCountText: {
 		marginHorizontal: 10,
 		padding: 5,
 	},
-	questionContainer: {
-		flexDirection: "row",
-		alignItems: "center",
-		justifyContent: "space-around",
-		margin: 5,
-		padding: 10,
+	container: {
+		marginVertical: 5,
+		marginHorizontal: 25,
 	},
 	addminusIcon: {},
+	description: {
+		paddingVertical: 5,
+	},
 });
 
 export default memo(Bathrooms);

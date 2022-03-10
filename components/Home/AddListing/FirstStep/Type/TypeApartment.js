@@ -5,11 +5,13 @@ import {MaterialIcons} from "@expo/vector-icons";
 import {useDispatch} from "react-redux";
 import {showFeatures} from "../../../../Store/homePageStore/modalSlice";
 import {Body} from "../../../../Typography";
+import {typeApartment} from "../../../../Store/homePageStore/propertyTypesSlice";
 
 function TypeApartment(props) {
 	const dispatch = useDispatch();
 
 	const handleShowFeatures = () => {
+		dispatch(typeApartment());
 		dispatch(showFeatures());
 	};
 

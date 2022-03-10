@@ -5,11 +5,13 @@ import {MaterialIcons} from "@expo/vector-icons";
 import {useDispatch} from "react-redux";
 import {showFeatures} from "../../../../Store/homePageStore/modalSlice";
 import {Body} from "../../../../Typography";
+import {typeHouse} from "../../../../Store/homePageStore/propertyTypesSlice";
 
 function TypeHouse(props) {
 	const dispatch = useDispatch();
 
 	const handleShowFeatures = () => {
+		dispatch(typeHouse());
 		dispatch(showFeatures());
 	};
 

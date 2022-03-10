@@ -7,9 +7,19 @@ const initialState = {
 const propertyTypesSlice = createSlice({
 	name: "store for data property type",
 	initialState,
-	reducers: {},
+	reducers: {
+		typeApartment: (state) => {
+			state.propertyType = "apartment";
+		},
+		typeHouse: (state) => {
+			state.propertyType = "house";
+		},
+		typeRoom: (state) => {
+			state.propertyType = "room";
+		},
+	},
 });
 
-export const {} = propertyTypesSlice.actions;
+export const {typeApartment, typeHouse, typeRoom} = propertyTypesSlice.actions;
 
 export default propertyTypesSlice.reducer;
