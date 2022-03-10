@@ -1,6 +1,8 @@
+import {memo} from "react";
 import {View, StyleSheet} from "react-native";
 import {HeadingS} from "../Typography";
-export default function Logo(props) {
+import color from "../colors";
+function Logo(props) {
 	return (
 		<View style={styles.container}>
 			<HeadingS style={styles.titleText}>gudsurvey</HeadingS>
@@ -12,7 +14,7 @@ const styles = StyleSheet.create({
 	container: {
 		marginLeft: 10,
 	},
-	titleText: {
-		color: "black",
-	},
+	titleText: {},
 });
+
+export default memo(Logo);

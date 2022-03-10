@@ -5,8 +5,8 @@ import {Entypo} from "@expo/vector-icons";
 import {useDispatch} from "react-redux";
 import {hidePropertyType} from "../../../Store/homePageStore/modalSlice";
 import {useSelector} from "react-redux";
-import Features from "../SpaceFeatures";
-import {HeadingS, Body} from "../../../Typography";
+import Features from "../SecondStep";
+import {HeadingS} from "../../../Typography";
 import TypeApartment from "./Type/TypeApartment";
 import TypeHouse from "./Type/TypeHouse";
 import TypeRoom from "./Type/TypeRoom";
@@ -33,8 +33,8 @@ function PropertyType(props) {
 				/>
 			</View>
 			<View style={styles.bottomContainer}>
-				<View style={styles.questionContainer}>
-					<HeadingS style={styles.questionText}>
+				<View style={styles.titleContainer}>
+					<HeadingS style={styles.titleText}>
 						What kind of a property do you have?
 					</HeadingS>
 				</View>
@@ -64,12 +64,12 @@ const styles = StyleSheet.create({
 	backArrow: {
 		color: color.dimblack,
 	},
-	questionText: {
+	titleText: {
 		color: "white",
-
 		textTransform: "lowercase",
+		fontWeight: "bold",
 	},
-	questionContainer: {
+	titleContainer: {
 		backgroundColor: color.primary,
 		paddingVertical: 20,
 		paddingHorizontal: 10,

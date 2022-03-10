@@ -14,7 +14,7 @@ function Listing(props) {
 			<View style={styles.topContainer}>
 				<View>
 					<Image
-						source={require("../../assets/house3.jpeg")}
+						source={require("../../assets/house.png")}
 						style={styles.propetyImage}
 					/>
 					<View style={styles.rentalStatusText} />
@@ -23,7 +23,9 @@ function Listing(props) {
 
 				<View style={styles.detailsContainer}>
 					<View>
-						<Body style={styles.price}>TZS {add_comma(price)}</Body>
+						<Body style={styles.price}>
+							<BodyS>TZS</BodyS> {add_comma(price)}
+						</Body>
 						<Caption style={styles.location}>Sinza,Dar Es Salaam</Caption>
 					</View>
 					<Entypo name='dots-three-vertical' size={14} color={color.dimblack} />
@@ -121,7 +123,6 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 	},
 	price: {
-		textTransform: "capitalize",
 		fontWeight: "bold",
 	},
 	propertyType: {

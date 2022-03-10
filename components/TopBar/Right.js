@@ -9,7 +9,7 @@ import {
 	showRequest,
 } from "../Store/homePageStore/modalSlice";
 import {useSelector, useDispatch} from "react-redux";
-import PropertyType from "../Home/AddListing/TypeSelection";
+import PropertyType from "../Home/AddListing/FirstStep";
 import {Caption} from "../Typography";
 import color from "../colors";
 import Request from "../Home/Requests";

@@ -6,10 +6,7 @@ import {useDispatch} from "react-redux";
 import {hideFeatures} from "../../../Store/homePageStore/modalSlice";
 import Bathrooms from "./RoomCount/Bathrooms";
 import Bedrooms from "./RoomCount/BedRooms";
-import MasterBedroom from "./SpaceSpecifics/MasterBedroom";
-import {ButtonText, HeadingS, Body} from "../../../Typography";
-import KitchenSpace from "./SpaceSpecifics/KitchenSpace";
-import DiningArea from "./SpaceSpecifics/DiningArea";
+import {ButtonText, HeadingS} from "../../../Typography";
 
 function Features(props) {
 	const dispatch = useDispatch();
@@ -31,19 +28,12 @@ function Features(props) {
 			</View>
 			<View style={styles.titleContainer}>
 				<HeadingS style={styles.titleText}>
-					Tell us more about the space you have?
+					How many rooms does your house have?
 				</HeadingS>
 			</View>
 			<View style={styles.bottomContainer}>
 				<Bedrooms />
 				<Bathrooms />
-
-				<View style={styles.spaceSpecificContainer}>
-					<Body style={styles.spaceSpecificText}>space specifics</Body>
-					<MasterBedroom />
-					<KitchenSpace />
-					<DiningArea />
-				</View>
 			</View>
 		</View>
 	);
@@ -63,6 +53,7 @@ const styles = StyleSheet.create({
 	},
 	titleText: {
 		color: "white",
+		fontWeight: "bold",
 	},
 	titleContainer: {
 		borderBottomWidth: 2,
@@ -84,7 +75,7 @@ const styles = StyleSheet.create({
 		height: "100%",
 		borderTopRightRadius: 30,
 		borderTopLeftRadius: 30,
-		paddingTop: 25,
+		paddingTop: 50,
 	},
 	spaceSpecificText: {
 		marginVertical: 5,

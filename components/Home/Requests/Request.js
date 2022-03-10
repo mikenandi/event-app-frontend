@@ -22,7 +22,10 @@ export default function Request(props) {
 					</View>
 				</View>
 				<View style={styles.offerContainer}>
-					<Body style={styles.offerPriceText}>TZS {add_comma(price)}</Body>
+					<Body style={styles.offerPriceText}>
+						<BodyS>TZS </BodyS>
+						{add_comma(price)}
+					</Body>
 					<Caption style={styles.durationText}>For 6 months</Caption>
 				</View>
 			</View>
