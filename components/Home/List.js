@@ -44,8 +44,9 @@ function Listing(props) {
 const styles = StyleSheet.create({
 	card: {
 		backgroundColor: "white",
-		marginBottom: 5,
-		marginTop: 2,
+		marginBottom: 4,
+		width: "100%",
+		marginTop: 1,
 	},
 	topContainer: {
 		marginBottom: 10,
@@ -54,7 +55,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		width: "100%",
 		height: 240,
-		backgroundColor: color.lightgray,
+		borderColor: "gray",
 	},
 	detailsContainer: {
 		marginHorizontal: 10,

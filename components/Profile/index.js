@@ -21,8 +21,8 @@ export default function Profile(props) {
 				style={styles.profileImage}
 				/>
 				<View style={styles.profileImageText}>
-					<BodyS style={styles.NormalText}>mikenandy@gmail.com </BodyS>
-					<Caption>Michael N.</Caption>
+					<Text style={styles.NormalText}>mikenandy@gmail.com </Text>
+					<Text style={styles.NormalText}>Michael N.</Text>
 				</View>
 			</View>
 			<TouchableOpacity
@@ -32,6 +32,22 @@ export default function Profile(props) {
 				<Text style={styles.editProfileTxt}>Edit Profile</Text>
 			</TouchableOpacity>
 			<View style={styles.profileInfo}>
+				<View style={styles.userInfo}>
+					<Text style={styles.userInfoLabel}>First Name:</Text>
+					<Text style={styles.userInfoText}>Michael</Text>
+				</View>
+				<View style={styles.userInfo}>
+					<Text style={styles.userInfoLabel}>Last Name:</Text>
+					<Text style={styles.userInfoText}>Nandi</Text>
+				</View>
+				<View style={styles.userInfo}>
+					<Text style={styles.userInfoLabel}>Email:</Text>
+					<Text style={styles.userInfoText}>michaelnandi@gmail.com</Text>
+				</View>
+				<View style={styles.userInfo}>
+					<Text style={styles.userInfoLabel}>Phone Number:</Text>
+					<Text style={styles.userInfoText}>0745392939</Text>
+				</View>
 
 			</View>
 		</View>
@@ -41,9 +57,11 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		display: 'flex',
-		alignItems: 'center'
+		alignItems: 'flex-start',
 	},
 	ImageContainer: {
+		marginLeft: 15,
+		alignItems: 'center',
 		marginTop: 10,
 		flexDirection: 'row',
 	},
@@ -54,29 +72,49 @@ const styles = StyleSheet.create({
 		borderRadius: 50
 	},
 	profileImageText: {
-		marginLeft:20,
+		marginLeft:12,
 		marginTop: 20
 	},
 	editButton: {
-		marginTop: 30,
-		width: 140,
-		height: 40,
+		display: 'flex',
+		marginLeft: 90,
+		alignItems: 'center',
+		marginTop: 22,
+		width: 180,
+		height: 35,
 		borderWidth: 0.5,
 		borderColor: 'grey',
 		borderRadius: 20
 	},
 	editProfileTxt: {
-		// marginHorizontal:20,
-		// marginVertical:40
-		fontSize: 20,
-		marginLeft: 10,
-		marginTop: 4
+		fontSize: 18,
+		marginTop: 2
 	},
 	NormalText: {
-		fontSize: 16
+		fontSize: 15,
+		padding: 2
 	},
 	profileInfo: {
+		marginTop:20,
+		alignItems: 'flex-start'
+	},
+	userInfo: {
+		// borderWidth: 0.5,
+		// borderColor: 'gray',
+		padding: 5,
+		margin:5,
+		display: 'flex',
+		flexDirection: 'row'
 
 	},
+	userInfoLabel: {
+		margin: 4,
+		fontSize: 17,
+		color: 'grey'
+	},
+	userInfoText: {
+		margin: 4,
+		fontSize: 17,
+	}
 
 });
