@@ -49,9 +49,9 @@ const styles = StyleSheet.create({
 		marginHorizontal: 8,
 	},
 	avatar: {
-		height: 40,
-		width: 40,
-		borderRadius: 20,
+		height: 30,
+		width: 30,
+		borderRadius: 15,
 		borderWidth: 1,
 		borderColor: color.secondary,
 	},

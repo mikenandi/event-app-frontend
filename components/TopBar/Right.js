@@ -68,16 +68,16 @@ function Right(props) {
 				onPress={handlePropertyTypeVisible}
 			/>
 
-			<Modal transparent={false} visible={searchVisible}>
+			<Modal transparent={false} visible={searchVisible} animationType='slide'>
 				<Search />
 			</Modal>
 			<Modal
 				transparent={false}
-				animationType='fade'
+				animationType='slide'
 				visible={propertyTypeVisible}>
 				<PropertyType />
 			</Modal>
-			<Modal transparent={false} animationType='fade' visible={requestVisible}>
+			<Modal transparent={false} animationType='slide' visible={requestVisible}>
 				<Request />
 			</Modal>
 		</View>
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
 	notifyText: {
 		position: "absolute",
 		padding: 6,
-		backgroundColor: color.primary,
+		backgroundColor: color.warning,
 		borderRadius: 6,
 		right: 23,
 		top: 0,

@@ -16,7 +16,6 @@ function Listing(props) {
 						source={require("../../assets/house.png")}
 						style={styles.propetyImage}
 					/>
-					<View style={styles.rentalStatusText} />
 					<BodyS style={styles.propertyType}>apartment</BodyS>
 				</View>
 
@@ -55,6 +54,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		width: "100%",
 		height: 240,
+		backgroundColor: color.lightgray,
 	},
 	detailsContainer: {
 		marginHorizontal: 10,
