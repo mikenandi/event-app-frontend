@@ -28,7 +28,6 @@ function Listing(props) {
 					</View>
 					<Entypo name='dots-three-vertical' size={14} color={color.dimblack} />
 				</View>
-
 				<View style={styles.amenityContainer}>
 					<Caption style={styles.amenitynumber}>3 Rooms</Caption>
 					<Entypo name='dot-single' size={10} color={color.dimblack} />
@@ -55,7 +54,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		width: "100%",
 		height: 240,
-		borderColor: "gray",
+		backgroundColor: color.lightgray,
 	},
 	detailsContainer: {
 		marginHorizontal: 10,
@@ -132,7 +131,9 @@ const styles = StyleSheet.create({
 	},
 	propertyType: {
 		position: "absolute",
-		backgroundColor: "white",
+		backgroundColor: "black",
+		opacity: 0.8,
+		color: "white",
 		textTransform: "capitalize",
 		padding: 5,
 		borderRadius: 2,

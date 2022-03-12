@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
 		borderTopLeftRadius: 25,
 		height: "100%",
 		paddingTop: 30,
+		paddingLeft: 20,
 	},
 });
 

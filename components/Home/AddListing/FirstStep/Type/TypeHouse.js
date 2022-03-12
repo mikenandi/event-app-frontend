@@ -4,7 +4,7 @@ import color from "../../../../colors";
 import {MaterialIcons} from "@expo/vector-icons";
 import {useDispatch} from "react-redux";
 import {showFeatures} from "../../../../Store/homePageStore/modalSlice";
-import {Body} from "../../../../Typography";
+import {HeadingS} from "../../../../Typography";
 import {typeHouse} from "../../../../Store/homePageStore/propertyTypesSlice";
 
 function TypeHouse(props) {
@@ -18,37 +18,33 @@ function TypeHouse(props) {
 	return (
 		<TouchableOpacity activeOpacity={0.9} onPress={handleShowFeatures}>
 			<View style={styles.typeContainer}>
+				<HeadingS>House</HeadingS>
 				<MaterialIcons
 					name='house'
 					size={34}
-					color={color.dimblack}
+					color='black'
 					style={styles.icon}
 				/>
-				<Body>House</Body>
 			</View>
 		</TouchableOpacity>
 	);
 }
 const styles = StyleSheet.create({
 	typeContainer: {
+		width: "90%",
 		margin: 5,
 		padding: 10,
 		flexDirection: "row",
 		alignItems: "center",
+		justifyContent: "space-between",
+		borderWidth: 1,
+		borderColor: color.dimblack,
+		borderRadius: 5,
 	},
-
 	icon: {
-		marginRight: 25,
 		backgroundColor: color.lightgray,
 		padding: 10,
-		borderRadius: 25,
-	},
-	typesContainer: {
-		backgroundColor: "white",
-		borderTopRightRadius: 25,
-		borderTopLeftRadius: 25,
-		height: "100%",
-		paddingTop: 30,
+		borderRadius: 5,
 	},
 });
 

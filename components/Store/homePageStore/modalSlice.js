@@ -8,10 +8,11 @@ const initialState = {
 	requestVisible: false,
 	thirdStepVisible: false,
 	roomSecondStepVisible: false,
+	amenityVisible: false,
 };
 
-export const homePageSlice = createSlice({
-	name: "Home actions",
+export const modalSlice = createSlice({
+	name: "modal actions",
 	initialState,
 	reducers: {
 		showSearch: (state) => {
@@ -50,6 +51,12 @@ export const homePageSlice = createSlice({
 		hideRoomSecondStep: (state) => {
 			state.roomSecondStepVisible = false;
 		},
+		showAmenity: (state) => {
+			state.amenityVisible = true;
+		},
+		hideAmenity: (state) => {
+			state.amenityVisible = false;
+		},
 	},
 });
 
@@ -66,6 +73,8 @@ export const {
 	hideThirdStep,
 	showRoomSecondStep,
 	hideRoomSecondStep,
-} = homePageSlice.actions;
+	showAmenity,
+	hideAmenity,
+} = modalSlice.actions;
 
-export default homePageSlice.reducer;
+export default modalSlice.reducer;

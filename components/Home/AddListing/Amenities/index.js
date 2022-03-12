@@ -1,25 +1,21 @@
 import React, {memo} from "react";
-import {View, StyleSheet, Modal} from "react-native";
+import {View, StyleSheet, TouchableOpacity} from "react-native";
 import color from "../../../colors";
 import {Ionicons} from "@expo/vector-icons";
-import {useDispatch, useSelector} from "react-redux";
-import {hideRoomSecondStep} from "../../../Store/homePageStore/modalSlice";
-import MasterRoom from "./SpaceSpecifics/MasterRoom";
+import {useDispatch} from "react-redux";
 import {ButtonText, HeadingS, Body} from "../../../Typography";
-import NormalRoom from "./SpaceSpecifics/NormalRoom";
-import SelfContained from "./SpaceSpecifics/SelfContained";
-import Amenities from "../Amenities";
+import {hideAmenity} from "../../../Store/homePageStore/modalSlice";
+import {clearRoomType} from "../../../Store/homePageStore/propertyTypesSlice";
 
-function RoomType(props) {
+function Amenities(props) {
 	const dispatch = useDispatch();
 
-	const visible = useSelector((state) => {
-		return state.showModal.amenityVisible;
-	});
-
-	const handleHideFeatures = () => {
-		dispatch(hideRoomSecondStep());
+	const handleHideAmenities = () => {
+		dispatch(clearRoomType());
+		dispatch(hideAmenity());
 	};
+
+	const handleNextStep = () => {};
 
 	return (
 		<View style={styles.screen}>
@@ -27,23 +23,19 @@ function RoomType(props) {
 				<Ionicons
 					name='arrow-back-outline'
 					size={28}
-					onPress={handleHideFeatures}
+					onPress={handleHideAmenities}
 					style={styles.backArrow}
 				/>
+				<TouchableOpacity activeOpacity={0.9} onPress={handleNextStep}>
+					<ButtonText style={styles.nextText}>Next</ButtonText>
+				</TouchableOpacity>
 			</View>
 			<View style={styles.titleContainer}>
 				<HeadingS style={styles.titleText}>
-					What words describes better the room that you have ?
+					What amenities are available at your property?
 				</HeadingS>
 			</View>
-			<View style={styles.bottomContainer}>
-				<MasterRoom />
-				<SelfContained />
-				<NormalRoom />
-			</View>
-			<Modal transparent={false} animationType='slide' visible={visible}>
-				<Amenities />
-			</Modal>
+			<View style={styles.bottomContainer}></View>
 		</View>
 	);
 }
@@ -85,7 +77,7 @@ const styles = StyleSheet.create({
 		borderTopRightRadius: 30,
 		borderTopLeftRadius: 30,
 		paddingTop: 50,
-		paddingHorizontal: 10,
+		padding: 10,
 	},
 	spaceSpecificText: {
 		marginVertical: 5,
@@ -96,4 +88,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default memo(RoomType);
+export default memo(Amenities);

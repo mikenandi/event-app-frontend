@@ -1,7 +1,7 @@
 import {memo} from "react";
 import {View, StyleSheet, Modal} from "react-native";
 import {MaterialIcons, EvilIcons} from "@expo/vector-icons";
-import {AntDesign} from "@expo/vector-icons";
+import {AntDesign, Octicons} from "@expo/vector-icons";
 import Search from "../Home/SearchModal";
 import {
 	showSearch,
@@ -60,8 +60,8 @@ function Right(props) {
 				style={styles.iconSearch}
 				onPress={handleSearchVisible}
 			/>
-			<AntDesign
-				name='plussquareo'
+			<Octicons
+				name='diff-added'
 				size={24}
 				color='black'
 				style={styles.iconPlus}
@@ -96,10 +96,10 @@ const styles = StyleSheet.create({
 	},
 	notifyText: {
 		position: "absolute",
-		padding: 6,
+		padding: 5,
 		backgroundColor: color.warning,
-		borderRadius: 6,
-		right: 23,
+		borderRadius: 5,
+		right: 25,
 		top: 0,
 	},
 });
