@@ -4,14 +4,17 @@ import color from "../../../../colors";
 import {useDispatch} from "react-redux";
 import {BodyS, HeadingS} from "../../../../Typography";
 import {normalRoom} from "../../../../Store/homePageStore/propertyTypesSlice";
-import {showAmenity} from "../../../../Store/homePageStore/modalSlice";
+import {
+	showAmenity,
+	showFlooring,
+} from "../../../../Store/homePageStore/modalSlice";
 
 function KitchenSpace(props) {
 	const dispatch = useDispatch();
 
 	const handleShowNextStep = () => {
 		dispatch(normalRoom());
-		dispatch(showAmenity());
+		dispatch(showFlooring());
 	};
 
 	return (

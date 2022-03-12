@@ -4,14 +4,17 @@ import color from "../../../../colors";
 import {useDispatch} from "react-redux";
 import {BodyS, HeadingS} from "../../../../Typography";
 import {masterRoom} from "../../../../Store/homePageStore/propertyTypesSlice";
-import {showAmenity} from "../../../../Store/homePageStore/modalSlice";
+import {
+	showAmenity,
+	showFlooring,
+} from "../../../../Store/homePageStore/modalSlice";
 
 function MasterBedroom(props) {
 	const dispatch = useDispatch();
 
 	const handleShowNextAmenity = () => {
 		dispatch(masterRoom());
-		dispatch(showAmenity());
+		dispatch(showFlooring());
 	};
 
 	return (

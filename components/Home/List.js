@@ -3,7 +3,7 @@ import {View, Text, Image, StyleSheet} from "react-native";
 import color from "../colors";
 import {Entypo} from "@expo/vector-icons";
 import {add_comma} from "../../Helpers/addCommaToNumber";
-import {Body, BodyS, Caption} from "../Typography";
+import {Body, BodyS, Caption, HeadingS} from "../Typography";
 
 function Listing(props) {
 	var price = props.price;
@@ -21,10 +21,10 @@ function Listing(props) {
 
 				<View style={styles.detailsContainer}>
 					<View>
-						<Body style={styles.price}>
-							<BodyS>TZS</BodyS> {add_comma(price)}
-						</Body>
-						<Caption style={styles.location}>House Name</Caption>
+						<HeadingS style={styles.price}>
+							<Body>TZS</Body> {add_comma(price)}
+						</HeadingS>
+						<BodyS style={styles.location}>House Name</BodyS>
 					</View>
 					<Entypo name='dots-three-vertical' size={14} color={color.dimblack} />
 				</View>
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
 	location: {
 		color: color.dimblack,
 		marginLeft: 3,
-		textTransform: "uppercase",
+		textTransform: "capitalize",
 	},
 	locationContainer: {
 		flexDirection: "row",
@@ -126,9 +126,7 @@ const styles = StyleSheet.create({
 	dotsepator: {
 		textAlign: "center",
 	},
-	price: {
-		fontWeight: "bold",
-	},
+	price: {},
 	propertyType: {
 		position: "absolute",
 		backgroundColor: "black",

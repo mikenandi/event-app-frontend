@@ -1,18 +1,26 @@
 import React, {memo} from "react";
-import {View, StyleSheet, TouchableOpacity} from "react-native";
+import {View, StyleSheet, TouchableOpacity, Modal} from "react-native";
 import color from "../../../colors";
 import {Ionicons} from "@expo/vector-icons";
-import {useDispatch} from "react-redux";
-import {ButtonText, HeadingS, Body} from "../../../Typography";
-import {hideAmenity} from "../../../Store/homePageStore/modalSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {HeadingS} from "../../../Typography";
+import {hideFlooring} from "../../../Store/homePageStore/modalSlice";
 import {clearFloor} from "../../../Store/homePageStore/propertyTypesSlice";
+import Tiles from "./floor-specifics/Tiles";
+import WoodenFloor from "./floor-specifics/WoodenFloor";
+import NormalFloor from "./floor-specifics/NormalFloor";
+import Amenity from "../Amenities";
 
-function Amenity(props) {
+function Flooring(props) {
 	const dispatch = useDispatch();
 
-	const handleHideAmenity = () => {
-		dispatch(hideAmenity());
+	const visible = useSelector((state) => {
+		return state.showModal.amenityVisible;
+	});
+
+	const handleHideFlooring = () => {
 		dispatch(clearFloor());
+		dispatch(hideFlooring());
 	};
 
 	const handleNextStep = () => {};
@@ -23,19 +31,26 @@ function Amenity(props) {
 				<Ionicons
 					name='arrow-back-outline'
 					size={28}
-					onPress={handleHideAmenity}
+					onPress={handleHideFlooring}
 					style={styles.backArrow}
 				/>
-				<TouchableOpacity activeOpacity={0.9} onPress={handleNextStep}>
+				{/* <TouchableOpacity activeOpacity={0.9} onPress={handleNextStep}>
 					<ButtonText style={styles.nextText}>Next</ButtonText>
-				</TouchableOpacity>
+				</TouchableOpacity> */}
 			</View>
 			<View style={styles.titleContainer}>
 				<HeadingS style={styles.titleText}>
 					What type of flooring does your property have?
 				</HeadingS>
 			</View>
-			<View style={styles.bottomContainer}></View>
+			<View style={styles.bottomContainer}>
+				<Tiles />
+				<WoodenFloor />
+				<NormalFloor />
+			</View>
+			<Modal transparent={false} animationType='slide' visible={visible}>
+				<Amenity />
+			</Modal>
 		</View>
 	);
 }
@@ -88,4 +103,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default memo(Amenity);
+export default memo(Flooring);

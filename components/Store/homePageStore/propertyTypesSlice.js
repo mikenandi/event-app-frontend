@@ -2,6 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
 	propertyType: "",
+	flooring: "",
 	roomType: "",
 };
 
@@ -30,6 +31,18 @@ const propertyTypesSlice = createSlice({
 		clearRoomType: (state) => {
 			state.roomType = "";
 		},
+		tilesFloor: (state) => {
+			state.flooring = "tile floor";
+		},
+		woodenFloor: (state) => {
+			state.flooring = "wooden floor";
+		},
+		normalFloor: (state) => {
+			state.flooring = "normal floor";
+		},
+		clearFloor: (state) => {
+			state.flooring = "";
+		},
 	},
 });
 
@@ -41,6 +54,10 @@ export const {
 	selfContained,
 	normalRoom,
 	clearRoomType,
+	tilesFloor,
+	normalFloor,
+	woodenFloor,
+	clearFloor,
 } = propertyTypesSlice.actions;
 
 export default propertyTypesSlice.reducer;

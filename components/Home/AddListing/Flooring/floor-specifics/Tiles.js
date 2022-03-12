@@ -3,26 +3,26 @@ import {View, StyleSheet, Pressable} from "react-native";
 import color from "../../../../colors";
 import {useDispatch} from "react-redux";
 import {BodyS, HeadingS} from "../../../../Typography";
-import {selfContained} from "../../../../Store/homePageStore/propertyTypesSlice";
 import {
-	showAmenity,
-	showFlooring,
-} from "../../../../Store/homePageStore/modalSlice";
+	masterRoom,
+	tilesFloor,
+} from "../../../../Store/homePageStore/propertyTypesSlice";
+import {showAmenity} from "../../../../Store/homePageStore/modalSlice";
 
-function DiningArea(props) {
+function Tiles(props) {
 	const dispatch = useDispatch();
 
 	const handleShowNextStep = () => {
-		dispatch(selfContained());
-		dispatch(showFlooring());
+		dispatch(tilesFloor());
+		dispatch(showAmenity);
 	};
 
 	return (
 		<Pressable activeOpacity={0.5} onPress={handleShowNextStep}>
 			<View style={styles.typeContainer}>
-				<HeadingS style={styles.typeText}>Self contained room</HeadingS>
+				<HeadingS style={styles.typeText}>Tiles floor</HeadingS>
 				<BodyS style={styles.captionText}>
-					Room that used to be master bedroom
+					the floor that is made up of tiles
 				</BodyS>
 			</View>
 		</Pressable>
@@ -41,6 +41,21 @@ const styles = StyleSheet.create({
 		borderColor: color.dimblack,
 		borderRadius: 5,
 	},
+	inactiveIcon: {
+		marginRight: 10,
+		padding: 9,
+		borderRadius: 20,
+		borderWidth: 1,
+		borderColor: color.grey,
+		marginVertical: 5,
+	},
+	activeIcon: {
+		marginRight: 10,
+		backgroundColor: color.lightgray,
+		padding: 10,
+		borderRadius: 20,
+		marginVertical: 5,
+	},
 	typeText: {
 		marginBottom: 5,
 	},
@@ -49,4 +64,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default memo(DiningArea);
+export default memo(Tiles);

@@ -3,27 +3,22 @@ import {View, StyleSheet, Pressable} from "react-native";
 import color from "../../../../colors";
 import {useDispatch} from "react-redux";
 import {BodyS, HeadingS} from "../../../../Typography";
-import {selfContained} from "../../../../Store/homePageStore/propertyTypesSlice";
-import {
-	showAmenity,
-	showFlooring,
-} from "../../../../Store/homePageStore/modalSlice";
+import {showAmenity} from "../../../../Store/homePageStore/modalSlice";
+import {woodenFloor} from "../../../../Store/homePageStore/propertyTypesSlice";
 
-function DiningArea(props) {
+function WoodenFloor(props) {
 	const dispatch = useDispatch();
 
 	const handleShowNextStep = () => {
-		dispatch(selfContained());
-		dispatch(showFlooring());
+		dispatch(woodenFloor());
+		dispatch(showAmenity());
 	};
 
 	return (
 		<Pressable activeOpacity={0.5} onPress={handleShowNextStep}>
 			<View style={styles.typeContainer}>
-				<HeadingS style={styles.typeText}>Self contained room</HeadingS>
-				<BodyS style={styles.captionText}>
-					Room that used to be master bedroom
-				</BodyS>
+				<HeadingS style={styles.typeText}>Wooden floor</HeadingS>
+				<BodyS style={styles.captionText}>Room that is made up of wood</BodyS>
 			</View>
 		</Pressable>
 	);
@@ -49,4 +44,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default memo(DiningArea);
+export default memo(WoodenFloor);

@@ -5,16 +5,16 @@ import {Ionicons} from "@expo/vector-icons";
 import {useDispatch, useSelector} from "react-redux";
 import {hideRoomSecondStep} from "../../../Store/homePageStore/modalSlice";
 import MasterRoom from "./SpaceSpecifics/MasterRoom";
-import {ButtonText, HeadingS, Body} from "../../../Typography";
+import {HeadingS} from "../../../Typography";
 import NormalRoom from "./SpaceSpecifics/NormalRoom";
 import SelfContained from "./SpaceSpecifics/SelfContained";
-import Amenities from "../Amenities";
+import Flooring from "../Flooring";
 
 function RoomType(props) {
 	const dispatch = useDispatch();
 
 	const visible = useSelector((state) => {
-		return state.showModal.amenityVisible;
+		return state.showModal.flooringVisible;
 	});
 
 	const handleHideFeatures = () => {
@@ -42,7 +42,7 @@ function RoomType(props) {
 				<NormalRoom />
 			</View>
 			<Modal transparent={false} animationType='slide' visible={visible}>
-				<Amenities />
+				<Flooring />
 			</Modal>
 		</View>
 	);

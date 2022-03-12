@@ -3,26 +3,26 @@ import {View, StyleSheet, Pressable} from "react-native";
 import color from "../../../../colors";
 import {useDispatch} from "react-redux";
 import {BodyS, HeadingS} from "../../../../Typography";
-import {selfContained} from "../../../../Store/homePageStore/propertyTypesSlice";
 import {
-	showAmenity,
-	showFlooring,
-} from "../../../../Store/homePageStore/modalSlice";
+	normalFloor,
+	selfContained,
+} from "../../../../Store/homePageStore/propertyTypesSlice";
+import {showAmenity} from "../../../../Store/homePageStore/modalSlice";
 
-function DiningArea(props) {
+function NormalFloor(props) {
 	const dispatch = useDispatch();
 
 	const handleShowNextStep = () => {
-		dispatch(selfContained());
-		dispatch(showFlooring());
+		dispatch(normalFloor());
+		dispatch(showAmenity());
 	};
 
 	return (
 		<Pressable activeOpacity={0.5} onPress={handleShowNextStep}>
 			<View style={styles.typeContainer}>
-				<HeadingS style={styles.typeText}>Self contained room</HeadingS>
+				<HeadingS style={styles.typeText}>Normal floor</HeadingS>
 				<BodyS style={styles.captionText}>
-					Room that used to be master bedroom
+					the floor that is made up of cement
 				</BodyS>
 			</View>
 		</Pressable>
@@ -49,4 +49,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default memo(DiningArea);
+export default memo(NormalFloor);
