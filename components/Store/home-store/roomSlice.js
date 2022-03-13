@@ -6,16 +6,10 @@ const initialState = {
 	roomType: "",
 };
 
-const propertyTypesSlice = createSlice({
+const room = createSlice({
 	name: "store for data property type",
 	initialState,
 	reducers: {
-		typeApartment: (state) => {
-			state.propertyType = "apartment";
-		},
-		typeHouse: (state) => {
-			state.propertyType = "house";
-		},
 		typeRoom: (state) => {
 			state.propertyType = "room";
 		},
@@ -31,18 +25,6 @@ const propertyTypesSlice = createSlice({
 		clearRoomType: (state) => {
 			state.roomType = "";
 		},
-		tilesFloor: (state) => {
-			state.flooring = "tile floor";
-		},
-		woodenFloor: (state) => {
-			state.flooring = "wooden floor";
-		},
-		normalFloor: (state) => {
-			state.flooring = "normal floor";
-		},
-		clearFloor: (state) => {
-			state.flooring = "";
-		},
 	},
 });
 
@@ -54,10 +36,6 @@ export const {
 	selfContained,
 	normalRoom,
 	clearRoomType,
-	tilesFloor,
-	normalFloor,
-	woodenFloor,
-	clearFloor,
-} = propertyTypesSlice.actions;
+} = room.actions;
 
-export default propertyTypesSlice.reducer;
+export default room.reducer;

@@ -4,21 +4,22 @@ import color from "../../../colors";
 import {Ionicons} from "@expo/vector-icons";
 import {useDispatch} from "react-redux";
 import {ButtonText, HeadingS, Body} from "../../../Typography";
-import {hideAmenity} from "../../../Store/homePageStore/modalSlice";
-import {clearFloor} from "../../../Store/homePageStore/propertyTypesSlice";
+import {hideAmenity} from "../../../Store/home-store/modalSlice";
+import {clearFloor} from "../../../Store/home-store/roomSlice";
 import ElectricityAmenity from "./amenity-types/electricity-amenity";
 import WaterAmenity from "./amenity-types/water-amenity";
 import AcAmenity from "./amenity-types/ac-amenity";
 import FanAmenity from "./amenity-types/fan-amenity";
 import PoolAmenity from "./amenity-types/pool-amenity";
 import ParkingAmenity from "./amenity-types/parking-amenity";
+import {clearAmenities} from "../../../Store/home-store/amenitySlice";
 
 function Amenity(props) {
 	const dispatch = useDispatch();
 
 	const handleHideAmenity = () => {
 		dispatch(hideAmenity());
-		dispatch(clearFloor());
+		dispatch(clearAmenities());
 	};
 
 	const handleNextStep = () => {};
@@ -98,26 +99,9 @@ const styles = StyleSheet.create({
 		paddingTop: 20,
 		padding: 10,
 	},
-	spaceSpecificText: {
-		marginVertical: 5,
-		fontWeight: "bold",
-	},
-	spaceSpecificContainer: {
-		marginHorizontal: 45,
-	},
 	rowContainer: {
 		flexDirection: "row",
-		justifyContent: "space-around",
-	},
-	amenityContainer: {
-		flex: 1,
-		borderWidth: 1,
-		margin: 5,
-		justifyContent: "center",
-		alignItems: "center",
-		paddingHorizontal: 10,
-		paddingVertical: 20,
-		borderRadius: 5,
+		justifyContent: "space-evenly",
 	},
 });
 

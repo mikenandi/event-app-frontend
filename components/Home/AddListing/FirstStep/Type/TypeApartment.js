@@ -3,20 +3,20 @@ import {View, StyleSheet, TouchableOpacity} from "react-native";
 import color from "../../../../colors";
 import {MaterialIcons} from "@expo/vector-icons";
 import {useDispatch} from "react-redux";
-import {showFeatures} from "../../../../Store/homePageStore/modalSlice";
+import {showFeatures} from "../../../../Store/home-store/modalSlice";
 import {Body, HeadingS} from "../../../../Typography";
-import {typeApartment} from "../../../../Store/homePageStore/propertyTypesSlice";
+import {typeApartment} from "../../../../Store/home-store/roomSlice";
 
 function TypeApartment(props) {
 	const dispatch = useDispatch();
 
 	const handleShowFeatures = () => {
-		dispatch(typeApartment());
-		dispatch(showFeatures());
+		// dispatch(typeApartment());
+		// dispatch(showFeatures());
 	};
 
 	return (
-		<TouchableOpacity activeOpacity={0.5} onPress={handleShowFeatures}>
+		<TouchableOpacity activeOpacity={0.9} onPress={handleShowFeatures}>
 			<View style={styles.typeContainer}>
 				<HeadingS style={styles.typeText}>Apartment</HeadingS>
 				<MaterialIcons

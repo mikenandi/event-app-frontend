@@ -3,11 +3,8 @@ import {View, StyleSheet, Pressable} from "react-native";
 import color from "../../../../colors";
 import {useDispatch} from "react-redux";
 import {BodyS, HeadingS} from "../../../../Typography";
-import {
-	normalFloor,
-	selfContained,
-} from "../../../../Store/homePageStore/propertyTypesSlice";
-import {showAmenity} from "../../../../Store/homePageStore/modalSlice";
+import {showAmenity} from "../../../../Store/home-store/modalSlice";
+import {normalFloor} from "../../../../Store/home-store/floorSlice";
 
 function NormalFloor(props) {
 	const dispatch = useDispatch();

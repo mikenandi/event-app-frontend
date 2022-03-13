@@ -3,11 +3,11 @@ import {View, StyleSheet, Pressable} from "react-native";
 import color from "../../../../colors";
 import {useDispatch} from "react-redux";
 import {BodyS, HeadingS} from "../../../../Typography";
-import {selfContained} from "../../../../Store/homePageStore/propertyTypesSlice";
+import {selfContained} from "../../../../Store/home-store/roomSlice";
 import {
 	showAmenity,
 	showFlooring,
-} from "../../../../Store/homePageStore/modalSlice";
+} from "../../../../Store/home-store/modalSlice";
 
 function DiningArea(props) {
 	const dispatch = useDispatch();

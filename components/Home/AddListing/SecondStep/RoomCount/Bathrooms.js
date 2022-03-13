@@ -7,12 +7,12 @@ import {useSelector} from "react-redux";
 import {
 	addBathRoom,
 	minusBathRoom,
-} from "../../../../Store/homePageStore/spaceFeatureSlice";
+} from "../../../../Store/home-store/houseSlice";
 import {BodyS, Body, HeadingS} from "../../../../Typography";
 
 function Bathrooms(props) {
 	const roomCount = useSelector((state) => {
-		return state.spaceFeature.bathRoomCount;
+		return state.house.bathRoomCount;
 	});
 	const dispatch = useDispatch();
 

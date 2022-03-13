@@ -2,14 +2,14 @@ import React, {memo} from "react";
 import {View, StyleSheet, Pressable} from "react-native";
 import color from "../../../../colors";
 import {useDispatch} from "react-redux";
-import {kitchenSpaceStatus} from "../../../../Store/homePageStore/spaceFeatureSlice";
+import {kitchenSpaceStatus} from "../../../../Store/home-store/houseSlice";
 import {useSelector} from "react-redux";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import {BodyS} from "../../../../Typography";
 
 function KitchenSpace(props) {
 	const show = useSelector((state) => {
-		return state.spaceFeature.kitchenSpace;
+		return state.house.kitchenSpace;
 	});
 
 	const dispatch = useDispatch();

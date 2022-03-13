@@ -1,19 +1,21 @@
 import {configureStore} from "@reduxjs/toolkit";
-import modalReducer from "./homePageStore/modalSlice";
-import imageReducer from "./homePageStore/imageSlice";
-import spaceFeaturesReducer from "./homePageStore/spaceFeatureSlice";
-import locationReducer from "./homePageStore/locationSlice";
-import amenityReducer from "./homePageStore/amenitySlice";
-import propertyTypesReducer from "./homePageStore/propertyTypesSlice";
+import modalReducer from "./home-store/modalSlice";
+import imageReducer from "./home-store/imageSlice";
+import houseReducer from "./home-store/houseSlice";
+import locationReducer from "./home-store/locationSlice";
+import amenityReducer from "./home-store/amenitySlice";
+import roomReducer from "./home-store/roomSlice";
+import floorReducer from "./home-store/floorSlice";
 
 export const store = configureStore({
 	reducer: {
 		readImage: imageReducer,
 		showModal: modalReducer,
-		spaceFeature: spaceFeaturesReducer,
+		house: houseReducer,
 		location: locationReducer,
 		amenity: amenityReducer,
-		propertyType: propertyTypesReducer,
+		room: roomReducer,
+		floor: floorReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({

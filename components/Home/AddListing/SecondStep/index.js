@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {
 	hideFeatures,
 	showThirdStep,
-} from "../../../Store/homePageStore/modalSlice";
+} from "../../../Store/home-store/modalSlice";
 import Bathrooms from "./RoomCount/Bathrooms";
 import Bedrooms from "./RoomCount/BedRooms";
 import {ButtonText, HeadingS} from "../../../Typography";

@@ -3,7 +3,7 @@ import {View, StyleSheet} from "react-native";
 import color from "../../../colors";
 import {Ionicons} from "@expo/vector-icons";
 import {useDispatch} from "react-redux";
-import {hideFeatures} from "../../../Store/homePageStore/modalSlice";
+import {hideFeatures} from "../../../Store/home-store/modalSlice";
 import MasterBedroom from "./SpaceSpecifics/MasterBedroom";
 import {ButtonText, HeadingS, Body} from "../../../Typography";
 import KitchenSpace from "./SpaceSpecifics/KitchenSpace";

@@ -3,11 +3,11 @@ import {View, StyleSheet, Pressable} from "react-native";
 import color from "../../../../colors";
 import {useDispatch} from "react-redux";
 import {BodyS, HeadingS} from "../../../../Typography";
-import {normalRoom} from "../../../../Store/homePageStore/propertyTypesSlice";
+import {normalRoom} from "../../../../Store/home-store/roomSlice";
 import {
 	showAmenity,
 	showFlooring,
-} from "../../../../Store/homePageStore/modalSlice";
+} from "../../../../Store/home-store/modalSlice";
 
 function KitchenSpace(props) {
 	const dispatch = useDispatch();

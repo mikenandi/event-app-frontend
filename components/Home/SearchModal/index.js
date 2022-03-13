@@ -1,7 +1,7 @@
 import {View, Text, StyleSheet} from "react-native";
 import {Ionicons} from "@expo/vector-icons";
 import {useDispatch} from "react-redux";
-import {hideSearch} from "../../Store/homePageStore/modalSlice";
+import {hideSearch} from "../../Store/home-store/modalSlice";
 
 export default function Search(props) {
 	const dispatch = useDispatch();

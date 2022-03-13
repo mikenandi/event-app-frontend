@@ -2,14 +2,14 @@ import React, {memo} from "react";
 import {View, Text, StyleSheet, Pressable} from "react-native";
 import color from "../../../../colors";
 import {useDispatch} from "react-redux";
-import {masterBedroomStatus} from "../../../../Store/homePageStore/spaceFeatureSlice";
+import {masterBedroomStatus} from "../../../../Store/home-store/houseSlice";
 import {useSelector} from "react-redux";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import {BodyS} from "../../../../Typography";
 
 function MasterBedroom(props) {
 	const show = useSelector((state) => {
-		return state.spaceFeature.masterBedroom;
+		return state.house.masterBedroom;
 	});
 
 	const dispatch = useDispatch();

@@ -3,14 +3,13 @@ import {View, StyleSheet, Modal} from "react-native";
 import color from "../../../colors";
 import {Entypo} from "@expo/vector-icons";
 import {useDispatch} from "react-redux";
-import {hidePropertyType} from "../../../Store/homePageStore/modalSlice";
+import {hidePropertyType} from "../../../Store/home-store/modalSlice";
 import {useSelector} from "react-redux";
 import SecondStep from "../SecondStep";
 import {HeadingS} from "../../../Typography";
 import TypeApartment from "./Type/TypeApartment";
 import TypeHouse from "./Type/TypeHouse";
 import TypeRoom from "./Type/TypeRoom";
-import ThirdStep from "../ThirdStep";
 
 function PropertyType(props) {
 	const featureVisible = useSelector((state) => {

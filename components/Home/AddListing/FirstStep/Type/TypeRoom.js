@@ -3,9 +3,9 @@ import {View, StyleSheet, TouchableOpacity, Modal} from "react-native";
 import color from "../../../../colors";
 import {Fontisto} from "@expo/vector-icons";
 import {useDispatch, useSelector} from "react-redux";
-import {showRoomSecondStep} from "../../../../Store/homePageStore/modalSlice";
+import {showRoomSecondStep} from "../../../../Store/home-store/modalSlice";
 import {HeadingS} from "../../../../Typography";
-import {typeRoom} from "../../../../Store/homePageStore/propertyTypesSlice";
+import {typeRoom} from "../../../../Store/home-store/roomSlice";
 import RoomSecondStep from "../../RoomSecondStep";
 
 function TypeRoom(props) {
@@ -20,7 +20,7 @@ function TypeRoom(props) {
 	});
 
 	return (
-		<TouchableOpacity activeOpacity={0.5} onPress={handleShowFeatures}>
+		<TouchableOpacity activeOpacity={0.9} onPress={handleShowFeatures}>
 			<View style={styles.typeContainer}>
 				<HeadingS style={styles.typeText}>Room</HeadingS>
 				<Fontisto name='room' size={34} color='black' style={styles.icon} />

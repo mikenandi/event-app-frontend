@@ -3,7 +3,7 @@ import {View, StyleSheet, Modal} from "react-native";
 import color from "../../../colors";
 import {Ionicons} from "@expo/vector-icons";
 import {useDispatch, useSelector} from "react-redux";
-import {hideRoomSecondStep} from "../../../Store/homePageStore/modalSlice";
+import {hideRoomSecondStep} from "../../../Store/home-store/modalSlice";
 import MasterRoom from "./SpaceSpecifics/MasterRoom";
 import {HeadingS} from "../../../Typography";
 import NormalRoom from "./SpaceSpecifics/NormalRoom";

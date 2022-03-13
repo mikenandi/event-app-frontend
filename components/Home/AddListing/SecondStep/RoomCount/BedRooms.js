@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {
 	addBedRoom,
 	minusBedRoom,
-} from "../../../../Store/homePageStore/spaceFeatureSlice";
+} from "../../../../Store/home-store/houseSlice";
 import {Body, BodyS, HeadingS} from "../../../../Typography";
 
 function AddRooms(props) {

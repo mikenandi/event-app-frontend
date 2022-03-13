@@ -3,16 +3,16 @@ import {View, StyleSheet, TouchableOpacity} from "react-native";
 import color from "../../../../colors";
 import {MaterialIcons} from "@expo/vector-icons";
 import {useDispatch} from "react-redux";
-import {showFeatures} from "../../../../Store/homePageStore/modalSlice";
+import {showFeatures} from "../../../../Store/home-store/modalSlice";
 import {HeadingS} from "../../../../Typography";
-import {typeHouse} from "../../../../Store/homePageStore/propertyTypesSlice";
+import {typeHouse} from "../../../../Store/home-store/roomSlice";
 
 function TypeHouse(props) {
 	const dispatch = useDispatch();
 
 	const handleShowFeatures = () => {
-		dispatch(typeHouse());
-		dispatch(showFeatures());
+		// dispatch(typeHouse());
+		// dispatch(showFeatures());
 	};
 
 	return (

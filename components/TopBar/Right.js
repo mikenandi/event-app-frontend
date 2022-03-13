@@ -7,7 +7,7 @@ import {
 	showSearch,
 	showPropertyType,
 	showRequest,
-} from "../Store/homePageStore/modalSlice";
+} from "../Store/home-store/modalSlice";
 import {useSelector, useDispatch} from "react-redux";
 import PropertyType from "../Home/AddListing/FirstStep";
 import {Caption} from "../Typography";

@@ -3,11 +3,11 @@ import {View, StyleSheet, Pressable} from "react-native";
 import color from "../../../../colors";
 import {useDispatch} from "react-redux";
 import {BodyS, HeadingS} from "../../../../Typography";
-import {masterRoom} from "../../../../Store/homePageStore/propertyTypesSlice";
+import {masterRoom} from "../../../../Store/home-store/roomSlice";
 import {
 	showAmenity,
 	showFlooring,
-} from "../../../../Store/homePageStore/modalSlice";
+} from "../../../../Store/home-store/modalSlice";
 
 function MasterBedroom(props) {
 	const dispatch = useDispatch();

@@ -6,7 +6,7 @@ import {Body, HeadingS} from "../../Typography";
 import color from "../../colors";
 import {Ionicons} from "@expo/vector-icons";
 import {useDispatch} from "react-redux";
-import {hideRequest} from "../../Store/homePageStore/modalSlice";
+import {hideRequest} from "../../Store/home-store/modalSlice";
 
 function Requests() {
 	const renderItem = ({item}) => {
