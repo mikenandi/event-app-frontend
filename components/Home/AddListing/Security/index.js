@@ -1,26 +1,22 @@
 import React, {memo} from "react";
-import {View, StyleSheet, TouchableOpacity, Modal} from "react-native";
+import {View, StyleSheet, TouchableOpacity} from "react-native";
 import color from "../../../colors";
 import {Ionicons} from "@expo/vector-icons";
-import {useDispatch, useSelector} from "react-redux";
-import {HeadingS} from "../../../Typography";
-import {hideFlooring} from "../../../Store/home-store/modalSlice";
-import {clearFloor} from "../../../Store/home-store/floorSlice";
-import Tiles from "./floor-specifics/Tiles";
-import WoodenFloor from "./floor-specifics/WoodenFloor";
-import NormalFloor from "./floor-specifics/NormalFloor";
-import Amenity from "../Amenities";
+import {useDispatch} from "react-redux";
+import {ButtonText, HeadingS, Body} from "../../../Typography";
+import {clearSecurity} from "../../../Store/home-store/securitySlice";
+import {hideSecurity} from "../../../Store/home-store/modalSlice";
+import FenceSecurity from "./secuirty-types/fence-security";
+import WatchmanSecurity from "./secuirty-types/watchman-security";
+import FireAlarmSecurity from "./secuirty-types/fire-alarm-security";
+import CctvCameraSecurity from "./secuirty-types/cctv-camera-security";
 
-function Flooring(props) {
+function Security(props) {
 	const dispatch = useDispatch();
 
-	const visible = useSelector((state) => {
-		return state.showModal.amenityVisible;
-	});
-
-	const handleHideFlooring = () => {
-		dispatch(clearFloor());
-		dispatch(hideFlooring());
+	const handleHideSecurity = () => {
+		dispatch(clearSecurity());
+		dispatch(hideSecurity());
 	};
 
 	const handleNextStep = () => {};
@@ -31,23 +27,29 @@ function Flooring(props) {
 				<Ionicons
 					name='arrow-back-outline'
 					size={28}
-					onPress={handleHideFlooring}
+					onPress={handleHideSecurity}
 					style={styles.backArrow}
 				/>
+				<TouchableOpacity activeOpacity={0.9} onPress={handleNextStep}>
+					<ButtonText style={styles.nextText}>Next</ButtonText>
+				</TouchableOpacity>
 			</View>
 			<View style={styles.titleContainer}>
 				<HeadingS style={styles.titleText}>
-					What type of flooring does your property have?
+					security features available at your property
 				</HeadingS>
 			</View>
 			<View style={styles.bottomContainer}>
-				<Tiles />
-				<WoodenFloor />
-				<NormalFloor />
+				<View style={styles.rowContainer}>
+					<FenceSecurity />
+					<WatchmanSecurity />
+				</View>
+				<View style={styles.rowContainer}>
+					<FireAlarmSecurity />
+					<CctvCameraSecurity />
+				</View>
+				<View style={styles.rowContainer}></View>
 			</View>
-			<Modal transparent={false} animationType='fade' visible={visible}>
-				<Amenity />
-			</Modal>
 		</View>
 	);
 }
@@ -88,16 +90,13 @@ const styles = StyleSheet.create({
 		height: "100%",
 		borderTopRightRadius: 30,
 		borderTopLeftRadius: 30,
-		paddingTop: 50,
+		paddingTop: 20,
 		padding: 10,
 	},
-	spaceSpecificText: {
-		marginVertical: 5,
-		fontWeight: "bold",
-	},
-	spaceSpecificContainer: {
-		marginHorizontal: 45,
+	rowContainer: {
+		flexDirection: "row",
+		justifyContent: "space-evenly",
 	},
 });
 
-export default memo(Flooring);
+export default memo(Security);

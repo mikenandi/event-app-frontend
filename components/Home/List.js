@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
 		color: "white",
 		textTransform: "capitalize",
 		padding: 5,
-		borderRadius: 2,
+		borderRadius: 0,
 		right: 3,
 		bottom: 3,
 	},

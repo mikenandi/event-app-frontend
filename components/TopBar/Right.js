@@ -68,16 +68,16 @@ function Right(props) {
 				onPress={handlePropertyTypeVisible}
 			/>
 
-			<Modal transparent={false} visible={searchVisible} animationType='slide'>
+			<Modal transparent={false} visible={searchVisible} animationType='fade'>
 				<Search />
 			</Modal>
 			<Modal
 				transparent={false}
-				animationType='slide'
+				animationType='fade'
 				visible={propertyTypeVisible}>
 				<PropertyType />
 			</Modal>
-			<Modal transparent={false} animationType='slide' visible={requestVisible}>
+			<Modal transparent={false} animationType='fade' visible={requestVisible}>
 				<Request />
 			</Modal>
 		</View>

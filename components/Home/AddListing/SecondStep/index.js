@@ -56,7 +56,7 @@ function Features(props) {
 			<Modal
 				transparent={false}
 				visible={thirdStepVisible}
-				animationType='slide'>
+				animationType='fade'>
 				<ThirdStep />
 			</Modal>
 		</View>

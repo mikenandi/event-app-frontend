@@ -41,7 +41,7 @@ function RoomType(props) {
 				<SelfContained />
 				<NormalRoom />
 			</View>
-			<Modal transparent={false} animationType='slide' visible={visible}>
+			<Modal transparent={false} animationType='fade' visible={visible}>
 				<Flooring />
 			</Modal>
 		</View>

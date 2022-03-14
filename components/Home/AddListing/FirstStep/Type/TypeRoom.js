@@ -25,7 +25,7 @@ function TypeRoom(props) {
 				<HeadingS style={styles.typeText}>Room</HeadingS>
 				<Fontisto name='room' size={34} color='black' style={styles.icon} />
 			</View>
-			<Modal transparent={false} animationType='slide' visible={visible}>
+			<Modal transparent={false} animationType='fade' visible={visible}>
 				<RoomSecondStep />
 			</Modal>
 		</TouchableOpacity>

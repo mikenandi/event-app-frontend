@@ -1,11 +1,10 @@
 import React, {memo} from "react";
-import {View, StyleSheet, TouchableOpacity} from "react-native";
+import {View, StyleSheet, TouchableOpacity, Modal} from "react-native";
 import color from "../../../colors";
 import {Ionicons} from "@expo/vector-icons";
-import {useDispatch} from "react-redux";
-import {ButtonText, HeadingS, Body} from "../../../Typography";
-import {hideAmenity} from "../../../Store/home-store/modalSlice";
-import {clearFloor} from "../../../Store/home-store/roomSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {ButtonText, HeadingS} from "../../../Typography";
+import {hideAmenity, showSecurity} from "../../../Store/home-store/modalSlice";
 import ElectricityAmenity from "./amenity-types/electricity-amenity";
 import WaterAmenity from "./amenity-types/water-amenity";
 import AcAmenity from "./amenity-types/ac-amenity";
@@ -13,8 +12,13 @@ import FanAmenity from "./amenity-types/fan-amenity";
 import PoolAmenity from "./amenity-types/pool-amenity";
 import ParkingAmenity from "./amenity-types/parking-amenity";
 import {clearAmenities} from "../../../Store/home-store/amenitySlice";
+import Security from "../Security";
 
 function Amenity(props) {
+	const visible = useSelector((state) => {
+		return state.showModal.securityVisible;
+	});
+
 	const dispatch = useDispatch();
 
 	const handleHideAmenity = () => {
@@ -22,7 +26,9 @@ function Amenity(props) {
 		dispatch(clearAmenities());
 	};
 
-	const handleNextStep = () => {};
+	const handleNextStep = () => {
+		dispatch(showSecurity());
+	};
 
 	return (
 		<View style={styles.screen}>
@@ -56,6 +62,9 @@ function Amenity(props) {
 					<ParkingAmenity />
 				</View>
 			</View>
+			<Modal transparent={false} animationType='fade' visible={visible}>
+				<Security />
+			</Modal>
 		</View>
 	);
 }

@@ -1,30 +1,30 @@
 import React, {memo} from "react";
 import {View, StyleSheet, TouchableOpacity} from "react-native";
 import color from "../../../../colors";
-import {Entypo} from "@expo/vector-icons";
+import {MaterialIcons} from "@expo/vector-icons";
 import {useDispatch, useSelector} from "react-redux";
-import {BodyS} from "../../../../Typography";
-import {showHideElectricity} from "../../../../Store/home-store/amenitySlice";
+import {Body} from "../../../../Typography";
+import {showHideFence} from "../../../../Store/home-store/securitySlice";
 
-function ElectricityAmenity(props) {
+function FenceSecurity(props) {
 	const show = useSelector((state) => {
-		return state.amenity.electricity;
+		return state.security.fence;
 	});
 	const dispatch = useDispatch();
 
-	const handleShowAmenityType = () => {
-		dispatch(showHideElectricity());
+	const handleShowType = () => {
+		dispatch(showHideFence());
 	};
 
 	return (
-		<TouchableOpacity activeOpacity={0.9} onPress={handleShowAmenityType}>
+		<TouchableOpacity activeOpacity={0.9} onPress={handleShowType}>
 			<View style={show ? styles.greyBack : styles.amenityContainer}>
-				<Entypo
-					name='flash'
+				<MaterialIcons
+					name='fence'
 					size={40}
 					color={show ? color.secondary : "gray"}
 				/>
-				<BodyS>electricity</BodyS>
+				<Body>fence</Body>
 			</View>
 		</TouchableOpacity>
 	);
@@ -35,9 +35,11 @@ const styles = StyleSheet.create({
 		marginBottom: 20,
 		justifyContent: "center",
 		alignItems: "center",
+		paddingHorizontal: 10,
+		paddingVertical: 20,
 		borderRadius: 5,
 		width: 120,
-		height: 110,
+		height: 120,
 	},
 	greyBack: {
 		backgroundColor: color.lightgray,
@@ -45,10 +47,12 @@ const styles = StyleSheet.create({
 		marginBottom: 20,
 		justifyContent: "center",
 		alignItems: "center",
+		paddingHorizontal: 10,
+		paddingVertical: 20,
 		borderRadius: 5,
 		width: 120,
-		height: 110,
+		height: 120,
 	},
 });
 
-export default memo(ElectricityAmenity);
+export default memo(FenceSecurity);

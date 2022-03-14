@@ -45,7 +45,7 @@ function PropertyType(props) {
 					<TypeRoom />
 				</View>
 			</View>
-			<Modal visible={featureVisible} transparent={false} animationType='slide'>
+			<Modal visible={featureVisible} transparent={false} animationType='fade'>
 				<SecondStep />
 			</Modal>
 		</View>

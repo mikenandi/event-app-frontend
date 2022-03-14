@@ -14,10 +14,7 @@ const styles = StyleSheet.create({
 	container: {
 		marginLeft: 10,
 	},
-	titleText: {
-		fontWeight: "bold",
-		color: color.dimblack,
-	},
+	titleText: {},
 });
 
 export default memo(Logo);

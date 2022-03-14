@@ -28,7 +28,7 @@ function MyTabs() {
 				name='property list'
 				component={Home}
 				options={{
-					tabBarLabel: "home",
+					tabBarLabel: "Home",
 					title: "",
 					tabBarIcon: ({color, size}) => (
 						<AntDesign name='home' size={size} color={color} />
@@ -43,7 +43,7 @@ function MyTabs() {
 				component={Payments}
 				options={{
 					title: "",
-					tabBarLabel: "payments",
+					tabBarLabel: "Payments",
 					tabBarIcon: ({color, size}) => (
 						<AntDesign name='swap' size={size} color={color} />
 					),
@@ -55,7 +55,7 @@ function MyTabs() {
 				component={Profile}
 				options={{
 					title: "",
-					tabBarLabel: "profile",
+					tabBarLabel: "Profile",
 					tabBarIcon: ({color, size}) => (
 						<Ionicons name='person-outline' size={size} color={color} />
 					),
