@@ -11,7 +11,7 @@ function Tiles(props) {
 
 	const handleShowNextStep = () => {
 		dispatch(tilesFloor());
-		dispatch(showAmenity);
+		dispatch(showAmenity());
 	};
 
 	return (

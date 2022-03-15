@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	backArrow: {
-		color: color.dimblack,
+		color: "white",
 	},
 	titleText: {
 		color: "white",

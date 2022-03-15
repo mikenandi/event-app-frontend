@@ -1,7 +1,7 @@
 import React, {memo} from "react";
 import {View, StyleSheet, TouchableOpacity} from "react-native";
 import color from "../../../../colors";
-import {MaterialIcons} from "@expo/vector-icons";
+import {FontAwesome5} from "@expo/vector-icons";
 import {useDispatch, useSelector} from "react-redux";
 import {Body} from "../../../../Typography";
 import {showHideParking} from "../../../../Store/home-store/amenitySlice";
@@ -10,6 +10,7 @@ function ParkingAmenity(props) {
 	const show = useSelector((state) => {
 		return state.amenity.parking;
 	});
+
 	const dispatch = useDispatch();
 
 	const handleShowAmenityType = () => {
@@ -19,8 +20,8 @@ function ParkingAmenity(props) {
 	return (
 		<TouchableOpacity activeOpacity={0.9} onPress={handleShowAmenityType}>
 			<View style={show ? styles.greyBack : styles.amenityContainer}>
-				<MaterialIcons
-					name='local-parking'
+				<FontAwesome5
+					name='car'
 					size={40}
 					color={show ? color.secondary : "gray"}
 				/>

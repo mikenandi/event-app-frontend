@@ -1,17 +1,22 @@
 import React, {memo} from "react";
-import {View, StyleSheet, TouchableOpacity} from "react-native";
+import {View, StyleSheet, TouchableOpacity, Modal} from "react-native";
 import color from "../../../colors";
 import {Ionicons} from "@expo/vector-icons";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {ButtonText, HeadingS, Body} from "../../../Typography";
 import {clearSecurity} from "../../../Store/home-store/securitySlice";
-import {hideSecurity} from "../../../Store/home-store/modalSlice";
+import {hideSecurity, showMap} from "../../../Store/home-store/modalSlice";
 import FenceSecurity from "./secuirty-types/fence-security";
 import WatchmanSecurity from "./secuirty-types/watchman-security";
 import FireAlarmSecurity from "./secuirty-types/fire-alarm-security";
 import CctvCameraSecurity from "./secuirty-types/cctv-camera-security";
+import ViewMap from "../Adress";
 
 function Security(props) {
+	const visible = useSelector((state) => {
+		return state.showModal.mapVisible;
+	});
+
 	const dispatch = useDispatch();
 
 	const handleHideSecurity = () => {
@@ -19,7 +24,9 @@ function Security(props) {
 		dispatch(hideSecurity());
 	};
 
-	const handleNextStep = () => {};
+	const handleNextStep = () => {
+		dispatch(showMap());
+	};
 
 	return (
 		<View style={styles.screen}>
@@ -50,6 +57,9 @@ function Security(props) {
 				</View>
 				<View style={styles.rowContainer}></View>
 			</View>
+			<Modal transparent={false} animationType='fade' visible={visible}>
+				<ViewMap />
+			</Modal>
 		</View>
 	);
 }
@@ -64,7 +74,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	backArrow: {
-		color: color.dimblack,
+		color: "white",
 	},
 	titleText: {
 		color: "white",

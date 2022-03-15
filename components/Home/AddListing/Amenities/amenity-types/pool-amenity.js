@@ -1,7 +1,7 @@
 import React, {memo} from "react";
 import {View, StyleSheet, TouchableOpacity} from "react-native";
 import color from "../../../../colors";
-import {FontAwesome5} from "@expo/vector-icons";
+import {MaterialCommunityIcons} from "@expo/vector-icons";
 import {useDispatch, useSelector} from "react-redux";
 import {Body} from "../../../../Typography";
 import {showHidePool} from "../../../../Store/home-store/amenitySlice";
@@ -19,8 +19,8 @@ function PoolAmenity(props) {
 	return (
 		<TouchableOpacity activeOpacity={0.9} onPress={handleShowAmenityType}>
 			<View style={show ? styles.greyBack : styles.amenityContainer}>
-				<FontAwesome5
-					name='swimming-pool'
+				<MaterialCommunityIcons
+					name='pool'
 					size={40}
 					color={show ? color.secondary : "gray"}
 				/>

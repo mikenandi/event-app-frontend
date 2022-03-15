@@ -11,6 +11,7 @@ const initialState = {
 	amenityVisible: false,
 	flooringVisible: false,
 	securityVisible: false,
+	mapVisible: false,
 };
 
 export const modalSlice = createSlice({
@@ -71,6 +72,12 @@ export const modalSlice = createSlice({
 		hideSecurity: (state) => {
 			state.securityVisible = false;
 		},
+		showMap: (state) => {
+			state.mapVisible = true;
+		},
+		hideMap: (state) => {
+			state.mapVisible = false;
+		},
 	},
 });
 
@@ -93,6 +100,8 @@ export const {
 	hideFlooring,
 	showSecurity,
 	hideSecurity,
+	showMap,
+	hideMap,
 } = modalSlice.actions;
 
 export default modalSlice.reducer;
