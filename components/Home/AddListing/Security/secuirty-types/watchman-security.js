@@ -22,7 +22,7 @@ function WatchManSecurity(props) {
 				<MaterialIcons
 					name='security'
 					size={40}
-					color={show ? color.secondary : "gray"}
+					color={show ? "black" : "gray"}
 				/>
 				<Body>gate watchman</Body>
 			</View>

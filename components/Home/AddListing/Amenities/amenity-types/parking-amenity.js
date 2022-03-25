@@ -20,11 +20,7 @@ function ParkingAmenity(props) {
 	return (
 		<TouchableOpacity activeOpacity={0.9} onPress={handleShowAmenityType}>
 			<View style={show ? styles.greyBack : styles.amenityContainer}>
-				<FontAwesome5
-					name='car'
-					size={40}
-					color={show ? color.secondary : "gray"}
-				/>
+				<FontAwesome5 name='car' size={40} color={show ? "black" : "gray"} />
 				<Body>parking</Body>
 			</View>
 		</TouchableOpacity>

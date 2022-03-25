@@ -22,7 +22,7 @@ function FireAlarmSecurity(props) {
 				<MaterialCommunityIcons
 					name='smoke-detector'
 					size={40}
-					color={show ? color.secondary : "gray"}
+					color={show ? "black" : "gray"}
 				/>
 				<Body>fire alarm</Body>
 			</View>

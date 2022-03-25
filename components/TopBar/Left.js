@@ -5,7 +5,7 @@ import color from "../colors";
 function Logo(props) {
 	return (
 		<View style={styles.container}>
-			<HeadingS style={styles.titleText}>gudsurvey</HeadingS>
+			<HeadingS style={styles.titleText}>Logo</HeadingS>
 		</View>
 	);
 }

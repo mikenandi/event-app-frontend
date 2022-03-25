@@ -23,7 +23,7 @@ function CctvSecurity(props) {
 				<MaterialCommunityIcons
 					name='cctv'
 					size={40}
-					color={show ? color.secondary : "grey"}
+					color={show ? "black" : "grey"}
 				/>
 				<Body>CCTV camera</Body>
 			</View>

@@ -22,7 +22,7 @@ function PoolAmenity(props) {
 				<MaterialCommunityIcons
 					name='pool'
 					size={40}
-					color={show ? color.secondary : "gray"}
+					color={show ? "black" : "gray"}
 				/>
 				<Body>pool</Body>
 			</View>

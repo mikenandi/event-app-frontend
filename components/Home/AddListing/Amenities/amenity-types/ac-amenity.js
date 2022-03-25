@@ -22,7 +22,7 @@ function AcAmenity(props) {
 				<MaterialCommunityIcons
 					name='air-conditioner'
 					size={40}
-					color={show ? color.secondary : "gray"}
+					color={show ? "black" : "gray"}
 				/>
 				<Body>air conditioner</Body>
 			</View>

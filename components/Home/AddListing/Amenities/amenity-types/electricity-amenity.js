@@ -19,11 +19,7 @@ function ElectricityAmenity(props) {
 	return (
 		<TouchableOpacity activeOpacity={0.9} onPress={handleShowAmenityType}>
 			<View style={show ? styles.greyBack : styles.amenityContainer}>
-				<Entypo
-					name='flash'
-					size={40}
-					color={show ? color.secondary : "gray"}
-				/>
+				<Entypo name='flash' size={40} color={show ? "black" : "gray"} />
 				<BodyS>electricity</BodyS>
 			</View>
 		</TouchableOpacity>

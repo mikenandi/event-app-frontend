@@ -11,6 +11,7 @@ import {StatusBar, Text} from "react-native";
 import Left from "./components/TopBar/Left";
 import Right from "./components/TopBar/Right";
 import Profile from "./components/Profile";
+import Messages from "./components/Messages";
 import {Provider} from "react-redux";
 import {store} from "./components/Store";
 
@@ -28,7 +29,7 @@ function MyTabs() {
 				name='property list'
 				component={Home}
 				options={{
-					tabBarLabel: "Home",
+					tabBarLabel: "",
 					title: "",
 					tabBarIcon: ({color, size}) => (
 						<AntDesign name='home' size={size} color={color} />
@@ -43,7 +44,7 @@ function MyTabs() {
 				component={Payments}
 				options={{
 					title: "",
-					tabBarLabel: "Payments",
+					tabBarLabel: "",
 					tabBarIcon: ({color, size}) => (
 						<AntDesign name='swap' size={size} color={color} />
 					),
@@ -51,11 +52,23 @@ function MyTabs() {
 				}}
 			/>
 			<Tab.Screen
+				name='Messages'
+				component={Messages}
+				options={{
+					title: "",
+					tabBarLabel: "",
+					tabBarIcon: ({color, size}) => (
+						<Ionicons name='chatbox-outline' size={size} color={color} />
+					),
+					headerLeft: () => <Left />,
+				}}
+			/>
+			<Tab.Screen
 				name='Profile'
 				component={Profile}
 				options={{
 					title: "",
-					tabBarLabel: "Profile",
+					tabBarLabel: "",
 					tabBarIcon: ({color, size}) => (
 						<Ionicons name='person-outline' size={size} color={color} />
 					),

@@ -5,7 +5,8 @@ import color from "../../../colors";
 import axios from "axios";
 import {getRegionFromIp} from "../../../Store/home-store/locationSlice";
 import {useDispatch, useSelector} from "react-redux";
-import {FontAwesome} from "@expo/vector-icons";
+import Search from "./search";
+import TopBar from "./top-bar";
 
 function ViewMap() {
 	const region = useSelector((state) => {
@@ -38,7 +39,7 @@ function ViewMap() {
 				initialRegion={{
 					latitude: region.latitude,
 					longitude: region.longitude,
-					latitudeDelta: 0.4,
+					latitudeDelta: 0.2,
 					longitudeDelta: 0.0421,
 				}}
 				style={styles.map}
@@ -60,10 +61,20 @@ function ViewMap() {
 					}}
 					opacity={0.8}>
 					<Callout style={{borderRadius: 5}}>
-						<Text>i am here</Text>
+						<Text
+							style={{
+								color: color.primary,
+								fontWeight: "bold",
+								textTransform: "capitalize",
+							}}>
+							here
+						</Text>
 					</Callout>
 				</Marker>
 			</MapView>
+
+			<TopBar />
+			<Search />
 		</View>
 	);
 }
@@ -72,9 +83,6 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: color.lightgray,
-		alignItems: "center",
-		justifyContent: "center",
-		padding: 10,
 	},
 	map: {
 		width: Dimensions.get("window").width,

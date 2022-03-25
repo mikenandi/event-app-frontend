@@ -19,11 +19,7 @@ function FenceSecurity(props) {
 	return (
 		<TouchableOpacity activeOpacity={0.9} onPress={handleShowType}>
 			<View style={show ? styles.greyBack : styles.amenityContainer}>
-				<MaterialIcons
-					name='fence'
-					size={40}
-					color={show ? color.secondary : "gray"}
-				/>
+				<MaterialIcons name='fence' size={40} color={show ? "black" : "gray"} />
 				<Body>fence</Body>
 			</View>
 		</TouchableOpacity>

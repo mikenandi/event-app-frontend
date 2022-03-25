@@ -19,11 +19,7 @@ function FanAmenity(props) {
 	return (
 		<TouchableOpacity activeOpacity={0.9} onPress={handleShowAmenityType}>
 			<View style={show ? styles.greyBack : styles.amenityContainer}>
-				<FontAwesome5
-					name='fan'
-					size={40}
-					color={show ? color.secondary : "gray"}
-				/>
+				<FontAwesome5 name='fan' size={40} color={show ? "black" : "gray"} />
 				<Body>fan</Body>
 			</View>
 		</TouchableOpacity>

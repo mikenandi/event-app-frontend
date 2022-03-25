@@ -1,13 +1,12 @@
-import React, {memo, useState} from "react";
+import React, {memo} from "react";
 import {View, Text, StyleSheet, Image, TouchableOpacity} from "react-native";
+
 import {Caption, BodyS, HeadingL} from "../Typography";
 
-function Profile(props) {
-	const editProfileHandler = () => {};
-
+function Messages(props) {
 	return (
 		<View style={styles.container}>
-			<HeadingL>Profile and settings page.</HeadingL>
+			<HeadingL>Tenant and landlord Messages</HeadingL>
 		</View>
 	);
 }
@@ -75,4 +74,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default memo(Profile);
+export default memo(Messages);

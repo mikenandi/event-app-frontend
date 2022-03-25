@@ -10,7 +10,7 @@ import FenceSecurity from "./secuirty-types/fence-security";
 import WatchmanSecurity from "./secuirty-types/watchman-security";
 import FireAlarmSecurity from "./secuirty-types/fire-alarm-security";
 import CctvCameraSecurity from "./secuirty-types/cctv-camera-security";
-import ViewMap from "../Adress";
+import ViewMap from "../Address";
 
 function Security(props) {
 	const visible = useSelector((state) => {

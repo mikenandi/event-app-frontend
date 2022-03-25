@@ -96,11 +96,13 @@ const styles = StyleSheet.create({
 	},
 	notifyText: {
 		position: "absolute",
-		padding: 5,
+		padding: 4,
 		backgroundColor: color.warning,
-		borderRadius: 5,
+		borderRadius: 6,
 		right: 25,
-		top: 0,
+		top: 2,
+		borderWidth: 1,
+		borderColor: "white",
 	},
 });
 
