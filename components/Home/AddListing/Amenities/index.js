@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "white",
 		paddingVertical: 10,
 		paddingHorizontal: 10,
-		color: color.dimblack,
+		color: "black",
 		fontWeight: "700",
 		borderRadius: 3,
 		marginRight: 10,

@@ -11,6 +11,7 @@ import WatchmanSecurity from "./secuirty-types/watchman-security";
 import FireAlarmSecurity from "./secuirty-types/fire-alarm-security";
 import CctvCameraSecurity from "./secuirty-types/cctv-camera-security";
 import ViewMap from "../Address";
+import {showLocationOption} from "../../../Store/home-store/modalSlice";
 
 function Security(props) {
 	const visible = useSelector((state) => {
@@ -26,6 +27,7 @@ function Security(props) {
 
 	const handleNextStep = () => {
 		dispatch(showMap());
+		dispatch(showLocationOption());
 	};
 
 	return (
@@ -90,7 +92,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "white",
 		paddingVertical: 10,
 		paddingHorizontal: 10,
-		color: color.dimblack,
+		color: "black",
 		fontWeight: "700",
 		borderRadius: 3,
 		marginRight: 10,

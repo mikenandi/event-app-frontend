@@ -1,21 +1,31 @@
 import React, {memo} from "react";
-import {View, Text, TextInput, StyleSheet} from "react-native";
+import {
+	View,
+	Text,
+	TextInput,
+	StyleSheet,
+	TouchableOpacity,
+} from "react-native";
 import {HeadingS} from "../../../Typography";
 import color from "../../../colors";
 import {FontAwesome} from "@expo/vector-icons";
 
 function Search(props) {
+	const handleShowSearch = () => {};
+
 	return (
 		<View style={styles.searchContainer}>
-			<View style={styles.searchInput}>
-				<FontAwesome
-					name='search'
-					size={20}
-					color='grey'
-					style={styles.searchIcon}
-				/>
-				<HeadingS>Search</HeadingS>
-			</View>
+			<TouchableOpacity activeOpacity={0.8} onPress={handleShowSearch}>
+				<View style={styles.searchInput}>
+					<FontAwesome
+						name='search'
+						size={20}
+						color='grey'
+						style={styles.searchIcon}
+					/>
+					<HeadingS>Search</HeadingS>
+				</View>
+			</TouchableOpacity>
 		</View>
 	);
 }

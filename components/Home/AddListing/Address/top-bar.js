@@ -1,16 +1,25 @@
 import React, {memo} from "react";
-import {View, TouchableOpacity, StyleSheet} from "react-native";
+import {View, TouchableOpacity, StyleSheet, Modal} from "react-native";
 import {ButtonText} from "../../../Typography";
 import {Ionicons} from "@expo/vector-icons";
 import color from "../../../colors";
-import {hideMap} from "../../../Store/home-store/modalSlice";
-import {useDispatch} from "react-redux";
+import {hideMap, showAddressData} from "../../../Store/home-store/modalSlice";
+import {useDispatch, useSelector} from "react-redux";
+import AddressData from "../AddressData";
 
 function TopBar(props) {
+	const visible = useSelector((state) => {
+		return state.showModal.addressDataVisible;
+	});
+
 	const dispatch = useDispatch();
 
 	const handleBack = () => {
 		dispatch(hideMap());
+	};
+
+	const handleNext = () => {
+		dispatch(showAddressData());
 	};
 
 	return (
@@ -22,9 +31,12 @@ function TopBar(props) {
 				style={styles.icon}
 				onPress={handleBack}
 			/>
-			<TouchableOpacity activeOpacity={0.9} onPress={() => {}}>
+			<TouchableOpacity activeOpacity={0.9} onPress={handleNext}>
 				<ButtonText style={styles.nextText}>Next</ButtonText>
 			</TouchableOpacity>
+			<Modal transparent={false} animationType='fade' visible={visible}>
+				<AddressData />
+			</Modal>
 		</View>
 	);
 }

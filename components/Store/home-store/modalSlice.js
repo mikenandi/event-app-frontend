@@ -12,6 +12,8 @@ const initialState = {
 	flooringVisible: false,
 	securityVisible: false,
 	mapVisible: false,
+	locationOptionVisible: false,
+	addressDataVisible: false,
 };
 
 export const modalSlice = createSlice({
@@ -78,6 +80,18 @@ export const modalSlice = createSlice({
 		hideMap: (state) => {
 			state.mapVisible = false;
 		},
+		showLocationOption: (state) => {
+			state.locationOptionVisible = true;
+		},
+		hideLocationOption: (state) => {
+			state.locationOptionVisible = false;
+		},
+		showAddressData: (state) => {
+			state.addressDataVisible = true;
+		},
+		hideAddressData: (state) => {
+			state.addressDataVisible = false;
+		},
 	},
 });
 
@@ -102,6 +116,10 @@ export const {
 	hideSecurity,
 	showMap,
 	hideMap,
+	showLocationOption,
+	hideLocationOption,
+	showAddressData,
+	hideAddressData,
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

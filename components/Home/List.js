@@ -43,7 +43,7 @@ function Listing(props) {
 const styles = StyleSheet.create({
 	card: {
 		backgroundColor: "white",
-		marginBottom: 4,
+		marginBottom: 9,
 		width: "100%",
 		marginTop: 1,
 	},

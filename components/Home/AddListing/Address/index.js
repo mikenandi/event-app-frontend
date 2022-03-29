@@ -1,16 +1,24 @@
 import React, {useState, memo, useEffect} from "react";
 import MapView, {Callout, Marker, Circle} from "react-native-maps";
-import {StyleSheet, Text, View, Dimensions} from "react-native";
+import {StyleSheet, Text, View, Dimensions, Modal} from "react-native";
 import color from "../../../colors";
 import axios from "axios";
 import {getRegionFromIp} from "../../../Store/home-store/locationSlice";
 import {useDispatch, useSelector} from "react-redux";
 import Search from "./search";
 import TopBar from "./top-bar";
+import LocationOptions from "./location-options";
+import {movePin} from "../../../Store/home-store/locationSlice";
+import {Ionicons} from "@expo/vector-icons";
+import {FontAwesome} from "@expo/vector-icons";
 
 function ViewMap() {
-	const region = useSelector((state) => {
-		return state.location.initialRegion;
+	const coordinates = useSelector((state) => {
+		return state.location.coordinates;
+	});
+
+	const visible = useSelector((state) => {
+		return state.showModal.locationOptionVisible;
 	});
 
 	const dispatch = useDispatch();
@@ -28,36 +36,30 @@ function ViewMap() {
 			});
 	}, []);
 
-	const [pin, setPin] = useState({
-		latitude: region.latitude,
-		longitude: region.longitude,
-	});
-
 	return (
 		<View style={styles.container}>
 			<MapView
 				initialRegion={{
-					latitude: region.latitude,
-					longitude: region.longitude,
-					latitudeDelta: 0.2,
+					latitude: coordinates.latitude,
+					longitude: coordinates.longitude,
+					latitudeDelta: 0.0922,
 					longitudeDelta: 0.0421,
 				}}
 				style={styles.map}
 				provider='google'
-				mapType='standard'
+				mapType='satellite'
 				showsCompass={false}
 				rotateEnabled={false}>
 				<Marker
-					coordinate={pin}
+					coordinate={coordinates}
 					draggable={true}
-					onDragStart={(e) => {
-						console.log("On Drag start", e.nativeEvent.coordinate);
-					}}
+					onDragStart={(e) => {}}
 					onDragEnd={(e) => {
-						setPin({
+						data = {
 							latitude: e.nativeEvent.coordinate.latitude,
 							longitude: e.nativeEvent.coordinate.longitude,
-						});
+						};
+						dispatch(movePin(data));
 					}}
 					opacity={0.8}>
 					<Callout style={{borderRadius: 5}}>
@@ -74,7 +76,8 @@ function ViewMap() {
 			</MapView>
 
 			<TopBar />
-			<Search />
+			{!visible && <Search />}
+			{visible && <LocationOptions />}
 		</View>
 	);
 }

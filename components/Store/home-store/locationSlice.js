@@ -1,18 +1,21 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
-	initialRegion: {
-		ip: "197.250.100.176",
-		country_code: "TZ",
-		country_name: "Tanzania",
-		region_code: "02",
-		region_name: "Dar es Salaam Region",
-		city: "Dar es Salaam",
-		zip_code: "",
-		time_zone: "Africa/Dar_es_Salaam",
+	coordinates: {
 		latitude: -6.7963,
 		longitude: 39.2847,
-		metro_code: 0,
+	},
+	location_data: {
+		city: "",
+		city_district: "",
+		country: "",
+		country_code: "",
+		house_number: "",
+		postcode: "",
+		region: "",
+		road: "",
+		suburb: "",
+		ward: "",
 	},
 };
 
@@ -21,11 +24,41 @@ export const locationSlice = createSlice({
 	initialState,
 	reducers: {
 		getRegionFromIp: (state, actions) => {
-			state.initialRegion = actions.payload;
+			state.coordinates.latitude = actions.payload.latitude;
+			state.coordinates.longitude = actions.payload.longitude;
+		},
+		getPhoneGpsLocation: (state, actions) => {
+			state.coordinates.latitude = actions.payload.coords.latitude;
+			state.coordinates.longitude = actions.payload.coords.longitude;
+		},
+		movePin: (state, actions) => {
+			state.coordinates.latitude = actions.payload.latitude;
+			state.coordinates.longitude = actions.payload.longitude;
+		},
+		saveLocationData: (state, actions) => {
+			state.location_data.city = actions.payload.city;
+			state.location_data.city_district = actions.payload.city_district;
+			state.location_data.country = actions.payload.country;
+			state.location_data.country_code = actions.payload.country_code;
+			state.location_data.house_number = actions.payload.house_number;
+			state.location_data.postcode = actions.payload.postcode;
+			state.location_data.region = actions.payload.region;
+			state.location_data.road = actions.payload.road;
+			state.location_data.suburb = actions.payload.suburb;
+			state.location_data.ward = actions.payload.ward;
+		},
+		clearLocationData: (state) => {
+			Object.assign(state.location_data, initialState.location_data);
 		},
 	},
 });
 
-export const {getRegionFromIp} = locationSlice.actions;
+export const {
+	getRegionFromIp,
+	getPhoneGpsLocation,
+	movePin,
+	saveLocationData,
+	clearLocationData,
+} = locationSlice.actions;
 
 export default locationSlice.reducer;

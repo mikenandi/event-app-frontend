@@ -1,5 +1,6 @@
 export default {
-	primary: "#00997a",
+	primary: "#0073E6",
+	primary1: "#00997A",
 	secondary: "#03DAC5",
 	alert: "crimson",
 	whitegrey: "#d9d9d9",
