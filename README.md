@@ -6,15 +6,15 @@
 
 ## tech stacks
 
-# react native
+### react native
 
-### React Native is an open-source UI software framework created by Meta Platforms, Inc. It is used to develop applications for Android, Android TV, iOS, macOS, tvOS, Web, Windows and UWP by enabling developers to use the React framework along with native platform capabilities.
+- React Native is an open-source UI software framework created by Meta Platforms, Inc. It is used to develop applications for Android, Android TV, iOS, macOS, tvOS, Web, Windows and UWP by enabling developers to use the React framework along with native platform capabilities.
 
-# expo
+### expo
 
 - Expo is an open-source platform for making universal native apps that run on Android, iOS, and the web. It includes a universal runtime and libraries that let you build native apps by writing React and JavaScript. This repository is where the Expo client software is developed, and includes the client apps, modules, apps, and more. The Expo CLI repository contains the Expo development tools.
 
-# redux
+### redux
 
 - Redux is an open-source JavaScript library for managing and centralizing application state. It is most commonly used with libraries such as React or Angular for building user interfaces. Similar to Facebook's Flux architecture, it was created by Dan Abramov and Andrew Clark.
 
@@ -50,4 +50,4 @@
 
 # Warning
 
-## use npm for installation of packages on the app. Don't use yarn or expo because the don't install all packages well sometimes.
+### use npm for installation of packages on the app. Don't use yarn or expo because it does not install all packages well sometimes.
