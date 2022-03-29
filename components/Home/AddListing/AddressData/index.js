@@ -151,10 +151,6 @@ const styles = StyleSheet.create({
 		paddingTop: 20,
 		padding: 10,
 	},
-	rowContainer: {
-		flexDirection: "row",
-		justifyContent: "space-evenly",
-	},
 	label: {
 		color: color.dimblack,
 		textTransform: "capitalize",
@@ -164,8 +160,6 @@ const styles = StyleSheet.create({
 		borderRadius: 10,
 	},
 	labelDataContainer: {
-		borderBottomWidth: 1,
-		borderBottomColor: color.grey,
 		padding: 5,
 		marginBottom: 10,
 		flexDirection: "row",
