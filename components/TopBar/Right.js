@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
 	notifyText: {
 		position: "absolute",
 		padding: 4,
-		backgroundColor: color.warning,
+		backgroundColor: color.primary,
 		borderRadius: 6,
 		right: 25,
 		top: 2,
