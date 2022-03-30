@@ -12,34 +12,24 @@ import color from "../../../colors";
 import {Ionicons} from "@expo/vector-icons";
 import {useDispatch, useSelector} from "react-redux";
 import {ButtonText, HeadingS, Body, BodyS} from "../../../Typography";
-import {
-	hidePopularName,
-	showGallery,
-} from "../../../Store/home-store/modalSlice";
-import {clearPopularLocation} from "../../../Store/home-store/locationSlice";
-import Gallery from "../Gallery";
+import {hidePrice} from "../../../Store/home-store/modalSlice";
 
-function PopularLocationName(props) {
+function Price(props) {
 	const visible = useSelector((state) => {
 		return state.showModal.galleryVisible;
 	});
 
-	const [popular_location_name, set_popular_location_name] = useState("");
+	const [price, set_price] = useState("");
 
 	const dispatch = useDispatch();
 
 	const handleBack = () => {
-		dispatch(clearPopularLocation());
-		dispatch(hidePopularName());
+		dispatch(hidePrice());
 	};
 
-	const handleNext = () => {
-		dispatch(showGallery());
-	};
+	const handleNext = () => {};
 
-	const handleChangeText = (popular_location_name) => {
-		set_popular_location_name(popular_location_name);
-	};
+	const handleChangeText = (popular_location_name) => {};
 
 	return (
 		<View style={styles.screen}>
@@ -55,13 +45,11 @@ function PopularLocationName(props) {
 				</TouchableOpacity>
 			</View>
 			<View style={styles.titleContainer}>
-				<HeadingS style={styles.titleText}>
-					What is popular name that your street is known?
-				</HeadingS>
+				<HeadingS style={styles.titleText}>what is the rental price?</HeadingS>
 			</View>
 
 			<View style={styles.bottomContainer}>
-				<View style={styles.fetchedContainer}>
+				{/* <View style={styles.fetchedContainer}>
 					<View style={styles.labelDataContainer}>
 						<Ionicons name='pin-outline' size={50} color={color.lightblue} />
 						<View>
@@ -76,11 +64,11 @@ function PopularLocationName(props) {
 							/>
 						</View>
 					</View>
-				</View>
+				</View> */}
 			</View>
-			<Modal transparent={false} animationType='fade' visible={visible}>
+			{/* <Modal transparent={false} animationType='fade' visible={visible}>
 				<Gallery />
-			</Modal>
+			</Modal> */}
 		</View>
 	);
 }
@@ -149,4 +137,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default memo(PopularLocationName);
+export default memo(Price);

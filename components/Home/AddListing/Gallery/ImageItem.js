@@ -1,5 +1,6 @@
 import {Image, View, StyleSheet, TouchableOpacity} from "react-native";
 import {SimpleLineIcons} from "@expo/vector-icons";
+import {Octicons} from "@expo/vector-icons";
 import React, {memo, useState} from "react";
 import color from "../../../colors";
 import {useDispatch, useSelector} from "react-redux";
@@ -44,13 +45,15 @@ function ImageItem(props) {
 			</TouchableOpacity>
 
 			{selected && (
-				<SimpleLineIcons
-					name='check'
-					size={24}
-					color={color.primary}
-					style={styles.tickIcon}
-					onPress={handleRemoveId}
-				/>
+				<View style={styles.tickContainer}>
+					<Octicons
+						name='check'
+						size={18}
+						color='black'
+						style={styles.tickIcon}
+						onPress={handleRemoveId}
+					/>
+				</View>
 			)}
 		</View>
 	);
@@ -63,11 +66,18 @@ const styles = StyleSheet.create({
 		margin: 1,
 	},
 	tickIcon: {
+		opacity: 0.6,
+	},
+	tickContainer: {
 		position: "absolute",
 		top: 20,
 		left: 20,
-		backgroundColor: "white",
-		borderRadius: 12,
+		borderRadius: 30,
+		width: 25,
+		height: 25,
+		backgroundColor: color.primary,
+		justifyContent: "center",
+		alignItems: "center",
 	},
 });
 

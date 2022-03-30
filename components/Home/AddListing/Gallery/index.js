@@ -15,13 +15,18 @@ import {useSelector} from "react-redux";
 import {useDispatch} from "react-redux";
 import {
 	clearPhotos,
+	clearSavedId,
+	getSelectedImages,
 	readFromLibrary,
-	setPreviewVisible,
 } from "../../../Store/home-store/imageSlice";
-import PreviewImages from "./PreviewImages";
 import {formatDataForGrid} from "../../../../Helpers/formatDataForGrid";
+import {hideGallery, showPrice} from "../../../Store/home-store/modalSlice";
+import {Body, Caption} from "../../../Typography";
+import Price from "../Price";
 
 function Gallery(props) {
+	const dispatch = useDispatch();
+
 	const warnTextVisible = useSelector((state) => {
 		return state.readImage.warnTextVisible;
 	});
@@ -38,15 +43,9 @@ function Gallery(props) {
 		return state.readImage.nextButtonVisible;
 	});
 
-	const previewVisible = useSelector((state) => {
-		return state.readImage.previewVisible;
+	const visible = useSelector((state) => {
+		return state.showModal.priceVisible;
 	});
-
-	const dispatch = useDispatch();
-
-	const handlePreviewImages = () => {
-		dispatch(setPreviewVisible());
-	};
 
 	const numColumns = 2;
 	useEffect(() => {
@@ -58,9 +57,15 @@ function Gallery(props) {
 			.catch((err) => console.log(err));
 	}, []);
 
-	const handleBackHomeScreen = () => {
+	const handleBack = () => {
+		dispatch(clearSavedId());
 		dispatch(clearPhotos());
-		props.setAddListingVisible(!props.addListingVisible);
+		dispatch(hideGallery());
+	};
+
+	const handleNext = () => {
+		dispatch(getSelectedImages());
+		dispatch(showPrice());
 	};
 
 	const renderItem = ({item}) => {
@@ -73,17 +78,17 @@ function Gallery(props) {
 				<Ionicons
 					name='arrow-back-outline'
 					size={28}
-					onPress={handleBackHomeScreen}
+					onPress={handleBack}
 					style={styles.backArrow}
 				/>
 				{warnTextVisible && (
-					<Text style={styles.textSelectWarning}>select at least 5 images</Text>
+					<Body style={styles.textSelectWarning}>select at least 5 images</Body>
 				)}
 				{nextButtonVisible && (
 					<TouchableOpacity
 						activeOpacity={0.8}
 						style={styles.nextButtonContainer}
-						onPress={handlePreviewImages}>
+						onPress={handleNext}>
 						<Text style={styles.buttonText}>NEXT</Text>
 					</TouchableOpacity>
 				)}
@@ -95,8 +100,8 @@ function Gallery(props) {
 				initialNumToRender={8}
 				numColumns={numColumns}
 			/>
-			<Modal visible={previewVisible}>
-				<PreviewImages />
+			<Modal visible={visible} transparent={false} animationType='fade'>
+				<Price />
 			</Modal>
 		</View>
 	);
@@ -118,9 +123,9 @@ const styles = StyleSheet.create({
 		color: "white",
 	},
 	textSelectWarning: {
-		fontSize: 18,
-		color: color.dimblack,
+		color: "black",
 		marginRight: 70,
+		textTransform: "lowercase",
 	},
 	nextButtonContainer: {
 		backgroundColor: "white",

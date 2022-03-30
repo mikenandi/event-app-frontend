@@ -16,6 +16,7 @@ const initialState = {
 	addressDataVisible: false,
 	popularNameVisible: false,
 	galleryVisible: false,
+	priceVisible: false,
 };
 
 export const modalSlice = createSlice({
@@ -106,6 +107,12 @@ export const modalSlice = createSlice({
 		hideGallery: (state) => {
 			state.galleryVisible = false;
 		},
+		showPrice: (state) => {
+			state.priceVisible = true;
+		},
+		hidePrice: (state) => {
+			state.priceVisible = false;
+		},
 	},
 });
 
@@ -138,6 +145,8 @@ export const {
 	hidePopularName,
 	showGallery,
 	hideGallery,
+	showPrice,
+	hidePrice,
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

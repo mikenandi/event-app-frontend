@@ -52,6 +52,9 @@ export const imageSlice = createSlice({
 		clearSelectedImages: (state) => {
 			state.selectedImages = [];
 		},
+		clearSavedId: (state) => {
+			Object.assign(state.savedIds, initialState.savedIds);
+		},
 	},
 });
 
@@ -63,6 +66,7 @@ export const {
 	setPreviewVisible,
 	getSelectedImages,
 	clearSelectedImages,
+	clearSavedId,
 } = imageSlice.actions;
 
 export default imageSlice.reducer;
