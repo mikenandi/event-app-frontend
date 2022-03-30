@@ -6,7 +6,7 @@ import {
 	clearSelectedImages,
 	getSelectedImages,
 	setPreviewVisible,
-} from "../Store/imageLibrary/imageSlice";
+} from "../../../Store/home-store/imageSlice";
 import {Ionicons} from "@expo/vector-icons";
 import color from "../../../colors";
 import {useEffect} from "react";

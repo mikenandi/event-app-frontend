@@ -16,6 +16,7 @@ const initialState = {
 		road: "",
 		suburb: "",
 		ward: "",
+		popular_name: "",
 	},
 };
 
@@ -50,6 +51,13 @@ export const locationSlice = createSlice({
 		clearLocationData: (state) => {
 			Object.assign(state.location_data, initialState.location_data);
 		},
+		clearPopularLocation: (state) => {
+			state.location_data.popular_name = "";
+		},
+		inputPopularLocation: (state, actions) => {
+			console.log(actions.payload);
+			state.location_data.popular_name = actions.payload;
+		},
 	},
 });
 
@@ -59,6 +67,8 @@ export const {
 	movePin,
 	saveLocationData,
 	clearLocationData,
+	clearPopularLocation,
+	inputPopularLocation,
 } = locationSlice.actions;
 
 export default locationSlice.reducer;

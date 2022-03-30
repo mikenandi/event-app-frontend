@@ -14,6 +14,8 @@ const initialState = {
 	mapVisible: false,
 	locationOptionVisible: false,
 	addressDataVisible: false,
+	popularNameVisible: false,
+	galleryVisible: false,
 };
 
 export const modalSlice = createSlice({
@@ -92,6 +94,18 @@ export const modalSlice = createSlice({
 		hideAddressData: (state) => {
 			state.addressDataVisible = false;
 		},
+		showPopularName: (state) => {
+			state.popularNameVisible = true;
+		},
+		hidePopularName: (state) => {
+			state.popularNameVisible = false;
+		},
+		showGallery: (state) => {
+			state.galleryVisible = true;
+		},
+		hideGallery: (state) => {
+			state.galleryVisible = false;
+		},
 	},
 });
 
@@ -120,6 +134,10 @@ export const {
 	hideLocationOption,
 	showAddressData,
 	hideAddressData,
+	showPopularName,
+	hidePopularName,
+	showGallery,
+	hideGallery,
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

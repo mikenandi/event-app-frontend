@@ -9,9 +9,17 @@ import {
 	clearLocationData,
 	saveLocationData,
 } from "../../../Store/home-store/locationSlice";
-import {hideAddressData} from "../../../Store/home-store/modalSlice";
+import {
+	hideAddressData,
+	showPopularName,
+} from "../../../Store/home-store/modalSlice";
+import PopularLocationName from "../PopularLocationName";
 
 function AddressData(props) {
+	const visible = useSelector((state) => {
+		return state.showModal.popularNameVisible;
+	});
+
 	const location = useSelector((state) => {
 		return state.location.location_data;
 	});
@@ -48,7 +56,9 @@ function AddressData(props) {
 		dispatch(hideAddressData());
 	};
 
-	const handleNextStep = () => {};
+	const handleNextStep = () => {
+		dispatch(showPopularName());
+	};
 
 	return (
 		<View style={styles.screen}>
@@ -108,6 +118,9 @@ function AddressData(props) {
 					</View>
 				</View>
 			</View>
+			<Modal transparent={false} animationType='fade' visible={visible}>
+				<PopularLocationName />
+			</Modal>
 		</View>
 	);
 }

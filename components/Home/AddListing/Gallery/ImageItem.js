@@ -1,12 +1,12 @@
 import {Image, View, StyleSheet, TouchableOpacity} from "react-native";
 import {SimpleLineIcons} from "@expo/vector-icons";
 import React, {memo, useState} from "react";
-import color from "../colors";
+import color from "../../../colors";
 import {useDispatch, useSelector} from "react-redux";
 import {
 	saveSelectedIds,
 	removeSelectedId,
-} from "../Store/imageLibrary/imageSlice";
+} from "../../../Store/home-store/imageSlice";
 
 function ImageItem(props) {
 	const [selected, setSelected] = useState(false);

@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import {Ionicons} from "@expo/vector-icons";
 import {getPhotos} from "../../../../Helpers/getPhotos";
-import ImageItem from "../ImageItem";
+import ImageItem from "./ImageItem";
 import color from "../../../colors";
 import {useSelector} from "react-redux";
 import {useDispatch} from "react-redux";
@@ -17,11 +17,11 @@ import {
 	clearPhotos,
 	readFromLibrary,
 	setPreviewVisible,
-} from "../Store/imageLibrary/imageSlice";
+} from "../../../Store/home-store/imageSlice";
 import PreviewImages from "./PreviewImages";
 import {formatDataForGrid} from "../../../../Helpers/formatDataForGrid";
 
-function ImageGalery(props) {
+function Gallery(props) {
 	const warnTextVisible = useSelector((state) => {
 		return state.readImage.warnTextVisible;
 	});
@@ -107,32 +107,33 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	topContainer: {
-		marginHorizontal: 8,
-		marginVertical: 10,
+		paddingVertical: 10,
+		paddingHorizontal: 8,
 		flexDirection: "row",
 		justifyContent: "space-between",
 		alignItems: "center",
+		backgroundColor: color.primary,
 	},
 	backArrow: {
-		color: color.dimblack,
+		color: "white",
 	},
 	textSelectWarning: {
-		fontFamily: "serif",
 		fontSize: 18,
 		color: color.dimblack,
 		marginRight: 70,
 	},
 	nextButtonContainer: {
-		backgroundColor: color.primary,
+		backgroundColor: "white",
 		paddingHorizontal: 15,
 		paddingVertical: 8,
 		marginRight: 10,
+		borderRadius: 5,
 	},
 	buttonText: {
-		color: "white",
+		color: "black",
 		fontSize: 16,
 		fontWeight: "normal",
 	},
 });
 
-export default memo(ImageGalery);
+export default memo(Gallery);
