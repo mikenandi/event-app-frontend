@@ -1,6 +1,6 @@
 # landlord_app
 
-### the app that will enable the landlord to manage his/her properties very.
+### the app that will enable the landlord to manage his/her properties on cloud.
 
 # Description
 
