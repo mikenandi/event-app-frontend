@@ -109,15 +109,18 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	topContainer: {
-		paddingVertical: 15,
+		paddingVertical: 8,
 		paddingHorizontal: 8,
 		flexDirection: "row",
 		justifyContent: "space-between",
 		alignItems: "center",
-		backgroundColor: color.primary,
+		backgroundColor: color.lightgray,
 	},
 	backArrow: {
 		color: "white",
+		backgroundColor: color.primary,
+		padding: 4,
+		borderRadius: 25,
 	},
 	textSelectWarning: {
 		color: "black",
@@ -136,10 +139,10 @@ const styles = StyleSheet.create({
 		fontWeight: "bold",
 	},
 	nextText: {
-		backgroundColor: "white",
+		backgroundColor: color.primary,
 		paddingVertical: 10,
 		paddingHorizontal: 10,
-		color: "black",
+		color: "white",
 		fontWeight: "700",
 		borderRadius: 3,
 		marginRight: 10,

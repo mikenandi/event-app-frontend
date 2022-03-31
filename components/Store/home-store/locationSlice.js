@@ -54,8 +54,7 @@ export const locationSlice = createSlice({
 		clearPopularLocation: (state) => {
 			state.location_data.popular_name = "";
 		},
-		inputPopularLocation: (state, actions) => {
-			console.log(actions.payload);
+		savePopularLocation: (state, actions) => {
 			state.location_data.popular_name = actions.payload;
 		},
 	},
@@ -68,7 +67,7 @@ export const {
 	saveLocationData,
 	clearLocationData,
 	clearPopularLocation,
-	inputPopularLocation,
+	savePopularLocation,
 } = locationSlice.actions;
 
 export default locationSlice.reducer;

@@ -1,9 +1,12 @@
 import {createSlice} from "@reduxjs/toolkit";
+import {remove_comma} from "../../../Helpers/remove_comma";
+import {add_comma} from "../../../Helpers/addCommaToNumber";
 
 const initialState = {
 	propertyType: "",
 	flooring: "",
 	roomType: "",
+	price: "",
 };
 
 const room = createSlice({
@@ -25,6 +28,14 @@ const room = createSlice({
 		clearRoomType: (state) => {
 			state.roomType = "";
 		},
+		savePrice: (state, actions) => {
+			const comma_removed = remove_comma(actions.payload);
+			const price_with_comma = add_comma(comma_removed);
+			state.price = price_with_comma;
+		},
+		clearPrice: (state) => {
+			state.price = "";
+		},
 	},
 });
 
@@ -36,6 +47,8 @@ export const {
 	selfContained,
 	normalRoom,
 	clearRoomType,
+	savePrice,
+	clearPrice,
 } = room.actions;
 
 export default room.reducer;

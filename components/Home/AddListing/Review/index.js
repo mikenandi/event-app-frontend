@@ -11,36 +11,26 @@ import {
 import color from "../../../colors";
 import {Ionicons} from "@expo/vector-icons";
 import {useDispatch, useSelector} from "react-redux";
-import {ButtonText, HeadingS, Body, BodyS} from "../../../Typography";
-import {hidePrice, showReview} from "../../../Store/home-store/modalSlice";
-import {add_comma} from "../../../../Helpers/addCommaToNumber";
-import {remove_comma} from "../../../../Helpers/remove_comma";
+import {ButtonText, HeadingS, Body, BodyS, HeadingM} from "../../../Typography";
+import {hidePrice, hideReview} from "../../../Store/home-store/modalSlice";
 import {clearPrice, savePrice} from "../../../Store/home-store/roomSlice";
-import Review from "../Review";
 
-function Price(props) {
-	const price = useSelector((state) => {
-		return state.room.price;
-	});
+function Review(props) {
+	// const price = useSelector((state) => {
+	// 	return state.room.price;
+	// });
 
-	const visible = useSelector((state) => {
-		return state.showModal.reviewVisible;
-	});
+	// const visible = useSelector((state) => {
+	// 	return state.showModal.reviewVisible;
+	// });
 
 	const dispatch = useDispatch();
 
 	const handleBack = () => {
-		dispatch(clearPrice());
-		dispatch(hidePrice());
+		dispatch(hideReview());
 	};
 
-	const handleNext = () => {
-		dispatch(showReview());
-	};
-
-	const handleChangeText = (price) => {
-		dispatch(savePrice(price));
-	};
+	const handleNext = () => {};
 
 	return (
 		<View style={styles.screen}>
@@ -51,35 +41,23 @@ function Price(props) {
 					onPress={handleBack}
 					style={styles.backArrow}
 				/>
-				<TouchableOpacity activeOpacity={0.9} onPress={handleNext}>
+				<HeadingM style={styles.titleText}>Let's review and post.</HeadingM>
+				{/* <TouchableOpacity activeOpacity={0.9} onPress={handleNext}>
 					<ButtonText style={styles.nextText}>Next</ButtonText>
-				</TouchableOpacity>
+				</TouchableOpacity> */}
 			</View>
-			<View style={styles.titleContainer}>
-				<HeadingS style={styles.titleText}>
-					what is the rental price per month?
-				</HeadingS>
-			</View>
+			{/* <View style={styles.titleContainer}>
+				<HeadingS style={styles.titleText}>lets review it now</HeadingS>
+			</View> */}
 
 			<View style={styles.bottomContainer}>
-				<View style={styles.inputContainer}>
-					<HeadingS>Tsh</HeadingS>
-					<TextInput
-						placeholder='price'
-						style={styles.inputText}
-						keyboardType='numeric'
-						multiline={false}
-						maxLength={15}
-						value={price}
-						onChangeText={handleChangeText}
-					/>
-				</View>
+				{/* <HeadingM>hello</HeadingM> */}
+				<TouchableOpacity activeOpacity={0.9} onPress={handleNext}>
+					<View style={styles.actionButton}>
+						<ButtonText style={styles.postButton}>post property</ButtonText>
+					</View>
+				</TouchableOpacity>
 			</View>
-
-			{/* {visible && <Review />} */}
-			<Modal transparent={false} animationType='fade' visible={visible}>
-				<Review />
-			</Modal>
 		</View>
 	);
 }
@@ -90,11 +68,11 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 8,
 		paddingVertical: 10,
 		flexDirection: "row",
-		justifyContent: "space-between",
 		alignItems: "center",
 	},
 	backArrow: {
 		color: "white",
+		marginRight: 15,
 	},
 	titleText: {
 		color: "white",
@@ -106,14 +84,10 @@ const styles = StyleSheet.create({
 		backgroundColor: color.primary,
 		padding: 10,
 	},
-	nextText: {
-		backgroundColor: "white",
-		paddingVertical: 10,
-		paddingHorizontal: 10,
-		color: "black",
+	postButton: {
+		color: "white",
 		fontWeight: "700",
-		borderRadius: 3,
-		marginRight: 10,
+		textAlign: "center",
 	},
 	bottomContainer: {
 		backgroundColor: "white",
@@ -122,7 +96,6 @@ const styles = StyleSheet.create({
 		borderTopLeftRadius: 30,
 		paddingTop: 20,
 		padding: 10,
-		alignItems: "center",
 	},
 	label: {
 		color: color.dimblack,
@@ -155,6 +128,18 @@ const styles = StyleSheet.create({
 		marginTop: 60,
 		borderColor: color.primary,
 	},
+	actionButton: {
+		backgroundColor: color.primary,
+		paddingVertical: 15,
+		paddingHorizontal: 10,
+		color: "white",
+		fontWeight: "700",
+		borderRadius: 3,
+		position: "absolute",
+		top: 400,
+
+		width: "100%",
+	},
 });
 
-export default memo(Price);
+export default memo(Review);

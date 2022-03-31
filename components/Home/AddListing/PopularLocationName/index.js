@@ -16,20 +16,24 @@ import {
 	hidePopularName,
 	showGallery,
 } from "../../../Store/home-store/modalSlice";
-import {clearPopularLocation} from "../../../Store/home-store/locationSlice";
+import {
+	clearPopularLocation,
+	savePopularLocation,
+} from "../../../Store/home-store/locationSlice";
 import Gallery from "../Gallery";
 
 function PopularLocationName(props) {
+	const popular_name = useSelector((state) => {
+		return state.location.location_data.popular_name;
+	});
+
 	const visible = useSelector((state) => {
 		return state.showModal.galleryVisible;
 	});
 
-	const [popular_location_name, set_popular_location_name] = useState("");
-
 	const dispatch = useDispatch();
 
 	const handleBack = () => {
-		Keyboard.dismiss();
 		dispatch(clearPopularLocation());
 		dispatch(hidePopularName());
 	};
@@ -38,8 +42,8 @@ function PopularLocationName(props) {
 		dispatch(showGallery());
 	};
 
-	const handleChangeText = (popular_location_name) => {
-		set_popular_location_name(popular_location_name);
+	const handleChangeText = (popular_name) => {
+		dispatch(savePopularLocation(popular_name));
 	};
 
 	return (
@@ -71,9 +75,11 @@ function PopularLocationName(props) {
 								placeholder='mfano sinza madukani'
 								style={styles.inputText}
 								multiline={true}
-								maxLength={100}
-								value={popular_location_name}
+								maxLength={60}
+								value={popular_name}
+								editable={true}
 								onChangeText={handleChangeText}
+								onKeyPress={(e) => {}}
 							/>
 						</View>
 					</View>
