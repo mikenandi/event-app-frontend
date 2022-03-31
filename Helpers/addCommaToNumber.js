@@ -1,6 +1,7 @@
-export const add_comma = (x) => {
-	x = x.toString();
-	var pattern = /(-?\d+)(\d{3})/;
-	while (pattern.test(x)) x = x.replace(pattern, "$1,$2");
-	return x;
+export const add_comma = (input) => {
+	// input = input.toString();
+	// var pattern = /(-?\d+)(\d{3})/;
+	// while (pattern.test(input)) input = input.replace(pattern, "$1,$2");
+	var commas = input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	return commas;
 };

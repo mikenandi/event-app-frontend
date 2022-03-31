@@ -21,7 +21,7 @@ import {
 } from "../../../Store/home-store/imageSlice";
 import {formatDataForGrid} from "../../../../Helpers/formatDataForGrid";
 import {hideGallery, showPrice} from "../../../Store/home-store/modalSlice";
-import {Body, Caption} from "../../../Typography";
+import {Body, ButtonText} from "../../../Typography";
 import Price from "../Price";
 
 function Gallery(props) {
@@ -85,11 +85,8 @@ function Gallery(props) {
 					<Body style={styles.textSelectWarning}>select at least 5 images</Body>
 				)}
 				{nextButtonVisible && (
-					<TouchableOpacity
-						activeOpacity={0.8}
-						style={styles.nextButtonContainer}
-						onPress={handleNext}>
-						<Text style={styles.buttonText}>NEXT</Text>
+					<TouchableOpacity activeOpacity={0.9} onPress={handleNext}>
+						<ButtonText style={styles.nextText}>Next</ButtonText>
 					</TouchableOpacity>
 				)}
 			</View>
@@ -112,7 +109,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	topContainer: {
-		paddingVertical: 10,
+		paddingVertical: 15,
 		paddingHorizontal: 8,
 		flexDirection: "row",
 		justifyContent: "space-between",
@@ -129,15 +126,23 @@ const styles = StyleSheet.create({
 	},
 	nextButtonContainer: {
 		backgroundColor: "white",
-		paddingHorizontal: 15,
-		paddingVertical: 8,
+		paddingHorizontal: 10,
+		paddingVertical: 10,
 		marginRight: 10,
 		borderRadius: 5,
 	},
 	buttonText: {
 		color: "black",
-		fontSize: 16,
-		fontWeight: "normal",
+		fontWeight: "bold",
+	},
+	nextText: {
+		backgroundColor: "white",
+		paddingVertical: 10,
+		paddingHorizontal: 10,
+		color: "black",
+		fontWeight: "700",
+		borderRadius: 3,
+		marginRight: 10,
 	},
 });
 

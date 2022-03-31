@@ -84,7 +84,7 @@ export default function App() {
 	return (
 		<Provider store={store}>
 			<NavigationContainer>
-				<StatusBar backgroundColor='gray' />
+				<StatusBar backgroundColor={color.lightblue} />
 				<MyTabs />
 			</NavigationContainer>
 		</Provider>

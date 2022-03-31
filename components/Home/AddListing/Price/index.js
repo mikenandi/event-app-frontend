@@ -1,4 +1,4 @@
-import React, {memo, useState} from "react";
+import React, {memo, useEffect, useState} from "react";
 import {
 	View,
 	StyleSheet,
@@ -13,13 +13,14 @@ import {Ionicons} from "@expo/vector-icons";
 import {useDispatch, useSelector} from "react-redux";
 import {ButtonText, HeadingS, Body, BodyS} from "../../../Typography";
 import {hidePrice} from "../../../Store/home-store/modalSlice";
+import {add_comma} from "../../../../Helpers/addCommaToNumber";
+import {remove_comma} from "../../../../Helpers/remove_comma";
 
 function Price(props) {
+	const [price, set_price] = useState("");
 	const visible = useSelector((state) => {
 		return state.showModal.galleryVisible;
 	});
-
-	const [price, set_price] = useState("");
 
 	const dispatch = useDispatch();
 
@@ -29,7 +30,12 @@ function Price(props) {
 
 	const handleNext = () => {};
 
-	const handleChangeText = (popular_location_name) => {};
+	const handleChangeText = (price) => {
+		const comma_removed = remove_comma(price);
+		if (Number(comma_removed) > 90000000) console.log("invalid amount");
+		const price_with_comma = add_comma(comma_removed);
+		set_price(price_with_comma);
+	};
 
 	return (
 		<View style={styles.screen}>
@@ -45,26 +51,24 @@ function Price(props) {
 				</TouchableOpacity>
 			</View>
 			<View style={styles.titleContainer}>
-				<HeadingS style={styles.titleText}>what is the rental price?</HeadingS>
+				<HeadingS style={styles.titleText}>
+					what is the rental price per month?
+				</HeadingS>
 			</View>
 
 			<View style={styles.bottomContainer}>
-				{/* <View style={styles.fetchedContainer}>
-					<View style={styles.labelDataContainer}>
-						<Ionicons name='pin-outline' size={50} color={color.lightblue} />
-						<View>
-							<BodyS style={styles.label}>Enter popular location name</BodyS>
-							<TextInput
-								placeholder='mfano sinza madukani'
-								style={styles.inputText}
-								multiline={true}
-								maxLength={100}
-								value={popular_location_name}
-								onChangeText={handleChangeText}
-							/>
-						</View>
-					</View>
-				</View> */}
+				<View style={styles.inputContainer}>
+					<HeadingS>Tsh</HeadingS>
+					<TextInput
+						placeholder='price'
+						style={styles.inputText}
+						keyboardType='numeric'
+						multiline={false}
+						maxLength={15}
+						value={price}
+						onChangeText={handleChangeText}
+					/>
+				</View>
 			</View>
 			{/* <Modal transparent={false} animationType='fade' visible={visible}>
 				<Gallery />
@@ -111,6 +115,7 @@ const styles = StyleSheet.create({
 		borderTopLeftRadius: 30,
 		paddingTop: 20,
 		padding: 10,
+		alignItems: "center",
 	},
 	label: {
 		color: color.dimblack,
@@ -126,14 +131,21 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "center",
 	},
-	bottomDetailContainer: {
-		padding: 5,
-	},
 	inputText: {
-		fontSize: 20,
+		fontSize: 25,
 		letterSpacing: 0.25,
-		width: 200,
-		padding: 5,
+		width: 240,
+		padding: 10,
+	},
+	inputContainer: {
+		flexDirection: "row",
+		alignItems: "center",
+		borderWidth: 1,
+		width: 240,
+		paddingVertical: 5,
+		paddingHorizontal: 20,
+		borderRadius: 2,
+		marginTop: 40,
 	},
 });
 

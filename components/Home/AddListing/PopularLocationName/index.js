@@ -29,6 +29,7 @@ function PopularLocationName(props) {
 	const dispatch = useDispatch();
 
 	const handleBack = () => {
+		Keyboard.dismiss();
 		dispatch(clearPopularLocation());
 		dispatch(hidePopularName());
 	};
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
 	topContainer: {
 		backgroundColor: color.primary,
 		paddingHorizontal: 8,
-		paddingVertical: 10,
+		paddingVertical: 8,
 		flexDirection: "row",
 		justifyContent: "space-between",
 		alignItems: "center",
