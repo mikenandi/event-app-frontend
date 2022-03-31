@@ -29,11 +29,17 @@
 ### the file that consists all the components of the project
 
 - Folder Home, Messages, Payment, Profile are represent screens on the app. They all have indexjs file which is the root folder for all activities done on that screen.
+
 - Store is the folder that consists all states of the app.
+
 - Topbar is the folder that consist the topbar components of the app.
+
 - Unusedcompents explain by themselves that they have not been used in the project.
+
 - Typography is the component that shows all typograpy components used in the project.
+
 - colors is the component for colors.
+
 - requestData.js and data.js are the files that store mock data of the app.
 
 ## Helpers
