@@ -1,9 +1,7 @@
 import React, {memo} from "react";
-import {View, StyleSheet, ScrollView} from "react-native";
-import {Body, Caption} from "../../../Typography";
+import {View, StyleSheet} from "react-native";
+import {Body, BodyS, Caption} from "../../../Typography";
 import {useSelector} from "react-redux";
-import {MaterialCommunityIcons} from "@expo/vector-icons";
-import {MaterialIcons} from "@expo/vector-icons";
 import color from "../../../colors";
 
 function SecurityReview(props) {
@@ -18,34 +16,22 @@ function SecurityReview(props) {
 			<View style={styles.amenityContainer}>
 				{security.watchman && (
 					<View style={styles.amenity}>
-						<MaterialIcons name='security' size={24} color={color.primary} />
-						<Caption>Gate guard</Caption>
+						<BodyS>Gate guard</BodyS>
 					</View>
 				)}
 				{security.fireAlarm && (
 					<View style={styles.amenity}>
-						<MaterialCommunityIcons
-							name='smoke-detector'
-							size={24}
-							color={color.primary}
-						/>
-						<Caption>Fire alarm</Caption>
+						<BodyS>Fire alarm</BodyS>
 					</View>
 				)}
 				{security.fence && (
 					<View style={styles.amenity}>
-						<MaterialIcons name='fence' size={24} color={color.primary} />
-						<Caption>Fence</Caption>
+						<BodyS>Fence</BodyS>
 					</View>
 				)}
 				{security.cctvCamera && (
 					<View style={styles.amenity}>
-						<MaterialCommunityIcons
-							name='cctv'
-							size={24}
-							color={color.primary}
-						/>
-						<Caption>CCTV camera</Caption>
+						<BodyS>CCTV camera</BodyS>
 					</View>
 				)}
 			</View>
@@ -55,7 +41,6 @@ function SecurityReview(props) {
 
 const styles = StyleSheet.create({
 	boldHeader: {
-		fontWeight: "bold",
 		borderBottomWidth: 1,
 		borderBottomColor: "gray",
 		marginBottom: 5,
@@ -73,6 +58,10 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 		marginRight: 15,
+		backgroundColor: color.lightgray,
+		borderRadius: 15,
+		padding: 8,
+		marginTop: 5,
 	},
 });
 

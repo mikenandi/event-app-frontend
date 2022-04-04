@@ -1,7 +1,7 @@
 import React, {memo} from "react";
 import {View, StyleSheet} from "react-native";
 import color from "../../../colors";
-import {Body} from "../../../Typography";
+import {Body, BodyS} from "../../../Typography";
 import {useSelector} from "react-redux";
 
 function PriceFeatures(props) {
@@ -29,30 +29,69 @@ function PriceFeatures(props) {
 	return (
 		<View style={styles.container}>
 			<Body style={styles.boldHeader}>Home details</Body>
-			<Body style={styles.detail}>Price: Tsh {price}</Body>
-			<Body style={styles.detail}>
-				Location: {location.ward}, {location.city}
-			</Body>
-			{room && <Body style={styles.detail}>Room type: {room_type}</Body>}
-			{!room && <Body style={styles.detail}>number of bathroms: unknown</Body>}
-			{!room && <Body style={styles.detail}>number of bedroom: unkown</Body>}
-			{!room && <Body style={styles.detail}>furnished: unkown</Body>}
-			<Body style={styles.detail}>Floor: {floor}</Body>
+			<View style={styles.detailContainer}>
+				<Body style={styles.detail}>Price</Body>
+				<Body style={styles.rightDetail}>Tsh {price}</Body>
+			</View>
+			<View style={styles.detailContainer}>
+				<Body style={styles.detail}>Location</Body>
+				<BodyS style={styles.rightDetail}>
+					{location.ward}, {location.city}
+				</BodyS>
+			</View>
+
+			{room && (
+				<View style={styles.detailContainer}>
+					<Body style={styles.detail}>Room type</Body>
+					<Body style={styles.rightDetail}>{room_type}</Body>
+				</View>
+			)}
+			{!room && (
+				<View style={styles.detailContainer}>
+					<Body style={styles.detail}>number of bathroms</Body>
+					<Body style={styles.rightDetail}>unknown</Body>
+				</View>
+			)}
+			{!room && (
+				<View style={styles.detailContainer}>
+					<Body style={styles.detail}>number of bedroom</Body>
+					<Body style={styles.rightDetail}>unkown</Body>
+				</View>
+			)}
+
+			{!room && (
+				<View style={styles.detailContainer}>
+					<Body style={styles.detail}>furnished</Body>
+					<Body style={styles.rightDetail}>unkown</Body>
+				</View>
+			)}
+			<View style={styles.detailContainer}>
+				<Body style={styles.detail}>Floor</Body>
+				<Body style={styles.rightDetail}> {floor}</Body>
+			</View>
 		</View>
 	);
 }
 
 const styles = StyleSheet.create({
 	boldHeader: {
-		fontWeight: "bold",
 		borderBottomWidth: 1,
 		borderBottomColor: "gray",
 		marginBottom: 5,
 	},
-	detail: {},
+	detailContainer: {
+		backgroundColor: color.lightgray,
+		padding: 10,
+		flexDirection: "row",
+		justifyContent: "space-between",
+		marginVertical: 5,
+	},
 	container: {
 		marginLeft: 15,
 		marginTop: 10,
+	},
+	rightDetail: {
+		fontWeight: "bold",
 	},
 });
 

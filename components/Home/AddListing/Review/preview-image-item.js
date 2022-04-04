@@ -11,8 +11,8 @@ function PreviewImageItem(props) {
 
 const styles = StyleSheet.create({
 	imagePreview: {
-		width: 100,
-		height: 100,
+		width: 150,
+		height: 150,
 		margin: 5,
 	},
 });

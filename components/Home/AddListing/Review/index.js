@@ -126,10 +126,7 @@ const styles = StyleSheet.create({
 		marginLeft: 20,
 		marginTop: 20,
 	},
-	reviewTitle: {
-		color: "black",
-		fontWeight: "bold",
-	},
+	reviewTitle: {},
 	contentContainerStyle: {},
 });
 

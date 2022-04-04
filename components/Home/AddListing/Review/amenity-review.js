@@ -1,6 +1,6 @@
 import React, {memo} from "react";
 import {View, StyleSheet, ScrollView} from "react-native";
-import {Body, Caption} from "../../../Typography";
+import {Body, BodyS, Caption} from "../../../Typography";
 import {useSelector} from "react-redux";
 import {Ionicons} from "@expo/vector-icons";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
@@ -19,46 +19,32 @@ function AmenityReview(props) {
 			<View style={styles.amenityContainer}>
 				{amenity.water && (
 					<View style={styles.amenity}>
-						<Ionicons name='water' size={24} color={color.primary} />
-						<Caption>Water </Caption>
+						<BodyS>Water </BodyS>
 					</View>
 				)}
 				{amenity.electricity && (
 					<View style={styles.amenity}>
-						<Ionicons name='flash' size={24} color={color.primary} />
-						<Caption> Electricity </Caption>
+						<BodyS> Electricity </BodyS>
 					</View>
 				)}
 				{amenity.airConditioner && (
 					<View style={styles.amenity}>
-						<MaterialCommunityIcons
-							name='air-conditioner'
-							size={24}
-							color={color.primary}
-						/>
-						<Caption>Air conditioner</Caption>
+						<BodyS>Air conditioner</BodyS>
 					</View>
 				)}
 				{amenity.parking && (
 					<View style={styles.amenity}>
-						<FontAwesome5 name='car' size={24} color={color.primary} />
-						<Caption>Parking</Caption>
+						<BodyS>Parking</BodyS>
 					</View>
 				)}
 				{amenity.pool && (
 					<View style={styles.amenity}>
-						<MaterialCommunityIcons
-							name='pool'
-							size={24}
-							color={color.primary}
-						/>
-						<Caption>Pool</Caption>
+						<BodyS>Pool</BodyS>
 					</View>
 				)}
 				{amenity.fan && (
 					<View style={styles.amenity}>
-						<FontAwesome5 name='fan' size={24} color={color.primary} />
-						<Caption>Fan</Caption>
+						<BodyS>Fan</BodyS>
 					</View>
 				)}
 			</View>
@@ -68,7 +54,6 @@ function AmenityReview(props) {
 
 const styles = StyleSheet.create({
 	boldHeader: {
-		fontWeight: "bold",
 		borderBottomWidth: 1,
 		borderBottomColor: "gray",
 		marginBottom: 5,
@@ -86,6 +71,10 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 		marginRight: 15,
+		backgroundColor: color.lightgray,
+		padding: 8,
+		borderRadius: 15,
+		marginTop: 5,
 	},
 });
 
