@@ -5,11 +5,11 @@ import {useDispatch} from "react-redux";
 import {
 	clearSelectedImages,
 	getSelectedImages,
-} from "../../../Store/home-store/imageSlice";
-import color from "../../../colors";
+} from "../../../../Store/home-store/imageSlice";
+import color from "../../../../colors";
 import {useEffect} from "react";
-import PreveiwImageItem from "./preview-image-item";
-import {Body} from "../../../Typography";
+import PreveiwImageItem from "./image-item";
+import {Body} from "../../../../Typography";
 
 function PreviewImage(props) {
 	const selectedImages = useSelector((state) => {

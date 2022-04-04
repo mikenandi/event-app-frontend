@@ -32,20 +32,20 @@ function Review(props) {
 				/>
 				<HeadingM style={styles.titleText}>Let's review and post.</HeadingM>
 			</View>
-			<ScrollView contentContainerStyle={styles.contentContainerStyle}>
+			<ScrollView>
 				<View style={styles.bottomContainer}>
 					<Body style={styles.reviewTitle}>Property images</Body>
 					<ImagePreview />
 					<PriceFeatures />
 					<AmenityReview />
 					<SecurityReview />
-					<TouchableOpacity activeOpacity={0.9} onPress={handlePost}>
-						<View style={styles.actionButton}>
-							<ButtonText style={styles.postButton}>post property</ButtonText>
-						</View>
-					</TouchableOpacity>
 				</View>
 			</ScrollView>
+			<TouchableOpacity activeOpacity={0.9} onPress={handlePost}>
+				<View style={styles.actionButton}>
+					<ButtonText style={styles.postButton}>post property</ButtonText>
+				</View>
+			</TouchableOpacity>
 		</View>
 	);
 }
@@ -125,9 +125,8 @@ const styles = StyleSheet.create({
 		width: "90%",
 		marginLeft: 20,
 		marginTop: 20,
+		bottom: 10,
 	},
-	reviewTitle: {},
-	contentContainerStyle: {},
 });
 
 export default memo(Review);
