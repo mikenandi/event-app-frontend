@@ -5,6 +5,7 @@ import {Entypo} from "@expo/vector-icons";
 import {add_comma} from "../../Helpers/addCommaToNumber";
 import {Body, BodyS, Caption, HeadingS} from "../Typography";
 import {Ionicons} from "@expo/vector-icons";
+import {MaterialCommunityIcons} from "@expo/vector-icons";
 
 function Listing(props) {
 	var price = props.price;
@@ -17,6 +18,13 @@ function Listing(props) {
 						source={require("../../assets/house.png")}
 						style={styles.propetyImage}
 					/>
+					<View style={styles.stickerContainer}>
+						<MaterialCommunityIcons
+							name='sticker-alert-outline'
+							size={24}
+							color='yellow'
+						/>
+					</View>
 					<BodyS style={styles.propertyType}>apartment</BodyS>
 				</View>
 
@@ -73,57 +81,12 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		justifyContent: "space-between",
 	},
-
 	location: {
 		color: "black",
 		marginLeft: 5,
 		textTransform: "capitalize",
 	},
-	locationContainer: {
-		flexDirection: "row",
-		alignItems: "center",
-		paddingTop: 10,
-		paddingBottom: 10,
-		marginLeft: 12,
-		alignItems: "center",
-	},
-	left: {
-		color: "crimson",
-	},
-	iconsContainer: {
-		flexDirection: "row",
-		justifyContent: "flex-start",
-	},
-	iconTextContainer: {
-		flexDirection: "row",
-		marginTop: 10,
-		alignItems: "baseline",
-	},
-	iconBathtub: {
-		marginRight: 5,
-	},
-	iconBed: {
-		marginRight: 5,
-		marginLeft: 15,
-	},
-	iconText: {
-		color: "grey",
-		fontSize: 12,
-		fontWeight: "700",
-	},
-	rentalStatusText: {
-		position: "absolute",
-		padding: 6,
-		backgroundColor: color.primary,
-		borderRadius: 6,
-		left: 10,
-		top: 10,
-	},
-	amenity: {
-		flexDirection: "row",
-		marginHorizontal: 12,
-		alignItems: "baseline",
-	},
+
 	amenitynumber: {
 		color: color.dimblack,
 		marginHorizontal: 4,
@@ -133,10 +96,6 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "center",
 	},
-	dotsepator: {
-		textAlign: "center",
-	},
-	price: {},
 	propertyType: {
 		position: "absolute",
 		backgroundColor: "black",
@@ -154,6 +113,18 @@ const styles = StyleSheet.create({
 	},
 	pinIcon: {
 		marginLeft: 5,
+	},
+	stickerContainer: {
+		position: "absolute",
+		backgroundColor: "black",
+		opacity: 0.8,
+		padding: 5,
+		borderRadius: 0,
+		left: 5,
+		top: 5,
+		justifyContent: "center",
+		alignItems: "center",
+		borderRadius: 5,
 	},
 });
 
