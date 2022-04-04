@@ -48,12 +48,12 @@
 
 ## App.js
 
-### all activities on the app starts here.
+- all activities on the app starts here.
 
 ## app.json
 
-### configuration files are stored here.
+- configuration files are stored here.
 
 # Warning
 
-### use npm for installation of packages on the app. Don't use yarn or expo because it does not install all packages well sometimes.
+> use npm for installation of packages on the app. Don't use yarn or expo because it does not install all packages well sometimes.
