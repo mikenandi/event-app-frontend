@@ -26,7 +26,7 @@
 
 ### components
 
-- the file that consists all the components of the project
+> > the file that consists all the components of the project
 
 - Folder Home, Messages, Payment, Profile are represent screens on the app. They all have indexjs file which is the root folder for all activities done on that screen.
 
