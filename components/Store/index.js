@@ -7,6 +7,7 @@ import amenityReducer from "./home-store/amenitySlice";
 import roomReducer from "./home-store/roomSlice";
 import floorReducer from "./home-store/floorSlice";
 import securityReducer from "./home-store/securitySlice";
+import propertyReducer from "./home-store/propertyTypeSlice";
 
 export const store = configureStore({
 	reducer: {
@@ -18,6 +19,7 @@ export const store = configureStore({
 		room: roomReducer,
 		floor: floorReducer,
 		security: securityReducer,
+		propertyType: propertyReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({

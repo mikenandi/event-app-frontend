@@ -3,8 +3,6 @@ import {remove_comma} from "../../../Helpers/remove_comma";
 import {add_comma} from "../../../Helpers/addCommaToNumber";
 
 const initialState = {
-	propertyType: "",
-	flooring: "",
 	roomType: "",
 	price: "",
 };
@@ -13,9 +11,6 @@ const room = createSlice({
 	name: "store for data property type",
 	initialState,
 	reducers: {
-		typeRoom: (state) => {
-			state.propertyType = "room";
-		},
 		masterRoom: (state) => {
 			state.roomType = "master room";
 		},

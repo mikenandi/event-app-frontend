@@ -1,36 +1,25 @@
 import React, {memo, useEffect, useState} from "react";
-import {
-	View,
-	StyleSheet,
-	TouchableOpacity,
-	Modal,
-	TextInput,
-	TouchableWithoutFeedback,
-	Keyboard,
-} from "react-native";
+import {View, StyleSheet, TouchableOpacity, ScrollView} from "react-native";
 import color from "../../../colors";
 import {Ionicons} from "@expo/vector-icons";
-import {useDispatch, useSelector} from "react-redux";
-import {ButtonText, HeadingS, Body, BodyS, HeadingM} from "../../../Typography";
-import {hidePrice, hideReview} from "../../../Store/home-store/modalSlice";
-import {clearPrice, savePrice} from "../../../Store/home-store/roomSlice";
+import {useDispatch} from "react-redux";
+import {ButtonText, HeadingM, Body} from "../../../Typography";
+import {hideAll, hideReview} from "../../../Store/home-store/modalSlice";
+import ImagePreview from "./image-preview";
+import PriceFeatures from "./price-features";
+import AmenityReview from "./amenity-review";
+import SecurityReview from "./security-review";
 
 function Review(props) {
-	// const price = useSelector((state) => {
-	// 	return state.room.price;
-	// });
-
-	// const visible = useSelector((state) => {
-	// 	return state.showModal.reviewVisible;
-	// });
-
 	const dispatch = useDispatch();
 
 	const handleBack = () => {
 		dispatch(hideReview());
 	};
 
-	const handleNext = () => {};
+	const handlePost = () => {
+		dispatch(hideAll());
+	};
 
 	return (
 		<View style={styles.screen}>
@@ -42,27 +31,26 @@ function Review(props) {
 					style={styles.backArrow}
 				/>
 				<HeadingM style={styles.titleText}>Let's review and post.</HeadingM>
-				{/* <TouchableOpacity activeOpacity={0.9} onPress={handleNext}>
-					<ButtonText style={styles.nextText}>Next</ButtonText>
-				</TouchableOpacity> */}
 			</View>
-			{/* <View style={styles.titleContainer}>
-				<HeadingS style={styles.titleText}>lets review it now</HeadingS>
-			</View> */}
-
-			<View style={styles.bottomContainer}>
-				{/* <HeadingM>hello</HeadingM> */}
-				<TouchableOpacity activeOpacity={0.9} onPress={handleNext}>
-					<View style={styles.actionButton}>
-						<ButtonText style={styles.postButton}>post property</ButtonText>
-					</View>
-				</TouchableOpacity>
-			</View>
+			<ScrollView contentContainerStyle={styles.contentContainerStyle}>
+				<View style={styles.bottomContainer}>
+					<Body style={styles.reviewTitle}>Property images</Body>
+					<ImagePreview />
+					<PriceFeatures />
+					<AmenityReview />
+					<SecurityReview />
+					<TouchableOpacity activeOpacity={0.9} onPress={handlePost}>
+						<View style={styles.actionButton}>
+							<ButtonText style={styles.postButton}>post property</ButtonText>
+						</View>
+					</TouchableOpacity>
+				</View>
+			</ScrollView>
 		</View>
 	);
 }
 const styles = StyleSheet.create({
-	screen: {flex: 1, backgroundColor: color.primary},
+	screen: {flex: 1},
 	topContainer: {
 		backgroundColor: color.primary,
 		paddingHorizontal: 8,
@@ -92,9 +80,7 @@ const styles = StyleSheet.create({
 	bottomContainer: {
 		backgroundColor: "white",
 		height: "100%",
-		borderTopRightRadius: 30,
-		borderTopLeftRadius: 30,
-		paddingTop: 20,
+		paddingTop: 10,
 		padding: 10,
 	},
 	label: {
@@ -135,11 +121,16 @@ const styles = StyleSheet.create({
 		color: "white",
 		fontWeight: "700",
 		borderRadius: 3,
-		position: "absolute",
-		top: 400,
-
-		width: "100%",
+		position: "relative",
+		width: "90%",
+		marginLeft: 20,
+		marginTop: 20,
 	},
+	reviewTitle: {
+		color: "black",
+		fontWeight: "bold",
+	},
+	contentContainerStyle: {},
 });
 
 export default memo(Review);

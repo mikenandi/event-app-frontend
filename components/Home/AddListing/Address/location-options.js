@@ -17,7 +17,7 @@ function LocationOptions(props) {
 				dispatch(getPhoneGpsLocation(location));
 			})
 			.catch((err) => {
-				console.log(err);
+				console.log(err.code, err.message);
 			});
 		dispatch(hideLocationOption());
 	};

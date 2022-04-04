@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 
-const initialState = {floorType: ""};
+const initialState = {flooring: ""};
 
 const floorSlice = createSlice({
 	name: "actions related to floor",

@@ -64,7 +64,6 @@ function Gallery(props) {
 	};
 
 	const handleNext = () => {
-		dispatch(getSelectedImages());
 		dispatch(showPrice());
 	};
 

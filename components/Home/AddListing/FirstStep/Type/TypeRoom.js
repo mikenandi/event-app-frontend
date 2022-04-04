@@ -5,8 +5,8 @@ import {Fontisto} from "@expo/vector-icons";
 import {useDispatch, useSelector} from "react-redux";
 import {showRoomSecondStep} from "../../../../Store/home-store/modalSlice";
 import {HeadingS} from "../../../../Typography";
-import {typeRoom} from "../../../../Store/home-store/roomSlice";
 import RoomSecondStep from "../../RoomSecondStep";
+import {typeRoom} from "../../../../Store/home-store/propertyTypeSlice";
 
 function TypeRoom(props) {
 	const dispatch = useDispatch();

@@ -120,6 +120,9 @@ export const modalSlice = createSlice({
 		hideReview: (state) => {
 			state.reviewVisible = false;
 		},
+		hideAll: (state) => {
+			Object.assign(state, initialState);
+		},
 	},
 });
 
@@ -156,6 +159,7 @@ export const {
 	hidePrice,
 	showReview,
 	hideReview,
+	hideAll,
 } = modalSlice.actions;
 
 export default modalSlice.reducer;
