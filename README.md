@@ -20,13 +20,13 @@
 
 # Project layout
 
-## assets
+### assets
 
 - the file that constists all assets of the project
 
-## components
+### components
 
-### the file that consists all the components of the project
+- the file that consists all the components of the project
 
 - Folder Home, Messages, Payment, Profile are represent screens on the app. They all have indexjs file which is the root folder for all activities done on that screen.
 
@@ -42,15 +42,15 @@
 
 - requestData.js and data.js are the files that store mock data of the app.
 
-## Helpers
+### Helpers
 
 - is the folder that have helper function of the app.
 
-## App.js
+### App.js
 
 - all activities on the app starts here.
 
-## app.json
+### app.json
 
 - configuration files are stored here.
 
