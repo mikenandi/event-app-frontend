@@ -6,6 +6,7 @@ import {
 	FlatList,
 	TouchableOpacity,
 	Modal,
+	StatusBar,
 } from "react-native";
 import {Ionicons} from "@expo/vector-icons";
 import {getPhotos} from "../../../../Helpers/getPhotos";
@@ -73,6 +74,7 @@ function Gallery(props) {
 
 	return (
 		<View style={styles.screen}>
+			<StatusBar backgroundColor={color.primary} />
 			<View style={styles.topContainer}>
 				<Ionicons
 					name='arrow-back-outline'
@@ -113,7 +115,8 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		justifyContent: "space-between",
 		alignItems: "center",
-		backgroundColor: color.lightgray,
+		backgroundColor: color.primary,
+		marginBottom: 2,
 	},
 	backArrow: {
 		color: "white",
@@ -138,10 +141,10 @@ const styles = StyleSheet.create({
 		fontWeight: "bold",
 	},
 	nextText: {
-		backgroundColor: color.primary,
+		backgroundColor: "white",
 		paddingVertical: 10,
 		paddingHorizontal: 10,
-		color: "white",
+		color: "black",
 		fontWeight: "700",
 		borderRadius: 3,
 		marginRight: 10,

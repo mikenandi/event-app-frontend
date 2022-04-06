@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	inputText: {
-		fontSize: 25,
+		fontSize: 30,
 		letterSpacing: 0.25,
 		width: 240,
 		padding: 10,
@@ -151,9 +151,9 @@ const styles = StyleSheet.create({
 		width: 240,
 		paddingVertical: 5,
 		paddingHorizontal: 20,
-		borderRadius: 5,
+		borderRadius: 2,
 		marginTop: 60,
-		borderColor: color.primary,
+		borderColor: "black",
 	},
 });
 

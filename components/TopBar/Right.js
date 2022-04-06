@@ -3,20 +3,17 @@ import {View, StyleSheet, Modal} from "react-native";
 import {MaterialIcons, EvilIcons} from "@expo/vector-icons";
 import {AntDesign, Octicons} from "@expo/vector-icons";
 import Search from "../Home/SearchModal";
-import {
-	showSearch,
-	showPropertyType,
-	showRequest,
-} from "../Store/home-store/modalSlice";
+import {showPropertyType} from "../Store/home-store/modalSlice";
 import {useSelector, useDispatch} from "react-redux";
 import PropertyType from "../Home/AddListing/FirstStep";
 import {Caption} from "../Typography";
 import color from "../colors";
 import Request from "../Home/Requests";
+import {showRequest, showSearch} from "../Store/home-store/modalSlice-home";
 
 function Right(props) {
 	const searchVisible = useSelector((state) => {
-		return state.showModal.searchVisible;
+		return state.showModalHome.searchVisible;
 	});
 
 	const propertyTypeVisible = useSelector((state) => {
@@ -24,7 +21,7 @@ function Right(props) {
 	});
 
 	const requestVisible = useSelector((state) => {
-		return state.showModal.requestVisible;
+		return state.showModalHome.requestVisible;
 	});
 
 	const dispatch = useDispatch();

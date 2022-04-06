@@ -36,6 +36,7 @@ function MyTabs() {
 					),
 					headerLeft: () => <Left title='gudsurvey' />,
 					headerRight: () => <Right />,
+					headerShown: true,
 				}}
 			/>
 

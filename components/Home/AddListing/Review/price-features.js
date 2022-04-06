@@ -31,7 +31,7 @@ function PriceFeatures(props) {
 			<Body style={styles.boldHeader}>Home details</Body>
 			<View style={styles.detailContainer}>
 				<Body style={styles.detail}>Price</Body>
-				<Body style={styles.rightDetail}>Tsh {price}</Body>
+				<Body style={styles.rightDetail}>tsh {price}</Body>
 			</View>
 			<View style={styles.detailContainer}>
 				<Body style={styles.detail}>Location</Body>

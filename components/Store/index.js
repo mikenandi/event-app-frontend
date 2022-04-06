@@ -8,6 +8,7 @@ import roomReducer from "./home-store/roomSlice";
 import floorReducer from "./home-store/floorSlice";
 import securityReducer from "./home-store/securitySlice";
 import propertyReducer from "./home-store/propertyTypeSlice";
+import modalHomeReducer from "./home-store/modalSlice-home";
 
 export const store = configureStore({
 	reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
 		floor: floorReducer,
 		security: securityReducer,
 		propertyType: propertyReducer,
+		showModalHome: modalHomeReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({

@@ -1,16 +1,30 @@
 import React, {memo} from "react";
 import {View, StyleSheet, ScrollView} from "react-native";
-import {Body, BodyS, Caption} from "../../../Typography";
+import {Body, BodyS} from "../../../Typography";
 import {useSelector} from "react-redux";
-import {Ionicons} from "@expo/vector-icons";
-import {MaterialCommunityIcons} from "@expo/vector-icons";
-import {FontAwesome5} from "@expo/vector-icons";
 import color from "../../../colors";
 
 function AmenityReview(props) {
 	const amenity = useSelector((state) => {
 		return state.amenity;
 	});
+
+	/**
+	 * a function to check if all all amenities are false.
+	 * @returns boolean
+	 */
+	const no_amenity = () => {
+		if (
+			!amenity.water &&
+			!amenity.airConditioner &&
+			!amenity.fan &&
+			!amenity.parking &&
+			!amenity.pool &&
+			!amenity.electricity
+		)
+			return true;
+		else return false;
+	};
 
 	return (
 		<View style={styles.container}>
@@ -47,6 +61,11 @@ function AmenityReview(props) {
 						<BodyS>Fan</BodyS>
 					</View>
 				)}
+				{no_amenity() && (
+					<View style={styles.no_amenity}>
+						<BodyS>No amenites selected.</BodyS>
+					</View>
+				)}
 			</View>
 		</View>
 	);
@@ -74,6 +93,15 @@ const styles = StyleSheet.create({
 		backgroundColor: color.lightgray,
 		padding: 8,
 		borderRadius: 15,
+		marginTop: 5,
+	},
+	no_amenity: {
+		justifyContent: "center",
+		alignItems: "center",
+		marginRight: 15,
+		backgroundColor: color.lightred,
+		borderRadius: 5,
+		padding: 8,
 		marginTop: 5,
 	},
 });

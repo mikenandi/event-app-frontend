@@ -1,6 +1,6 @@
 import React, {useState, memo, useEffect} from "react";
 import MapView, {Callout, Marker, Circle} from "react-native-maps";
-import {StyleSheet, Text, View, Dimensions, Modal} from "react-native";
+import {StyleSheet, Text, View, Dimensions, StatusBar} from "react-native";
 import color from "../../../colors";
 import axios from "axios";
 import {getRegionFromIp} from "../../../Store/home-store/locationSlice";
@@ -9,8 +9,6 @@ import Search from "./search";
 import TopBar from "./top-bar";
 import LocationOptions from "./location-options";
 import {movePin} from "../../../Store/home-store/locationSlice";
-import {Ionicons} from "@expo/vector-icons";
-import {FontAwesome} from "@expo/vector-icons";
 
 function ViewMap() {
 	const coordinates = useSelector((state) => {
@@ -26,18 +24,22 @@ function ViewMap() {
 	useEffect(() => {
 		axios({
 			method: "GET",
-			url: "https://api.freegeoip.app/json/?apikey=99a22ff0-9d53-11ec-aea3-63511395cb14",
+			url: "https://api.freegeoip.app/json/",
+			params: {
+				apikey: "99a22ff0-9d53-11ec-aea3-63511395cb14",
+			},
 		})
 			.then((res) => {
 				dispatch(getRegionFromIp(res.data));
 			})
 			.catch((err) => {
-				console.log(err);
+				console.log(err.message, err.code);
 			});
 	}, []);
 
 	return (
-		<View style={styles.container}>
+		<View style={styles.screen}>
+			<StatusBar backgroundColor={color.primary} />
 			<MapView
 				initialRegion={{
 					latitude: coordinates.latitude,
@@ -48,8 +50,8 @@ function ViewMap() {
 				style={styles.map}
 				provider='google'
 				mapType='satellite'
-				showsCompass={false}
-				rotateEnabled={false}>
+				showsCompass={true}
+				rotateEnabled={true}>
 				<Marker
 					coordinate={coordinates}
 					draggable={true}
@@ -83,7 +85,7 @@ function ViewMap() {
 }
 
 const styles = StyleSheet.create({
-	container: {
+	screen: {
 		flex: 1,
 		backgroundColor: color.lightgray,
 	},

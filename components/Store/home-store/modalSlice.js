@@ -1,11 +1,8 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
-	addListingVisible: false,
-	searchVisible: false,
 	propertyTypeVisible: false,
 	secondStepVisible: false,
-	requestVisible: false,
 	thirdStepVisible: false,
 	roomSecondStepVisible: false,
 	amenityVisible: false,
@@ -21,15 +18,9 @@ const initialState = {
 };
 
 export const modalSlice = createSlice({
-	name: "modal actions",
+	name: "modal actions for posting property",
 	initialState,
 	reducers: {
-		showSearch: (state) => {
-			state.searchVisible = true;
-		},
-		hideSearch: (state) => {
-			state.searchVisible = false;
-		},
 		showPropertyType: (state) => {
 			state.propertyTypeVisible = true;
 		},
@@ -42,12 +33,7 @@ export const modalSlice = createSlice({
 		hideFeatures: (state) => {
 			state.secondStepVisible = false;
 		},
-		showRequest: (state) => {
-			state.requestVisible = true;
-		},
-		hideRequest: (state) => {
-			state.requestVisible = false;
-		},
+
 		showThirdStep: (state) => {
 			state.thirdStepVisible = true;
 		},
@@ -127,14 +113,10 @@ export const modalSlice = createSlice({
 });
 
 export const {
-	showSearch,
-	hideSearch,
 	showPropertyType,
 	hidePropertyType,
 	showFeatures,
 	hideFeatures,
-	showRequest,
-	hideRequest,
 	showThirdStep,
 	hideThirdStep,
 	showRoomSecondStep,

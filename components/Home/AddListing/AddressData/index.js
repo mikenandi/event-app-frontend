@@ -1,5 +1,11 @@
 import React, {memo, useEffect} from "react";
-import {View, StyleSheet, TouchableOpacity, Modal} from "react-native";
+import {
+	View,
+	StyleSheet,
+	TouchableOpacity,
+	Modal,
+	StatusBar,
+} from "react-native";
 import color from "../../../colors";
 import {Ionicons} from "@expo/vector-icons";
 import {useDispatch, useSelector} from "react-redux";
@@ -62,6 +68,7 @@ function AddressData(props) {
 
 	return (
 		<View style={styles.screen}>
+			<StatusBar backgroundColor={color.lightblue} />
 			<View style={styles.topContainer}>
 				<Ionicons
 					name='arrow-back-outline'

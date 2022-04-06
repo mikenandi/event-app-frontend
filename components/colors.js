@@ -10,4 +10,5 @@ export default {
 	grey: "#999999",
 	lightblue: "#0099ff",
 	warning: "#ff1a1a",
+	lightred: "#ffcccc",
 };

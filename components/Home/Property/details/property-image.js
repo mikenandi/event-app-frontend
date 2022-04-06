@@ -1,37 +1,35 @@
 import React, {memo} from "react";
-import {View, Text, Image, StyleSheet} from "react-native";
-import color from "../colors";
+import {View, Image, StyleSheet} from "react-native";
+import color from "../../../colors";
 import {Entypo} from "@expo/vector-icons";
-import {add_comma} from "../../Helpers/addCommaToNumber";
-import {Body, BodyS, Caption, HeadingS} from "../Typography";
+import {add_comma} from "../../../../Helpers/addCommaToNumber";
+import {Body, BodyS, Caption, HeadingS} from "../../../Typography";
 import {Ionicons} from "@expo/vector-icons";
-import {MaterialCommunityIcons} from "@expo/vector-icons";
+import {useDispatch, useSelector} from "react-redux";
+import {hideDetail} from "../../../Store/home-store/modalSlice-home";
 
-function Listing(props) {
-	var price = props.price;
+function PropertyImage(props) {
+	const dispatch = useDispatch();
+
+	const handleHideSearch = () => {
+		dispatch(hideDetail());
+	};
 
 	return (
 		<View style={styles.card}>
 			<View style={styles.topContainer}>
 				<View>
 					<Image
-						source={require("../../assets/house.png")}
+						source={require("../../../../assets/house.png")}
 						style={styles.propetyImage}
 					/>
-					<View style={styles.stickerContainer}>
-						<MaterialCommunityIcons
-							name='sticker-alert-outline'
-							size={24}
-							color='yellow'
-						/>
-					</View>
 					<BodyS style={styles.propertyType}>apartment</BodyS>
 				</View>
 
 				<View style={styles.detailsContainer}>
 					<View>
 						<HeadingS style={styles.price}>
-							<Body>TZS</Body> {add_comma(price)}
+							<Body>TZS</Body> 100000
 						</HeadingS>
 					</View>
 					<Entypo name='dots-three-vertical' size={14} color={color.dimblack} />
@@ -44,7 +42,7 @@ function Listing(props) {
 						style={styles.pinIcon}
 					/>
 					<View>
-						<Body style={styles.location}>House Name</Body>
+						<Body style={styles.location}>Location name</Body>
 						<View style={styles.amenityContainer}>
 							<Caption style={styles.amenitynumber}>3 Rooms</Caption>
 							<Entypo name='dot-single' size={10} color={color.dimblack} />
@@ -70,9 +68,8 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
 	},
 	propetyImage: {
-		flex: 1,
 		width: "100%",
-		height: 240,
+		height: 200,
 		backgroundColor: color.lightgray,
 	},
 	detailsContainer: {
@@ -111,21 +108,16 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "center",
 	},
-	pinIcon: {
-		marginLeft: 5,
-	},
-	stickerContainer: {
-		position: "absolute",
-		backgroundColor: "black",
-		opacity: 0.8,
-		padding: 5,
-		borderRadius: 0,
-		left: 5,
-		top: 5,
-		justifyContent: "center",
+	topbar: {
+		flexDirection: "row",
+		backgroundColor: color.lightgray,
 		alignItems: "center",
-		borderRadius: 5,
+		paddingBottom: 5,
+	},
+	backIcon: {
+		marginRight: 10,
+		marginLeft: 5,
 	},
 });
 
-export default memo(Listing);
+export default memo(PropertyImage);

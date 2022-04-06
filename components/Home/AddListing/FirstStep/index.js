@@ -10,6 +10,7 @@ import {HeadingS} from "../../../Typography";
 import TypeApartment from "./Type/TypeApartment";
 import TypeHouse from "./Type/TypeHouse";
 import TypeRoom from "./Type/TypeRoom";
+import {StatusBar} from "expo-status-bar";
 
 function PropertyType(props) {
 	const featureVisible = useSelector((state) => {
@@ -24,6 +25,7 @@ function PropertyType(props) {
 
 	return (
 		<View style={styles.screen}>
+			<StatusBar backgroundColor={color.lightblue} />
 			<View style={styles.topContainer}>
 				<Entypo
 					name='cross'

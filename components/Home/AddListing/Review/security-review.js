@@ -9,29 +9,49 @@ function SecurityReview(props) {
 		return state.security;
 	});
 
+	/**
+	 * a function to check if all features of the property are false.
+	 * @returns boolean
+	 */
+	const no_security_feature = () => {
+		if (
+			!security.cctvCamera &&
+			!security.fence &&
+			!security.fireAlarm &&
+			!security.watchman
+		)
+			return true;
+		else return false;
+	};
+
 	return (
 		<View style={styles.container}>
 			<Body style={styles.boldHeader}>Security Features available</Body>
 
 			<View style={styles.amenityContainer}>
 				{security.watchman && (
-					<View style={styles.amenity}>
+					<View style={styles.security}>
 						<BodyS>Gate guard</BodyS>
 					</View>
 				)}
 				{security.fireAlarm && (
-					<View style={styles.amenity}>
+					<View style={styles.security}>
 						<BodyS>Fire alarm</BodyS>
 					</View>
 				)}
 				{security.fence && (
-					<View style={styles.amenity}>
+					<View style={styles.security}>
 						<BodyS>Fence</BodyS>
 					</View>
 				)}
 				{security.cctvCamera && (
-					<View style={styles.amenity}>
+					<View style={styles.security}>
 						<BodyS>CCTV camera</BodyS>
+					</View>
+				)}
+				{no_security_feature() && (
+					<View style={styles.no_security}>
+						<BodyS>No security feature selected</BodyS>
 					</View>
 				)}
 			</View>
@@ -54,12 +74,21 @@ const styles = StyleSheet.create({
 		flexWrap: "wrap",
 		width: "100%",
 	},
-	amenity: {
+	security: {
 		justifyContent: "center",
 		alignItems: "center",
 		marginRight: 15,
 		backgroundColor: color.lightgray,
 		borderRadius: 15,
+		padding: 8,
+		marginTop: 5,
+	},
+	no_security: {
+		justifyContent: "center",
+		alignItems: "center",
+		marginRight: 15,
+		backgroundColor: color.lightred,
+		borderRadius: 5,
 		padding: 8,
 		marginTop: 5,
 	},
