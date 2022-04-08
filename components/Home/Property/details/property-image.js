@@ -29,7 +29,7 @@ function PropertyImage(props) {
 				<View style={styles.detailsContainer}>
 					<View>
 						<HeadingS style={styles.price}>
-							<Body>TZS</Body> 100000
+							<Body>TZS</Body> 100000 <BodyS>/month</BodyS>
 						</HeadingS>
 					</View>
 					<Entypo name='dots-three-vertical' size={14} color={color.dimblack} />
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
 	},
 	propetyImage: {
 		width: "100%",
-		height: 200,
+		height: 180,
 		backgroundColor: color.lightgray,
 	},
 	detailsContainer: {

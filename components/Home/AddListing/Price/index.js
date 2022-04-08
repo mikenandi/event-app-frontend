@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 20,
 		borderRadius: 2,
 		marginTop: 60,
-		borderColor: "black",
+		borderColor: color.primary,
 	},
 });
 
