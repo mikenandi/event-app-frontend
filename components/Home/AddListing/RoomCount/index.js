@@ -1,19 +1,33 @@
-import React, {memo} from "react";
-import {View, StyleSheet} from "react-native";
+import React, {memo, useEffect} from "react";
+import {View, StyleSheet, TouchableOpacity, Modal} from "react-native";
 import color from "../../../colors";
 import {Ionicons} from "@expo/vector-icons";
-import {useDispatch} from "react-redux";
-import {hideFeatures} from "../../../Store/home-store/modalSlice";
-import MasterBedroom from "./SpaceSpecifics/MasterBedroom";
-import {ButtonText, HeadingS, Body} from "../../../Typography";
-import KitchenSpace from "./SpaceSpecifics/KitchenSpace";
-import DiningArea from "./SpaceSpecifics/DiningArea";
+import {useDispatch, useSelector} from "react-redux";
+import {hideRoomCount, showSpace} from "../../../Store/home-store/modalSlice";
+import Bathrooms from "./room-count/Bathrooms";
+import Bedrooms from "./room-count/BedRooms";
+import {ButtonText, HeadingS} from "../../../Typography";
+import ThirdStep from "../Spaces";
+import {clearType} from "../../../Store/home-store/propertyTypeSlice";
 
-function Features(props) {
+function RoomCount(props) {
+	const type = useSelector((state) => {
+		return state.propertyType.type;
+	});
+
+	const thirdStepVisible = useSelector((state) => {
+		return state.showModal.spaceVisible;
+	});
+
 	const dispatch = useDispatch();
 
-	const handleHideFeatures = () => {
-		dispatch(hideFeatures());
+	const handleBack = () => {
+		dispatch(clearType());
+		dispatch(hideRoomCount());
+	};
+
+	const handleNext = () => {
+		dispatch(showSpace());
 	};
 
 	return (
@@ -22,21 +36,29 @@ function Features(props) {
 				<Ionicons
 					name='arrow-back-outline'
 					size={28}
-					onPress={handleHideFeatures}
+					onPress={handleBack}
 					style={styles.backArrow}
 				/>
-				<ButtonText style={styles.nextText}>Next</ButtonText>
+				<TouchableOpacity activeOpacity={0.9} onPress={handleNext}>
+					<ButtonText style={styles.nextText}>Next</ButtonText>
+				</TouchableOpacity>
 			</View>
 			<View style={styles.titleContainer}>
 				<HeadingS style={styles.titleText}>
-					How many rooms does your house have?
+					How many rooms does your {type} have?
 				</HeadingS>
 			</View>
 			<View style={styles.bottomContainer}>
-				<MasterBedroom />
-				<DiningArea />
-				<KitchenSpace />
+				<Bedrooms />
+				<View style={styles.mid} />
+				<Bathrooms />
 			</View>
+			<Modal
+				transparent={false}
+				visible={thirdStepVisible}
+				animationType='fade'>
+				<ThirdStep />
+			</Modal>
 		</View>
 	);
 }
@@ -51,7 +73,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	backArrow: {
-		color: color.dimblack,
+		color: "white",
 	},
 	titleText: {
 		color: "white",
@@ -67,7 +89,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "white",
 		paddingVertical: 10,
 		paddingHorizontal: 10,
-		color: color.dimblack,
+		color: "black",
 		fontWeight: "700",
 		borderRadius: 3,
 		marginRight: 10,
@@ -77,7 +99,7 @@ const styles = StyleSheet.create({
 		height: "100%",
 		borderTopRightRadius: 30,
 		borderTopLeftRadius: 30,
-		paddingTop: 50,
+		paddingTop: 20,
 	},
 	spaceSpecificText: {
 		marginVertical: 5,
@@ -86,6 +108,9 @@ const styles = StyleSheet.create({
 	spaceSpecificContainer: {
 		marginHorizontal: 45,
 	},
+	mid: {
+		height: 20,
+	},
 });
 
-export default memo(Features);
+export default memo(RoomCount);

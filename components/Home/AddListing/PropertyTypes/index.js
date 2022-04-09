@@ -5,7 +5,7 @@ import {Entypo} from "@expo/vector-icons";
 import {useDispatch} from "react-redux";
 import {hidePropertyType} from "../../../Store/home-store/modalSlice";
 import {useSelector} from "react-redux";
-import SecondStep from "../SecondStep";
+// import SecondStep from "../SecondStep";
 import {HeadingS} from "../../../Typography";
 import TypeApartment from "./Type/TypeApartment";
 import TypeHouse from "./Type/TypeHouse";
@@ -13,10 +13,6 @@ import TypeRoom from "./Type/TypeRoom";
 import {StatusBar} from "expo-status-bar";
 
 function PropertyType(props) {
-	const featureVisible = useSelector((state) => {
-		return state.showModal.secondStepVisible;
-	});
-
 	const dispatch = useDispatch();
 
 	const handleBackToHomePage = () => {
@@ -40,16 +36,12 @@ function PropertyType(props) {
 						What kind of a property do you have?
 					</HeadingS>
 				</View>
-
 				<View style={styles.typesContainer}>
 					<TypeApartment />
 					<TypeHouse />
 					<TypeRoom />
 				</View>
 			</View>
-			<Modal visible={featureVisible} transparent={false} animationType='fade'>
-				<SecondStep />
-			</Modal>
 		</View>
 	);
 }

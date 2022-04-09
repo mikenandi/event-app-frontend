@@ -5,11 +5,11 @@ import {useDispatch} from "react-redux";
 import {masterBedroomStatus} from "../../../../Store/home-store/houseSlice";
 import {useSelector} from "react-redux";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
-import {BodyS} from "../../../../Typography";
+import {Body} from "../../../../Typography";
 
 function MasterBedroom(props) {
 	const show = useSelector((state) => {
-		return state.house.masterBedroom;
+		return state.house.spaces.masterBedroom;
 	});
 
 	const dispatch = useDispatch();
@@ -20,42 +20,46 @@ function MasterBedroom(props) {
 
 	return (
 		<Pressable activeOpacity={0.5} onPress={handleActive}>
-			<View style={styles.typeContainer}>
+			<View style={show ? styles.activeContainer : styles.inactiveContainer}>
 				<MaterialCommunityIcons
 					name='bed-king'
-					size={24}
-					color={show ? color.secondary : color.grey}
+					size={50}
+					color={show ? "black" : "grey"}
 					style={show ? styles.activeIcon : styles.inactiveIcon}
 				/>
-				<BodyS style={styles.typeText}>Master bedroom</BodyS>
+				<Body style={styles.typeText}>Master bedroom</Body>
 			</View>
 		</Pressable>
 	);
 }
 
 const styles = StyleSheet.create({
-	typeContainer: {
+	activeContainer: {
 		margin: 5,
-		flexDirection: "row",
+		flexDirection: "column",
 		alignItems: "center",
-	},
-	inactiveIcon: {
-		marginRight: 10,
-		padding: 9,
-		borderRadius: 20,
-		borderWidth: 1,
-		borderColor: color.grey,
-		marginVertical: 5,
-	},
-	activeIcon: {
-		marginRight: 10,
+		justifyContent: "center",
 		backgroundColor: color.lightgray,
-		padding: 10,
-		borderRadius: 20,
-		marginVertical: 5,
+		width: 120,
+		height: 120,
+		borderWidth: 1,
+		borderRadius: 5,
+		padding: 5,
 	},
 	typeText: {
 		textTransform: "capitalize",
+	},
+	inactiveContainer: {
+		margin: 5,
+		flexDirection: "column",
+		alignItems: "center",
+		justifyContent: "center",
+		backgroundColor: "white",
+		width: 120,
+		height: 120,
+		borderWidth: 1,
+		borderRadius: 5,
+		padding: 5,
 	},
 });
 

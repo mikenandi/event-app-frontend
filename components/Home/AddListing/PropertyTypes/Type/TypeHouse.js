@@ -1,35 +1,38 @@
 import React, {memo} from "react";
 import {View, StyleSheet, TouchableOpacity, Modal} from "react-native";
 import color from "../../../../colors";
-import {Fontisto} from "@expo/vector-icons";
+import {MaterialIcons} from "@expo/vector-icons";
 import {useDispatch, useSelector} from "react-redux";
-import {
-	hidePropertyType,
-	showRoomSecondStep,
-} from "../../../../Store/home-store/modalSlice";
+import {showRoomCount} from "../../../../Store/home-store/modalSlice";
 import {HeadingS} from "../../../../Typography";
-import RoomSecondStep from "../../RoomSecondStep";
-import {typeRoom} from "../../../../Store/home-store/propertyTypeSlice";
+import {typeHouse} from "../../../../Store/home-store/propertyTypeSlice";
+import RoomCount from "../../RoomCount";
 
-function TypeRoom(props) {
+function TypeHouse(props) {
 	const dispatch = useDispatch();
 
-	const handleNext = () => {
-		dispatch(typeRoom());
-		dispatch(showRoomSecondStep());
-	};
 	const visible = useSelector((state) => {
-		return state.showModal.roomSecondStepVisible;
+		return state.showModal.roomCountVisible;
 	});
+
+	const handleNext = () => {
+		dispatch(typeHouse());
+		dispatch(showRoomCount());
+	};
 
 	return (
 		<TouchableOpacity activeOpacity={0.9} onPress={handleNext}>
 			<View style={styles.typeContainer}>
-				<HeadingS style={styles.typeText}>Room</HeadingS>
-				<Fontisto name='room' size={34} color='black' style={styles.icon} />
+				<HeadingS>House</HeadingS>
+				<MaterialIcons
+					name='house'
+					size={34}
+					color='black'
+					style={styles.icon}
+				/>
 			</View>
 			<Modal transparent={false} animationType='fade' visible={visible}>
-				<RoomSecondStep />
+				<RoomCount />
 			</Modal>
 		</TouchableOpacity>
 	);
@@ -53,4 +56,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default memo(TypeRoom);
+export default memo(TypeHouse);

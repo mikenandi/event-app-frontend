@@ -3,7 +3,7 @@ import {createSlice} from "@reduxjs/toolkit";
 const initialState = {
 	propertyTypeVisible: false,
 	secondStepVisible: false,
-	thirdStepVisible: false,
+	spaceVisible: false,
 	roomSecondStepVisible: false,
 	amenityVisible: false,
 	flooringVisible: false,
@@ -15,6 +15,7 @@ const initialState = {
 	galleryVisible: false,
 	priceVisible: false,
 	reviewVisible: false,
+	roomCountVisible: false,
 };
 
 export const modalSlice = createSlice({
@@ -34,11 +35,11 @@ export const modalSlice = createSlice({
 			state.secondStepVisible = false;
 		},
 
-		showThirdStep: (state) => {
-			state.thirdStepVisible = true;
+		showSpace: (state) => {
+			state.spaceVisible = true;
 		},
-		hideThirdStep: (state) => {
-			state.thirdStepVisible = false;
+		hideSpace: (state) => {
+			state.spaceVisible = false;
 		},
 		showRoomSecondStep: (state) => {
 			state.roomSecondStepVisible = true;
@@ -109,6 +110,12 @@ export const modalSlice = createSlice({
 		hideAll: (state) => {
 			Object.assign(state, initialState);
 		},
+		showRoomCount: (state) => {
+			state.roomCountVisible = true;
+		},
+		hideRoomCount: (state) => {
+			state.roomCountVisible = false;
+		},
 	},
 });
 
@@ -117,8 +124,8 @@ export const {
 	hidePropertyType,
 	showFeatures,
 	hideFeatures,
-	showThirdStep,
-	hideThirdStep,
+	showSpace,
+	hideSpace,
 	showRoomSecondStep,
 	hideRoomSecondStep,
 	showAmenity,
@@ -142,6 +149,8 @@ export const {
 	showReview,
 	hideReview,
 	hideAll,
+	showRoomCount,
+	hideRoomCount,
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

@@ -13,6 +13,14 @@ function PriceFeatures(props) {
 		return state.location.location_data;
 	});
 
+	const bathroom = useSelector((state) => {
+		return state.house.bathroom;
+	});
+
+	const bedroom = useSelector((state) => {
+		return state.house.bedroom;
+	});
+
 	const room_type = useSelector((state) => {
 		return state.room.roomType;
 	});
@@ -49,17 +57,17 @@ function PriceFeatures(props) {
 			{!room && (
 				<View style={styles.detailContainer}>
 					<Body style={styles.detail}>number of bathroms</Body>
-					<Body style={styles.rightDetail}>unknown</Body>
+					<Body style={styles.rightDetail}>{bathroom}</Body>
 				</View>
 			)}
 			{!room && (
 				<View style={styles.detailContainer}>
 					<Body style={styles.detail}>number of bedroom</Body>
-					<Body style={styles.rightDetail}>unkown</Body>
+					<Body style={styles.rightDetail}>{bedroom}</Body>
 				</View>
 			)}
 
-			{!room && (
+			{false && (
 				<View style={styles.detailContainer}>
 					<Body style={styles.detail}>furnished</Body>
 					<Body style={styles.rightDetail}>unkown</Body>

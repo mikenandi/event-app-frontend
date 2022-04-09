@@ -2,46 +2,43 @@ import React, {memo} from "react";
 import {View, Text, StyleSheet} from "react-native";
 import {AntDesign} from "@expo/vector-icons";
 import color from "../../../../colors";
-import {useDispatch} from "react-redux";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {
-	addBathRoom,
-	minusBathRoom,
+	addBedRoom,
+	minusBedRoom,
 } from "../../../../Store/home-store/houseSlice";
-import {BodyS, Body, HeadingS} from "../../../../Typography";
+import {Body, BodyS, HeadingM, HeadingS} from "../../../../Typography";
 
-function Bathrooms(props) {
+function AddRooms(props) {
 	const roomCount = useSelector((state) => {
-		return state.house.bathRoomCount;
+		return state.house.bedroom;
 	});
 	const dispatch = useDispatch();
 
 	const handleAddRoom = () => {
-		dispatch(addBathRoom());
+		dispatch(addBedRoom());
 	};
 
 	const handleMinusRoom = () => {
-		dispatch(minusBathRoom());
+		dispatch(minusBedRoom());
 	};
 
 	return (
 		<View style={styles.container}>
-			<Body style={styles.description}>Number of bathrooms</Body>
+			<Body style={styles.questionText}>Number bedrooms</Body>
 			<View style={styles.numberContainer}>
 				<AntDesign
 					name='minus'
 					size={30}
 					onPress={handleMinusRoom}
 					color='black'
-					style={styles.addminusIcon}
 				/>
-				<HeadingS style={styles.roomsCountText}>{roomCount}</HeadingS>
+				<HeadingM style={styles.roomsCountText}>{roomCount}</HeadingM>
 				<AntDesign
 					name='plus'
 					size={30}
 					onPress={handleAddRoom}
 					color='black'
-					style={styles.addminusIcon}
 				/>
 			</View>
 		</View>
@@ -66,10 +63,9 @@ const styles = StyleSheet.create({
 		marginVertical: 5,
 		marginHorizontal: 25,
 	},
-	addminusIcon: {},
-	description: {
+	questionText: {
 		paddingVertical: 5,
 	},
 });
 
-export default memo(Bathrooms);
+export default memo(AddRooms);

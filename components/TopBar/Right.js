@@ -5,7 +5,7 @@ import {AntDesign, Octicons} from "@expo/vector-icons";
 import Search from "../Home/SearchModal";
 import {showPropertyType} from "../Store/home-store/modalSlice";
 import {useSelector, useDispatch} from "react-redux";
-import PropertyType from "../Home/AddListing/FirstStep";
+import PropertyType from "../Home/AddListing/PropertyTypes";
 import {Caption} from "../Typography";
 import color from "../colors";
 import Request from "../Home/Requests";

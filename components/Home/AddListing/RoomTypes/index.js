@@ -1,34 +1,24 @@
-import React, {memo, useEffect} from "react";
-import {View, StyleSheet, TouchableOpacity, Modal} from "react-native";
+import React, {memo} from "react";
+import {View, StyleSheet, Modal} from "react-native";
 import color from "../../../colors";
 import {Ionicons} from "@expo/vector-icons";
 import {useDispatch, useSelector} from "react-redux";
-import {
-	hideFeatures,
-	showThirdStep,
-} from "../../../Store/home-store/modalSlice";
-import Bathrooms from "./RoomCount/Bathrooms";
-import Bedrooms from "./RoomCount/BedRooms";
-import {ButtonText, HeadingS} from "../../../Typography";
-import ThirdStep from "../ThirdStep";
+import {hideRoomSecondStep} from "../../../Store/home-store/modalSlice";
+import MasterRoom from "./Type/MasterRoom";
+import {HeadingS} from "../../../Typography";
+import NormalRoom from "./Type/NormalRoom";
+import SelfContained from "./Type/SelfContained";
+import Flooring from "../Flooring";
 
-function Features(props) {
-	const type = useSelector((state) => {
-		return state.propertyType.propertyType;
-	});
-
-	const thirdStepVisible = useSelector((state) => {
-		return state.showModal.thirdStepVisible;
-	});
-
+function RoomType(props) {
 	const dispatch = useDispatch();
 
-	const handleHideFeatures = () => {
-		dispatch(hideFeatures());
-	};
+	const visible = useSelector((state) => {
+		return state.showModal.flooringVisible;
+	});
 
-	const handleNextStep = () => {
-		dispatch(showThirdStep());
+	const handleHideFeatures = () => {
+		dispatch(hideRoomSecondStep());
 	};
 
 	return (
@@ -40,24 +30,19 @@ function Features(props) {
 					onPress={handleHideFeatures}
 					style={styles.backArrow}
 				/>
-				<TouchableOpacity activeOpacity={0.9} onPress={handleNextStep}>
-					<ButtonText style={styles.nextText}>Next</ButtonText>
-				</TouchableOpacity>
 			</View>
 			<View style={styles.titleContainer}>
 				<HeadingS style={styles.titleText}>
-					How many rooms does your {type} have?
+					What words describes better the room that you have ?
 				</HeadingS>
 			</View>
 			<View style={styles.bottomContainer}>
-				<Bedrooms />
-				<Bathrooms />
+				<MasterRoom />
+				<SelfContained />
+				<NormalRoom />
 			</View>
-			<Modal
-				transparent={false}
-				visible={thirdStepVisible}
-				animationType='fade'>
-				<ThirdStep />
+			<Modal transparent={false} animationType='fade' visible={visible}>
+				<Flooring />
 			</Modal>
 		</View>
 	);
@@ -73,7 +58,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	backArrow: {
-		color: color.dimblack,
+		color: "white",
 	},
 	titleText: {
 		color: "white",
@@ -99,7 +84,8 @@ const styles = StyleSheet.create({
 		height: "100%",
 		borderTopRightRadius: 30,
 		borderTopLeftRadius: 30,
-		paddingTop: 20,
+		paddingTop: 50,
+		paddingHorizontal: 10,
 	},
 	spaceSpecificText: {
 		marginVertical: 5,
@@ -110,4 +96,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default memo(Features);
+export default memo(RoomType);

@@ -9,6 +9,7 @@ import ImagePreview from "./image-preview";
 import PriceFeatures from "./price-features";
 import AmenityReview from "./amenity-review";
 import SecurityReview from "./security-review";
+import Spaces from "./spaces";
 
 function Review(props) {
 	const dispatch = useDispatch();
@@ -37,6 +38,7 @@ function Review(props) {
 					<Body style={styles.reviewTitle}>Property images</Body>
 					<ImagePreview />
 					<PriceFeatures />
+					<Spaces />
 					<AmenityReview />
 					<SecurityReview />
 				</View>

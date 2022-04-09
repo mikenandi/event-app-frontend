@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
 		opacity: 0.5,
 	},
 	tickContainer: {
-		position: "relative",
+		position: "absolute",
 		bottom: 120,
 		left: 20,
 		borderRadius: 30,

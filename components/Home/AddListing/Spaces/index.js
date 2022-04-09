@@ -1,24 +1,35 @@
 import React, {memo} from "react";
-import {View, StyleSheet, Modal} from "react-native";
+import {View, StyleSheet, TouchableOpacity, Modal} from "react-native";
 import color from "../../../colors";
 import {Ionicons} from "@expo/vector-icons";
 import {useDispatch, useSelector} from "react-redux";
-import {hideRoomSecondStep} from "../../../Store/home-store/modalSlice";
-import MasterRoom from "./SpaceSpecifics/MasterRoom";
-import {HeadingS} from "../../../Typography";
-import NormalRoom from "./SpaceSpecifics/NormalRoom";
-import SelfContained from "./SpaceSpecifics/SelfContained";
+import {
+	hideSpace,
+	showAmenity,
+	showFlooring,
+} from "../../../Store/home-store/modalSlice";
+import MasterBedroom from "./Type/MasterBedroom";
+import {ButtonText, HeadingS, Body} from "../../../Typography";
+import KitchenSpace from "./Type/KitchenSpace";
+import DiningArea from "./Type/DiningArea";
+import {clearSpace} from "../../../Store/home-store/houseSlice";
+import LivingRoom from "./Type/LivingRoom";
 import Flooring from "../Flooring";
 
-function RoomType(props) {
+function Features(props) {
 	const dispatch = useDispatch();
 
 	const visible = useSelector((state) => {
 		return state.showModal.flooringVisible;
 	});
 
-	const handleHideFeatures = () => {
-		dispatch(hideRoomSecondStep());
+	const handleBack = () => {
+		dispatch(clearSpace());
+		dispatch(hideSpace());
+	};
+
+	const handleNext = () => {
+		dispatch(showFlooring());
 	};
 
 	return (
@@ -27,21 +38,29 @@ function RoomType(props) {
 				<Ionicons
 					name='arrow-back-outline'
 					size={28}
-					onPress={handleHideFeatures}
+					onPress={handleBack}
 					style={styles.backArrow}
 				/>
+				<TouchableOpacity activeOpacity={0.9} onPress={handleNext}>
+					<ButtonText style={styles.nextText}>Next</ButtonText>
+				</TouchableOpacity>
 			</View>
 			<View style={styles.titleContainer}>
 				<HeadingS style={styles.titleText}>
-					What words describes better the room that you have ?
+					Lets know spaces which your house have.
 				</HeadingS>
 			</View>
 			<View style={styles.bottomContainer}>
-				<MasterRoom />
-				<SelfContained />
-				<NormalRoom />
+				<View style={styles.rowContainer}>
+					<MasterBedroom />
+					<DiningArea />
+				</View>
+				<View style={styles.rowContainer}>
+					<KitchenSpace />
+					<LivingRoom />
+				</View>
 			</View>
-			<Modal transparent={false} animationType='fade' visible={visible}>
+			<Modal animationType='fade' transparent={false} visible={visible}>
 				<Flooring />
 			</Modal>
 		</View>
@@ -74,7 +93,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "white",
 		paddingVertical: 10,
 		paddingHorizontal: 10,
-		color: color.dimblack,
+		color: "black",
 		fontWeight: "700",
 		borderRadius: 3,
 		marginRight: 10,
@@ -84,8 +103,7 @@ const styles = StyleSheet.create({
 		height: "100%",
 		borderTopRightRadius: 30,
 		borderTopLeftRadius: 30,
-		paddingTop: 50,
-		paddingHorizontal: 10,
+		paddingTop: 20,
 	},
 	spaceSpecificText: {
 		marginVertical: 5,
@@ -94,6 +112,11 @@ const styles = StyleSheet.create({
 	spaceSpecificContainer: {
 		marginHorizontal: 45,
 	},
+	rowContainer: {
+		flexDirection: "row",
+		justifyContent: "space-evenly",
+		marginBottom: 10,
+	},
 });
 
-export default memo(RoomType);
+export default memo(Features);
