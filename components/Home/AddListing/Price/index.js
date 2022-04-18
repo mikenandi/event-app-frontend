@@ -139,10 +139,10 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	inputText: {
-		fontSize: 30,
-		letterSpacing: 0.25,
+		fontSize: 20,
+		letterSpacing: 0.15,
 		width: 240,
-		padding: 10,
+		padding: 5,
 	},
 	inputContainer: {
 		flexDirection: "row",

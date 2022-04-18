@@ -12,10 +12,33 @@ import Left from "./components/TopBar/Left";
 import Right from "./components/TopBar/Right";
 import Profile from "./components/Profile";
 import Messages from "./components/Messages";
+import Login from "./components/Auth/Login";
+import Signup from "./components/Auth/Signup";
 import {Provider} from "react-redux";
 import {store} from "./components/Store";
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
+
+function MyAuth() {
+	return (
+		<Stack.Navigator initialRouteName='login'>
+			<Stack.Screen
+				name='Login'
+				component={Login}
+				options={{
+					headerShown: false,
+				}}
+			/>
+			<Stack.Screen
+				name='Signup'
+				component={Signup}
+				options={{headerShown: false}}
+			/>
+		</Stack.Navigator>
+	);
+}
 
 function MyTabs() {
 	return (
@@ -40,7 +63,7 @@ function MyTabs() {
 				}}
 			/>
 
-			<Tab.Screen
+			{/* <Tab.Screen
 				name='Payments'
 				component={Payments}
 				options={{
@@ -51,7 +74,7 @@ function MyTabs() {
 					),
 					headerLeft: () => <Left title='Payments' />,
 				}}
-			/>
+			/> */}
 			<Tab.Screen
 				name='Messages'
 				component={Messages}
@@ -86,7 +109,7 @@ export default function App() {
 		<Provider store={store}>
 			<NavigationContainer>
 				<StatusBar backgroundColor={color.lightblue} />
-				<MyTabs />
+				{false ? <MyAuth /> : <MyTabs />}
 			</NavigationContainer>
 		</Provider>
 	);

@@ -39,7 +39,7 @@ function Listing(props) {
 							<MaterialCommunityIcons
 								name='calendar-outline'
 								size={24}
-								color={color.warning}
+								color='black'
 							/>
 						</View>
 					)}
@@ -49,7 +49,7 @@ function Listing(props) {
 				<View style={styles.detailsContainer}>
 					<View>
 						<HeadingS style={styles.price}>
-							<Body>TZS</Body> {add_comma(price)}
+							<Body>TSH</Body> {add_comma(price)}
 						</HeadingS>
 					</View>
 					<Entypo name='dots-three-vertical' size={14} color={color.dimblack} />
