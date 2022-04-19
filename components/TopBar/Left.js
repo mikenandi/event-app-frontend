@@ -6,7 +6,7 @@ import color from "../colors";
 function Logo(props) {
 	return (
 		<View style={styles.container}>
-			<HeadingS style={styles.titleText}>gudpin</HeadingS>
+			<HeadingS style={styles.titleText}>gudsurvey</HeadingS>
 		</View>
 	);
 }
@@ -16,7 +16,8 @@ const styles = StyleSheet.create({
 		marginLeft: 10,
 	},
 	titleText: {
-		fontWeight: "800",
+		fontWeight: "700",
+		color: color.primary,
 	},
 });
 

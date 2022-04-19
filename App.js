@@ -14,6 +14,7 @@ import Profile from "./components/Profile";
 import Messages from "./components/Messages";
 import Login from "./components/Auth/Login";
 import Signup from "./components/Auth/Signup";
+import ForgotPassword from "./components/Auth/ForgotPassword";
 import {Provider} from "react-redux";
 import {store} from "./components/Store";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
@@ -27,6 +28,13 @@ function MyAuth() {
 			<Stack.Screen
 				name='Login'
 				component={Login}
+				options={{
+					headerShown: false,
+				}}
+			/>
+			<Stack.Screen
+				name='ForgotPassword'
+				component={ForgotPassword}
 				options={{
 					headerShown: false,
 				}}

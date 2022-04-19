@@ -25,7 +25,6 @@ export default function Listings() {
 			<FlatList
 				data={DATA}
 				renderItem={renderItem}
-				removeClippedSubviews={true}
 				keyExtractor={(item) => item.id}
 				contentContainerStyle={styles.contentContainer}
 				showsVerticalScrollIndicator={true}

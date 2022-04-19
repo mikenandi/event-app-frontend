@@ -30,37 +30,41 @@ function Spaces(props) {
 	};
 
 	return (
-		<View style={styles.container}>
-			<Body style={styles.boldHeader}> Room types</Body>
+		<View>
+			{!room && (
+				<View style={styles.container}>
+					<Body style={styles.boldHeader}> Room types</Body>
 
-			<View style={styles.amenityContainer}>
-				{space.livingRoom && (
-					<View style={styles.space}>
-						<BodyS>Dinning Room</BodyS>
-					</View>
-				)}
-				{space.dinningArea && (
-					<View style={styles.space}>
-						<BodyS>Living room</BodyS>
-					</View>
-				)}
-				{space.kitchenSpace && (
-					<View style={styles.space}>
-						<BodyS>Kitchen</BodyS>
-					</View>
-				)}
-				{space.masterBedroom && (
-					<View style={styles.space}>
-						<BodyS>Master bedroom</BodyS>
-					</View>
-				)}
+					<View style={styles.amenityContainer}>
+						{space.livingRoom && (
+							<View style={styles.space}>
+								<BodyS>Dinning Room</BodyS>
+							</View>
+						)}
+						{space.dinningArea && (
+							<View style={styles.space}>
+								<BodyS>Living room</BodyS>
+							</View>
+						)}
+						{space.kitchenSpace && (
+							<View style={styles.space}>
+								<BodyS>Kitchen</BodyS>
+							</View>
+						)}
+						{space.masterBedroom && (
+							<View style={styles.space}>
+								<BodyS>Master bedroom</BodyS>
+							</View>
+						)}
 
-				{no_space() && (
-					<View style={styles.no_amenity}>
-						<BodyS>Nothing was selected.</BodyS>
+						{no_space() && (
+							<View style={styles.no_amenity}>
+								<BodyS>Nothing was selected.</BodyS>
+							</View>
+						)}
 					</View>
-				)}
-			</View>
+				</View>
+			)}
 		</View>
 	);
 }

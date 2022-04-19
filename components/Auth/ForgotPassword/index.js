@@ -11,41 +11,25 @@ import {
 import color from "../../colors";
 import {Ionicons} from "@expo/vector-icons";
 
-function Login(props) {
+function ForgotPassword(props) {
 	const handleSignup = () => {
 		props.navigation.navigate("Signup");
-	};
-
-	const handleForgot = () => {
-		props.navigation.navigate("ForgotPassword");
 	};
 
 	return (
 		<View style={styles.container}>
 			<StatusBar backgroundColor={color.lightgray} />
 			<View>
-				<HeadingM>Sign in</HeadingM>
+				<HeadingM>Forgot password</HeadingM>
 
 				<Caption>username or email</Caption>
 				<TextInput
-					placeholder='username or email'
+					placeholder='email'
 					style={styles.inputText}
 					textContentType='emailAddress'
 				/>
-				<Caption>password</Caption>
-				<TextInput
-					placeholder='password'
-					style={styles.inputText}
-					secureTextEntry={true}
-					passwordRules='minlength: 8;'
-					textContentType='password'
-				/>
 
-				<Pressable onPress={handleForgot}>
-					<BodyS style={styles.forgotPasswordText}>Forgot password?</BodyS>
-				</Pressable>
-
-				<ButtonText style={styles.loginButton}>sign in</ButtonText>
+				<ButtonText style={styles.loginButton}>reset</ButtonText>
 				<View style={styles.questionContainer}>
 					<BodyS style={styles.question}>Don't have an account?</BodyS>
 					<Pressable style={styles.signupContainer} onPress={handleSignup}>
@@ -104,4 +88,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default memo(Login);
+export default memo(ForgotPassword);
