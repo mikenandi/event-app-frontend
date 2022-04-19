@@ -1,33 +1,59 @@
 import React, {memo} from "react";
-import {View, Text, StyleSheet, Image, TouchableOpacity} from "react-native";
+import {
+	View,
+	Text,
+	StyleSheet,
+	Image,
+	TouchableOpacity,
+	Modal,
+} from "react-native";
+import {useDispatch, useSelector} from "react-redux";
 import color from "../../colors";
+import {showChat} from "../../Store/message-store/modalSlice";
 import {Caption, BodyS, Body, HeadingL, HeadingS} from "../../Typography";
+import Chat from "../Chat";
 
 function Message(props) {
-	return (
-		<View style={styles.messagecontainer}>
-			<Image
-				source={require("../../../assets/tenant.jpeg")}
-				style={styles.avatar}
-			/>
-			<View>
-				<View style={styles.rowContainer}>
-					<Body style={styles.nameText}>Michael Nandi</Body>
-					<Caption style={styles.timeText}>Yesterday</Caption>
-				</View>
+	const dispatch = useDispatch();
 
-				<View style={styles.rowContainer}>
-					<BodyS style={props.read ? styles.briefActive : styles.briefInactive}>
-						{props.msg}
-					</BodyS>
-					{props.read && (
-						<View style={styles.newMsgContainer}>
-							<BodyS style={styles.newMsgText}>12</BodyS>
-						</View>
-					)}
+	const visible = useSelector((state) => {
+		return state.showModalMessage.chatVisible;
+	});
+
+	const handleChat = () => {
+		dispatch(showChat());
+	};
+
+	return (
+		<TouchableOpacity activeOpacity={0.7} onPress={handleChat}>
+			<View style={styles.messagecontainer}>
+				<Image
+					source={require("../../../assets/tenant.jpeg")}
+					style={styles.avatar}
+				/>
+				<View>
+					<View style={styles.rowContainer}>
+						<Body style={styles.nameText}>{props.name}</Body>
+						<Caption style={styles.timeText}>Yesterday</Caption>
+					</View>
+
+					<View style={styles.rowContainer}>
+						<BodyS
+							style={props.read ? styles.briefActive : styles.briefInactive}>
+							{props.msg}
+						</BodyS>
+						{props.read && (
+							<View style={styles.newMsgContainer}>
+								<BodyS style={styles.newMsgText}>1</BodyS>
+							</View>
+						)}
+					</View>
 				</View>
+				<Modal animationType='slide' visible={visible} transparent={false}>
+					<Chat />
+				</Modal>
 			</View>
-		</View>
+		</TouchableOpacity>
 	);
 }
 const styles = StyleSheet.create({
@@ -42,6 +68,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "white",
 		padding: 10,
 		alignItems: "center",
+		marginVertical: 5,
 	},
 	nameText: {
 		marginBottom: 2,

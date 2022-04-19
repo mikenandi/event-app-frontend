@@ -53,7 +53,7 @@ function MyTabs() {
 		<Tab.Navigator
 			initialRouteName='homepage'
 			screenOptions={{
-				tabBarActiveTintColor: "black",
+				tabBarActiveTintColor: color.primary,
 				headerShown: true,
 			}}>
 			<Tab.Screen
@@ -90,7 +90,7 @@ function MyTabs() {
 					title: "",
 					tabBarLabel: "",
 					tabBarIcon: ({color, size}) => (
-						<Ionicons name='chatbox-outline' size={size} color={color} />
+						<Ionicons name='chatbubbles-outline' size={size} color={color} />
 					),
 					headerLeft: () => <Left />,
 				}}

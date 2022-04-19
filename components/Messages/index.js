@@ -14,7 +14,7 @@ import Message from "./Message";
 
 function Messages(props) {
 	const renderItem = ({item}) => {
-		return <Message name={item.name} read={item.read} msg={item.msg} />;
+		return <Message name={item.tenantName} read={item.read} msg={item.msg} />;
 	};
 
 	return (
@@ -30,6 +30,7 @@ function Messages(props) {
 const styles = StyleSheet.create({
 	screen: {
 		flex: 1,
+		backgroundColor: "white",
 	},
 });
 

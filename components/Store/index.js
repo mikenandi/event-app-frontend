@@ -9,6 +9,7 @@ import floorReducer from "./home-store/floorSlice";
 import securityReducer from "./home-store/securitySlice";
 import propertyReducer from "./home-store/propertyTypeSlice";
 import modalHomeReducer from "./home-store/modalSlice-home";
+import modalMessageReducer from "./message-store/modalSlice";
 
 export const store = configureStore({
 	reducer: {
@@ -22,6 +23,7 @@ export const store = configureStore({
 		security: securityReducer,
 		propertyType: propertyReducer,
 		showModalHome: modalHomeReducer,
+		showModalMessage: modalMessageReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({

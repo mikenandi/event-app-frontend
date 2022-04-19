@@ -16,8 +16,8 @@ const styles = StyleSheet.create({
 		marginLeft: 10,
 	},
 	titleText: {
-		fontWeight: "700",
-		color: color.primary,
+		fontWeight: "600",
+		color: "black",
 	},
 });
 
