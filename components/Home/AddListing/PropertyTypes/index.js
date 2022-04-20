@@ -21,7 +21,7 @@ function PropertyType(props) {
 
 	return (
 		<View style={styles.screen}>
-			<StatusBar backgroundColor={color.lightblue} />
+			<StatusBar backgroundColor={color.primary} />
 			<View style={styles.topContainer}>
 				<Entypo
 					name='cross'

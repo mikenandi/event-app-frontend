@@ -68,7 +68,7 @@ function AddressData(props) {
 
 	return (
 		<View style={styles.screen}>
-			<StatusBar backgroundColor={color.lightblue} />
+			<StatusBar backgroundColor={color.primary} />
 			<View style={styles.topContainer}>
 				<Ionicons
 					name='arrow-back-outline'
@@ -88,14 +88,14 @@ function AddressData(props) {
 			<View style={styles.bottomContainer}>
 				<View style={styles.fetchedContainer}>
 					<View style={styles.labelDataContainer}>
-						<Ionicons name='pin-outline' size={30} color={color.lightblue} />
+						<Ionicons name='pin-outline' size={30} color={color.primary} />
 						<View>
 							<BodyS style={styles.label}>country</BodyS>
 							<HeadingS>{location.country}</HeadingS>
 						</View>
 					</View>
 					<View style={styles.labelDataContainer}>
-						<Ionicons name='pin-outline' size={30} color={color.lightblue} />
+						<Ionicons name='pin-outline' size={30} color={color.primary} />
 						<View>
 							<BodyS style={styles.label}>city</BodyS>
 							<HeadingS>{location.city}</HeadingS>
@@ -103,21 +103,21 @@ function AddressData(props) {
 					</View>
 
 					<View style={styles.labelDataContainer}>
-						<Ionicons name='pin-outline' size={30} color={color.lightblue} />
+						<Ionicons name='pin-outline' size={30} color={color.primary} />
 						<View>
 							<BodyS style={styles.label}>district</BodyS>
 							<HeadingS>{location.city_district}</HeadingS>
 						</View>
 					</View>
 					<View style={styles.labelDataContainer}>
-						<Ionicons name='pin-outline' size={30} color={color.lightblue} />
+						<Ionicons name='pin-outline' size={30} color={color.primary} />
 						<View>
 							<BodyS style={styles.label}>ward</BodyS>
 							<HeadingS>{location.ward}</HeadingS>
 						</View>
 					</View>
 					<View style={styles.labelDataContainer}>
-						<Ionicons name='pin-outline' size={30} color={color.lightblue} />
+						<Ionicons name='pin-outline' size={30} color={color.primary} />
 						<View>
 							<BodyS style={styles.label}>House number</BodyS>
 							<HeadingS>{location.house_number}</HeadingS>

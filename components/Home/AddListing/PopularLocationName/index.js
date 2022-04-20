@@ -21,6 +21,7 @@ import {
 	savePopularLocation,
 } from "../../../Store/home-store/locationSlice";
 import Gallery from "../Gallery";
+import {StatusBar} from "expo-status-bar";
 
 function PopularLocationName(props) {
 	const popular_name = useSelector((state) => {
@@ -48,6 +49,7 @@ function PopularLocationName(props) {
 
 	return (
 		<View style={styles.screen}>
+			<StatusBar backgroundColor={color.primary} />
 			<View style={styles.topContainer}>
 				<Ionicons
 					name='arrow-back-outline'
@@ -68,7 +70,7 @@ function PopularLocationName(props) {
 			<View style={styles.bottomContainer}>
 				<View style={styles.fetchedContainer}>
 					<View style={styles.labelDataContainer}>
-						<Ionicons name='pin-outline' size={50} color={color.lightblue} />
+						<Ionicons name='pin-outline' size={50} color={color.primary} />
 						<View>
 							<BodyS style={styles.label}>Enter popular location name</BodyS>
 							<TextInput

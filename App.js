@@ -10,6 +10,7 @@ import color from "./components/colors";
 import {StatusBar, Text} from "react-native";
 import Left from "./components/TopBar/Left";
 import Right from "./components/TopBar/Right";
+import RightMessages from "./components/TopBar/Right-message";
 import Profile from "./components/Profile";
 import Messages from "./components/Messages";
 import Login from "./components/Auth/Login";
@@ -93,6 +94,7 @@ function MyTabs() {
 						<Ionicons name='chatbubbles-outline' size={size} color={color} />
 					),
 					headerLeft: () => <Left />,
+					headerRight: () => <RightMessages />,
 				}}
 			/>
 			<Tab.Screen

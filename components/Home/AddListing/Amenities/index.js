@@ -38,7 +38,7 @@ function Amenity(props) {
 
 	return (
 		<View style={styles.screen}>
-			<StatusBar backgroundColor={color.lightblue} />
+			<StatusBar backgroundColor={color.primary} />
 			<View style={styles.topContainer}>
 				<Ionicons
 					name='arrow-back-outline'

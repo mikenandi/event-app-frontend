@@ -8,7 +8,8 @@ export default {
 	dimblack: "#404040",
 	lightgray: "#f2f2f2",
 	grey: "#999999",
-	lightblue: "#0099ff",
+	// lightblue: "#0099ff",
+	lightblue: "#b3e0ff",
 	warning: "#ff1a1a",
 	lightred: "#ffcccc",
 };

@@ -58,7 +58,7 @@ function Listing(props) {
 					<Ionicons
 						name='ios-pin-outline'
 						size={24}
-						color={color.lightblue}
+						color={color.primary}
 						style={styles.pinIcon}
 					/>
 					<View>

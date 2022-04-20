@@ -42,14 +42,14 @@ function Message(props) {
 							style={props.read ? styles.briefActive : styles.briefInactive}>
 							{props.msg}
 						</BodyS>
-						{props.read && (
+						{false && (
 							<View style={styles.newMsgContainer}>
 								<BodyS style={styles.newMsgText}>1</BodyS>
 							</View>
 						)}
 					</View>
 				</View>
-				<Modal animationType='slide' visible={visible} transparent={false}>
+				<Modal animationType='fade' visible={visible} transparent={false}>
 					<Chat />
 				</Modal>
 			</View>
@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
 	},
 	briefActive: {
 		color: color.primary,
+		fontWeight: "bold",
 	},
 	briefInactive: {color: "gray"},
 	timeText: {
