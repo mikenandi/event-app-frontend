@@ -125,11 +125,6 @@ const styles = StyleSheet.create({
 	iconText: {
 		textTransform: "capitalize",
 	},
-	signOutContainer: {
-		flexDirection: "row",
-		alignItems: "center",
-		marginLeft: 20,
-	},
 });
 
 export default memo(Profile);
