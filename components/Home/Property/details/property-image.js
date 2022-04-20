@@ -38,7 +38,7 @@ function PropertyImage(props) {
 					<Ionicons
 						name='ios-pin-outline'
 						size={24}
-						color={color.lightblue}
+						color={color.primary}
 						style={styles.pinIcon}
 					/>
 					<View>
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
 		backgroundColor: color.lightgray,
 	},
 	detailsContainer: {
-		marginHorizontal: 10,
+		marginHorizontal: 15,
 		marginVertical: 5,
 		flexDirection: "row",
 		justifyContent: "space-between",
@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
 	pinContainer: {
 		flexDirection: "row",
 		alignItems: "center",
+		marginHorizontal: 15,
 	},
 	topbar: {
 		flexDirection: "row",

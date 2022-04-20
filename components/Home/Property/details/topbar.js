@@ -17,9 +17,9 @@ function TopBar(props) {
 	return (
 		<View style={styles.topbar}>
 			<Ionicons
-				name='chevron-back-sharp'
+				name='arrow-back-sharp'
 				size={30}
-				color='black'
+				color={color.dimblack}
 				onPress={handleHideSearch}
 				style={styles.backIcon}
 			/>

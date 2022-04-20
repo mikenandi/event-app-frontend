@@ -31,7 +31,7 @@ function LocationOptions(props) {
 			<Entypo
 				name='location'
 				size={80}
-				color={color.primary}
+				color={color.lightblue}
 				style={styles.icon}
 			/>
 			<View style={styles.explanationContainer}>
@@ -69,16 +69,14 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	icon: {
-		backgroundColor: color.lightgray,
 		padding: 20,
-		borderRadius: 60,
 		marginVertical: 10,
 	},
 	questionText: {
-		fontWeight: "bold",
+		fontWeight: "normal",
 	},
 	bottomText: {
-		color: color.dimblack,
+		color: "gray",
 		marginHorizontal: 20,
 	},
 	explanationContainer: {
