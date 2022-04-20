@@ -11,6 +11,7 @@ import {StatusBar, Text} from "react-native";
 import Left from "./components/TopBar/Left";
 import Right from "./components/TopBar/Right";
 import RightMessages from "./components/TopBar/Right-message";
+import RightProfile from "./components/TopBar/Right-profile";
 import Profile from "./components/Profile";
 import Messages from "./components/Messages";
 import Login from "./components/Auth/Login";
@@ -107,6 +108,7 @@ function MyTabs() {
 						<Ionicons name='person-outline' size={size} color={color} />
 					),
 					headerLeft: () => <Left title='Profile' />,
+					headerRight: () => <RightProfile />,
 					headerShown: true,
 				}}
 			/>

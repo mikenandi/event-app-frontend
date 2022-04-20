@@ -1,77 +1,134 @@
 import React, {memo, useState} from "react";
 import {View, Text, StyleSheet, Image, TouchableOpacity} from "react-native";
-import {Caption, BodyS, HeadingL} from "../Typography";
+import {MaterialIcons} from "@expo/vector-icons";
+import {MaterialCommunityIcons} from "@expo/vector-icons";
+import {AntDesign} from "@expo/vector-icons";
+import {Feather} from "@expo/vector-icons";
+import {Caption, BodyS, HeadingS, Body} from "../Typography";
+import color from "../colors";
 
 function Profile(props) {
 	const editProfileHandler = () => {};
 
 	return (
-		<View style={styles.container}>
-			<HeadingL>Profile and settings page.</HeadingL>
+		<View style={styles.screen}>
+			<View style={styles.avatarContainer}>
+				<Image
+					source={require("../../assets/tenant.jpeg")}
+					style={styles.avatar}
+				/>
+				<View>
+					<HeadingS>Michael Nandi</HeadingS>
+					<BodyS style={{color: color.primary, fontWeight: "bold"}}>
+						show profile
+					</BodyS>
+				</View>
+			</View>
+			<View style={styles.container}>
+				<View style={styles.rowContainer}>
+					<MaterialCommunityIcons
+						name='account-circle-outline'
+						size={30}
+						color='gray'
+						style={styles.icon}
+					/>
+					<Body style={styles.iconText}>Edit profile</Body>
+				</View>
+				<View style={styles.rowContainer}>
+					<AntDesign
+						name='creditcard'
+						size={30}
+						color='gray'
+						style={styles.icon}
+					/>
+					<Body style={styles.iconText}>payouts</Body>
+				</View>
+			</View>
+			<View style={styles.container}>
+				<View style={styles.rowContainer}>
+					<MaterialCommunityIcons
+						name='account-group-outline'
+						size={30}
+						color='gray'
+						style={styles.icon}
+					/>
+					<Body style={styles.iconText}>Tenants</Body>
+				</View>
+				<View style={styles.rowContainer}>
+					<MaterialIcons
+						name='insert-chart-outlined'
+						size={30}
+						color='gray'
+						style={styles.icon}
+					/>
+					<Body style={styles.iconText}>Payments summary</Body>
+				</View>
+			</View>
+			<View>
+				<View style={styles.rowContainer}>
+					<Feather
+						name='help-circle'
+						size={30}
+						color='black'
+						style={styles.icon}
+					/>
+					<Body style={styles.iconText}>help</Body>
+				</View>
+				<View style={styles.rowContainer}>
+					<AntDesign
+						name='setting'
+						size={30}
+						color='gray'
+						style={styles.icon}
+					/>
+					<Body style={styles.iconText}>settings</Body>
+				</View>
+			</View>
+			<View style={styles.rowContainer}>
+				<Feather name='log-out' size={30} color='gray' style={styles.icon} />
+				<Body style={styles.iconText}>sign out</Body>
+			</View>
 		</View>
 	);
 }
 const styles = StyleSheet.create({
-	container: {
+	screen: {
 		flex: 1,
-		display: "flex",
-		alignItems: "flex-start",
+		backgroundColor: "white",
 	},
-	ImageContainer: {
-		marginLeft: 15,
-		alignItems: "center",
-		marginTop: 10,
+	avatar: {
+		width: 60,
+		height: 60,
+		borderRadius: 30,
+		marginRight: 10,
+	},
+	rowContainer: {
 		flexDirection: "row",
-	},
-	profileImage: {
-		marginLeft: 10,
-		width: 100,
-		height: 100,
-		borderRadius: 50,
-	},
-	profileImageText: {
-		marginLeft: 12,
-		marginTop: 20,
-	},
-	editButton: {
-		display: "flex",
-		marginLeft: 90,
 		alignItems: "center",
-		marginTop: 22,
-		width: 180,
-		height: 35,
-		borderWidth: 0.5,
-		borderColor: "grey",
-		borderRadius: 20,
+		marginLeft: 20,
+		marginVertical: 8,
 	},
-	editProfileTxt: {
-		fontSize: 18,
-		marginTop: 2,
-	},
-	NormalText: {
-		fontSize: 15,
-		padding: 2,
-	},
-	profileInfo: {
-		marginTop: 20,
-		alignItems: "flex-start",
-	},
-	userInfo: {
-		// borderWidth: 0.5,
-		// borderColor: 'gray',
-		padding: 5,
-		margin: 5,
-		display: "flex",
+	container: {},
+	avatarContainer: {
+		paddingLeft: 10,
 		flexDirection: "row",
+		alignItems: "center",
+		paddingVertical: 10,
+		paddingVertical: 10,
+		borderBottomWidth: 1,
+		borderBottomColor: color.lightgray,
 	},
-	userInfoLabel: {
-		margin: 4,
-		fontSize: 17,
-		color: "grey",
+	icon: {
+		marginRight: 15,
+		color: color.grey,
 	},
-	userInfoText: {
-		margin: 4,
-		fontSize: 17,
+	iconText: {
+		textTransform: "capitalize",
+	},
+	signOutContainer: {
+		flexDirection: "row",
+		alignItems: "center",
+		marginLeft: 20,
 	},
 });
 

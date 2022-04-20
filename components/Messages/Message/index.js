@@ -42,9 +42,9 @@ function Message(props) {
 							style={props.read ? styles.briefActive : styles.briefInactive}>
 							{props.msg}
 						</BodyS>
-						{false && (
+						{props.read && (
 							<View style={styles.newMsgContainer}>
-								<BodyS style={styles.newMsgText}>1</BodyS>
+								<BodyS style={styles.newMsgText}>12</BodyS>
 							</View>
 						)}
 					</View>
@@ -90,12 +90,13 @@ const styles = StyleSheet.create({
 	newMsgText: {
 		color: "white",
 		fontWeight: "bold",
+		marginBottom: 1,
 	},
 	newMsgContainer: {
 		backgroundColor: color.primary,
-		width: 20,
-		height: 20,
-		borderRadius: 10,
+		width: 23,
+		height: 23,
+		borderRadius: 11.5,
 		justifyContent: "center",
 		alignItems: "center",
 		padding: 2,
