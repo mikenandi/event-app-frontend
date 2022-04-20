@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
 	},
 	briefActive: {
 		color: color.primary,
-		fontWeight: "bold",
+		fontWeight: "normal",
 	},
 	briefInactive: {color: "gray"},
 	timeText: {

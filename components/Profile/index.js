@@ -19,9 +19,7 @@ function Profile(props) {
 				/>
 				<View>
 					<HeadingS>Michael Nandi</HeadingS>
-					<BodyS style={{color: color.primary, fontWeight: "bold"}}>
-						show profile
-					</BodyS>
+					<BodyS style={styles.showProfileText}>show profile</BodyS>
 				</View>
 			</View>
 			<View style={styles.container}>
@@ -120,9 +118,14 @@ const styles = StyleSheet.create({
 	},
 	icon: {
 		marginRight: 15,
-		color: color.grey,
+		color: "black",
 	},
 	iconText: {
+		textTransform: "capitalize",
+	},
+	showProfileText: {
+		color: color.primary,
+		fontWeight: "bold",
 		textTransform: "capitalize",
 	},
 });

@@ -16,8 +16,9 @@ const styles = StyleSheet.create({
 		marginLeft: 10,
 	},
 	titleText: {
-		fontWeight: "600",
+		fontWeight: "bold",
 		color: "black",
+		fontFamily: "serif",
 	},
 });
 
