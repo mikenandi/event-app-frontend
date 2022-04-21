@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
 	},
 	nameText: {
 		marginBottom: 2,
+		textTransform: "capitalize",
 	},
 	briefActive: {
 		color: color.primary,

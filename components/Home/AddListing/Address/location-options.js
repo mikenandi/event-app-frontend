@@ -30,16 +30,12 @@ function LocationOptions(props) {
 		<View style={styles.container}>
 			<Entypo
 				name='location'
-				size={80}
-				color={color.lightblue}
+				size={50}
+				color={color.grey}
 				style={styles.icon}
 			/>
 			<View style={styles.explanationContainer}>
-				<HeadingS style={styles.questionText}>Where is your house?</HeadingS>
-				<Body style={styles.bottomText}>
-					Select location of your house so as people interested with your
-					property discover location where the property is found.
-				</Body>
+				<HeadingS style={styles.questionText}>Where is your property?</HeadingS>
 			</View>
 			<View>
 				<TouchableOpacity onPress={handleSwitchGps} activeOpacity={0.8}>
@@ -61,16 +57,16 @@ const styles = StyleSheet.create({
 		position: "absolute",
 		backgroundColor: "white",
 		width: "100%",
-		height: 420,
+		height: 320,
 		bottom: 0,
 		borderTopRightRadius: 30,
 		borderTopLeftRadius: 30,
-		paddingTop: 10,
 		alignItems: "center",
 	},
 	icon: {
 		padding: 20,
 		marginVertical: 10,
+		color: "black",
 	},
 	questionText: {
 		fontWeight: "normal",

@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
 	},
 	icon: {
 		marginRight: 15,
-		color: "black",
+		color: "gray",
 	},
 	iconText: {
 		textTransform: "capitalize",

@@ -3,6 +3,7 @@ import {View, StyleSheet, Modal} from "react-native";
 import color from "../../../colors";
 import {Entypo} from "@expo/vector-icons";
 import {useDispatch} from "react-redux";
+import {EvilIcons} from "@expo/vector-icons";
 import {hidePropertyType} from "../../../Store/home-store/modalSlice";
 import {useSelector} from "react-redux";
 // import SecondStep from "../SecondStep";
@@ -23,9 +24,9 @@ function PropertyType(props) {
 		<View style={styles.screen}>
 			<StatusBar backgroundColor={color.primary} />
 			<View style={styles.topContainer}>
-				<Entypo
-					name='cross'
-					size={30}
+				<EvilIcons
+					name='close'
+					size={35}
 					onPress={handleBackToHomePage}
 					style={styles.backArrow}
 				/>
@@ -45,6 +46,7 @@ function PropertyType(props) {
 		</View>
 	);
 }
+
 const styles = StyleSheet.create({
 	screen: {flex: 1, backgroundColor: color.primary},
 	topContainer: {

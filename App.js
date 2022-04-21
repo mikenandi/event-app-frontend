@@ -1,7 +1,7 @@
 import * as React from "react";
 import {NavigationContainer} from "@react-navigation/native";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import {Entypo} from "@expo/vector-icons";
+import {Entypo, Foundation} from "@expo/vector-icons";
 import {Ionicons} from "@expo/vector-icons";
 import {MaterialCommunityIcons, AntDesign} from "@expo/vector-icons";
 import Home from "./components/Home";
@@ -55,7 +55,7 @@ function MyTabs() {
 		<Tab.Navigator
 			initialRouteName='homepage'
 			screenOptions={{
-				tabBarActiveTintColor: color.primary,
+				tabBarActiveTintColor: "black",
 				headerShown: true,
 			}}>
 			<Tab.Screen
@@ -65,7 +65,7 @@ function MyTabs() {
 					tabBarLabel: "",
 					title: "",
 					tabBarIcon: ({color, size}) => (
-						<AntDesign name='home' size={size} color={color} />
+						<Entypo name='home' size={size} color={color} />
 					),
 					headerLeft: () => <Left title='gudsurvey' />,
 					headerRight: () => <Right />,
@@ -92,10 +92,10 @@ function MyTabs() {
 					title: "",
 					tabBarLabel: "",
 					tabBarIcon: ({color, size}) => (
-						<Ionicons name='chatbubbles-outline' size={size} color={color} />
+						<Ionicons name='chatbubbles' size={size} color={color} />
 					),
 					headerLeft: () => <Left />,
-					headerRight: () => <RightMessages />,
+					headerRight: () => <Right />,
 				}}
 			/>
 			<Tab.Screen
@@ -105,10 +105,10 @@ function MyTabs() {
 					title: "",
 					tabBarLabel: "",
 					tabBarIcon: ({color, size}) => (
-						<Ionicons name='person-outline' size={size} color={color} />
+						<Ionicons name='person' size={size} color={color} />
 					),
 					headerLeft: () => <Left title='Profile' />,
-					headerRight: () => <RightProfile />,
+					headerRight: () => <Right />,
 					headerShown: true,
 				}}
 			/>
