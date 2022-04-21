@@ -26,16 +26,16 @@ function Profile(props) {
 				<View style={styles.rowContainer}>
 					<MaterialCommunityIcons
 						name='account-circle-outline'
-						size={30}
+						size={24}
 						color='gray'
 						style={styles.icon}
 					/>
 					<Body style={styles.iconText}>Edit profile</Body>
 				</View>
 				<View style={styles.rowContainer}>
-					<AntDesign
-						name='creditcard'
-						size={30}
+					<MaterialCommunityIcons
+						name='wallet-plus-outline'
+						size={24}
 						color='gray'
 						style={styles.icon}
 					/>
@@ -46,7 +46,7 @@ function Profile(props) {
 				<View style={styles.rowContainer}>
 					<MaterialCommunityIcons
 						name='account-group-outline'
-						size={30}
+						size={24}
 						color='gray'
 						style={styles.icon}
 					/>
@@ -55,7 +55,7 @@ function Profile(props) {
 				<View style={styles.rowContainer}>
 					<MaterialIcons
 						name='insert-chart-outlined'
-						size={30}
+						size={24}
 						color='gray'
 						style={styles.icon}
 					/>
@@ -66,7 +66,7 @@ function Profile(props) {
 				<View style={styles.rowContainer}>
 					<Feather
 						name='help-circle'
-						size={30}
+						size={24}
 						color='black'
 						style={styles.icon}
 					/>
@@ -75,7 +75,7 @@ function Profile(props) {
 				<View style={styles.rowContainer}>
 					<AntDesign
 						name='setting'
-						size={30}
+						size={24}
 						color='gray'
 						style={styles.icon}
 					/>
@@ -83,7 +83,7 @@ function Profile(props) {
 				</View>
 			</View>
 			<View style={styles.rowContainer}>
-				<Feather name='log-out' size={30} color='gray' style={styles.icon} />
+				<Feather name='log-out' size={24} color='gray' style={styles.icon} />
 				<Body style={styles.iconText}>sign out</Body>
 			</View>
 		</View>
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
 	},
 	icon: {
 		marginRight: 15,
-		color: "gray",
+		color: "black",
 	},
 	iconText: {
 		textTransform: "capitalize",
