@@ -1,10 +1,12 @@
 import React, {useState} from "react";
-import {View, FlatList, StyleSheet} from "react-native";
+import {View, FlatList, Modal, StyleSheet} from "react-native";
 import List from "./Property";
 import DATA from "../data";
 import {StatusBar} from "react-native";
 import color from "../colors";
 import {HeadingM} from "../Typography";
+import {useSelector, useDispatch} from "react-redux";
+import Details from "./Property/details";
 
 export default function Listings() {
 	const renderItem = ({item}) => {
@@ -19,6 +21,10 @@ export default function Listings() {
 		);
 	};
 
+	const visible = useSelector((state) => {
+		return state.showModalHome.detailVisible;
+	});
+
 	return (
 		<View style={styles.screen}>
 			<StatusBar backgroundColor={color.lightgray} />
@@ -29,6 +35,11 @@ export default function Listings() {
 				contentContainerStyle={styles.contentContainer}
 				showsVerticalScrollIndicator={true}
 			/>
+
+			{/* A modal to show the details of the property */}
+			<Modal transparent={false} animationType='none' visible={visible}>
+				<Details />
+			</Modal>
 		</View>
 	);
 }

@@ -3,13 +3,13 @@ export default data = [
 		id: 1,
 		tenantName: "Michael Nandi",
 		read: true,
-		msg: "your offer have been accepted",
+		msg: "your offer have been accepted having an amount or number that is not known or not stated, or being a part of something: Let's get some work done. Some stories he wrote were made into movies.",
 	},
 	{
 		id: 2,
 		tenantName: "juma nao",
 		read: false,
-		msg: "your offer has been accepted",
+		msg: "your offer has been accepted having an amount or number that is not known or not stated, or being a part of something: Let's get some work done. Some stories he wrote were made into movies.",
 	},
 	{
 		id: 3,

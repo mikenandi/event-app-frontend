@@ -6,13 +6,20 @@ import {
 	Image,
 	TouchableOpacity,
 	FlatList,
+	Modal,
 } from "react-native";
 import color from "../colors";
 import {Caption, BodyS, Body, HeadingL, HeadingS} from "../Typography";
 import Data from "../msgdata";
 import Message from "./Message";
+import {useSelector} from "react-redux";
+import Chat from "./Chat";
 
 function Messages(props) {
+	const visible = useSelector((state) => {
+		return state.showModalMessage.chatVisible;
+	});
+
 	const renderItem = ({item}) => {
 		return <Message name={item.tenantName} read={item.read} msg={item.msg} />;
 	};
@@ -24,6 +31,9 @@ function Messages(props) {
 				renderItem={renderItem}
 				keyExtractor={(item) => item.id}
 			/>
+			<Modal animationType='fade' visible={visible} transparent={false}>
+				<Chat />
+			</Modal>
 		</View>
 	);
 }

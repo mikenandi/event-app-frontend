@@ -49,7 +49,7 @@ function ImageItem(props) {
 					<Octicons
 						name='check'
 						size={18}
-						color='black'
+						color='white'
 						style={styles.tickIcon}
 						onPress={handleRemoveId}
 					/>
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
 		margin: 1,
 	},
 	tickIcon: {
-		opacity: 0.5,
+		opacity: 0.9,
 	},
 	tickContainer: {
 		position: "absolute",
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
 		borderRadius: 30,
 		width: 25,
 		height: 25,
-		backgroundColor: color.primary2,
+		backgroundColor: "black",
 		justifyContent: "center",
 		alignItems: "center",
 	},

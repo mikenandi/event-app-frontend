@@ -99,7 +99,10 @@ const styles = StyleSheet.create({
 		marginTop: 10,
 	},
 	rightDetail: {
-		fontWeight: "bold",
+		fontWeight: "normal",
+	},
+	detail: {
+		textTransform: "capitalize",
 	},
 });
 

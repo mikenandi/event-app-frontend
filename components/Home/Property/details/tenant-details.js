@@ -16,17 +16,23 @@ function TenantDetails(props) {
 				/>
 				<View>
 					<Body style={styles.name}>John Doe</Body>
-					<BodyS>Age: 28</BodyS>
-					<BodyS>Gender: male</BodyS>
-					<BodyS>Occupation: student</BodyS>
 				</View>
 			</View>
 			<View>
 				<View style={styles.container2}>
-					<Body style={styles.paymentHeader}>payments.</Body>
-					<Body style={styles.detail}>Due date: 10 oct 22</Body>
-					<Body style={styles.detail}>Rent for: 3 months</Body>
-					<Body style={styles.detail}>Amount: Tsh 4200000</Body>
+					<Body style={styles.paymentHeader}>Rent payment.</Body>
+					<View style={styles.rowContainer}>
+						<Body style={styles.detail}>Due date</Body>
+						<Body style={styles.rightdetail}>10 oct 22</Body>
+					</View>
+					<View style={styles.rowContainer}>
+						<Body style={styles.detail}>Rent for</Body>
+						<Body style={styles.rightdetail}>3 months</Body>
+					</View>
+					<View style={styles.rowlastContainer}>
+						<Body style={styles.detail}>Amount</Body>
+						<Body style={styles.rightdetail}>Tsh 4200000</Body>
+					</View>
 				</View>
 			</View>
 		</View>
@@ -35,49 +41,70 @@ function TenantDetails(props) {
 
 const styles = StyleSheet.create({
 	avatar: {
-		width: 80,
-		height: 80,
-		borderRadius: 10,
+		width: 40,
+		height: 40,
+		borderRadius: 20,
 		marginRight: 15,
 	},
 	container1: {
 		flexDirection: "row",
-		backgroundColor: color.lightgray,
 		marginHorizontal: 10,
 		alignItems: "center",
 		borderRadius: 10,
 	},
 	name: {
-		fontWeight: "bold",
+		fontWeight: "normal",
 	},
 	container2: {
-		backgroundColor: color.lightgray,
 		padding: 10,
-		marginHorizontal: 10,
+		marginHorizontal: 5,
 		borderRadius: 10,
 	},
 	container: {
 		flexDirection: "column",
-		backgroundColor: color.lightgray,
-		marginHorizontal: 10,
 		borderRadius: 0,
+		borderTopWidth: 1,
+		borderTopColor: color.lightblue,
 	},
 	tenantHeader: {
-		paddingLeft: 15,
-		marginBottom: 4,
-		fontWeight: "normal",
-		color: color.dimblack,
+		paddingLeft: 10,
+		marginBottom: 5,
+		fontWeight: "bold",
+		color: "black",
 		borderBottomWidth: 0,
 		borderBottomColor: color.lightblue,
-		marginTop: 10,
+		marginTop: 5,
 	},
 	paymentHeader: {
-		fontWeight: "bold",
-		color: color.dimblack,
+		fontWeight: "normal",
+		color: "black",
 		marginBottom: 4,
 	},
 	detail: {
-		fontWeight: "100",
+		fontWeight: "normal",
+		textTransform: "uppercase",
+	},
+	ageGenderText: {
+		color: "gray",
+	},
+	rowContainer: {
+		borderTopWidth: 1,
+		paddingVertical: 10,
+		justifyContent: "space-between",
+		flexDirection: "row",
+		borderTopColor: color.lightblue,
+	},
+	rowlastContainer: {
+		borderBottomWidth: 1,
+		borderBottomColor: color.lightblue,
+		borderTopWidth: 1,
+		borderTopColor: color.lightblue,
+		paddingVertical: 10,
+		justifyContent: "space-between",
+		flexDirection: "row",
+	},
+	rightdetail: {
+		textTransform: "lowercase",
 	},
 });
 

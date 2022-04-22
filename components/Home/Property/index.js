@@ -8,14 +8,9 @@ import {Ionicons} from "@expo/vector-icons";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import {useDispatch, useSelector} from "react-redux";
 import {showDetail} from "../../Store/home-store/modalSlice-home";
-import Details from "./details";
 
 function Listing(props) {
 	var price = props.price;
-
-	const visible = useSelector((state) => {
-		return state.showModalHome.detailVisible;
-	});
 
 	const dispatch = useDispatch();
 
@@ -73,11 +68,6 @@ function Listing(props) {
 					</View>
 				</View>
 			</View>
-
-			{/* A modal to show the details of the property */}
-			<Modal transparent={false} animationType='none' visible={visible}>
-				<Details />
-			</Modal>
 		</View>
 	);
 }

@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "center",
 		marginLeft: 20,
-		marginVertical: 8,
+		marginVertical: 12,
 	},
 	container: {},
 	avatarContainer: {
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
 		borderBottomColor: color.lightgray,
 	},
 	icon: {
-		marginRight: 15,
+		marginRight: 25,
 		color: "black",
 	},
 	iconText: {

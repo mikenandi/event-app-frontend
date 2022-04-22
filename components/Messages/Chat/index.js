@@ -122,10 +122,11 @@ const styles = StyleSheet.create({
 		borderRadius: 20,
 		justifyContent: "center",
 		alignItems: "center",
-		backgroundColor: color.lightblue,
+		backgroundColor: color.primary,
 	},
 	icon: {
 		marginLeft: 5,
+		color: "white",
 	},
 	incomingMessageContainer: {
 		backgroundColor: color.lightgray,

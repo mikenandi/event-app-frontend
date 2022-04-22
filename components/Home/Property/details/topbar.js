@@ -18,8 +18,8 @@ function TopBar(props) {
 		<View style={styles.topbar}>
 			<Ionicons
 				name='arrow-back-sharp'
-				size={30}
-				color={color.dimblack}
+				size={24}
+				color='black'
 				onPress={handleHideSearch}
 				style={styles.backIcon}
 			/>
@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		backgroundColor: color.lightgray,
 		alignItems: "center",
-		paddingBottom: 5,
+		paddingBottom: 10,
+		paddingVertical: 10,
 	},
 	backIcon: {
 		marginRight: 10,

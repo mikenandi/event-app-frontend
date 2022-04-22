@@ -11,14 +11,9 @@ import {useDispatch, useSelector} from "react-redux";
 import color from "../../colors";
 import {showChat} from "../../Store/message-store/modalSlice";
 import {Caption, BodyS, Body, HeadingL, HeadingS} from "../../Typography";
-import Chat from "../Chat";
 
 function Message(props) {
 	const dispatch = useDispatch();
-
-	const visible = useSelector((state) => {
-		return state.showModalMessage.chatVisible;
-	});
 
 	const handleChat = () => {
 		dispatch(showChat());
@@ -33,25 +28,27 @@ function Message(props) {
 				/>
 				<View>
 					<View style={styles.rowContainer}>
-						<Body style={styles.nameText}>{props.name}</Body>
-						<Caption style={styles.timeText}>Yesterday</Caption>
+						<Body style={props.read ? styles.activeNameText : styles.nameText}>
+							{props.name}
+						</Body>
+						<View style={styles.readStatusContainer}>
+							<Caption
+								style={props.read ? styles.unreadTimeText : styles.timeText}>
+								Wed
+							</Caption>
+							{props.read && <View style={styles.newMsgdot}></View>}
+						</View>
 					</View>
 
 					<View style={styles.rowContainer}>
 						<BodyS
 							style={props.read ? styles.briefActive : styles.briefInactive}>
-							{props.msg}
+							{props.msg.length > 70
+								? props.msg.slice(0, 35).concat("...")
+								: props.msg}
 						</BodyS>
-						{props.read && (
-							<View style={styles.newMsgContainer}>
-								<BodyS style={styles.newMsgText}>12</BodyS>
-							</View>
-						)}
 					</View>
 				</View>
-				<Modal animationType='fade' visible={visible} transparent={false}>
-					<Chat />
-				</Modal>
 			</View>
 		</TouchableOpacity>
 	);
@@ -75,10 +72,10 @@ const styles = StyleSheet.create({
 		textTransform: "capitalize",
 	},
 	briefActive: {
-		color: color.primary,
-		fontWeight: "normal",
+		color: "black",
+		fontWeight: "bold",
 	},
-	briefInactive: {color: "gray"},
+	briefInactive: {color: color.dimblack, fontWeight: "normal"},
 	timeText: {
 		marginBottom: 2,
 		color: color.dimblack,
@@ -93,14 +90,24 @@ const styles = StyleSheet.create({
 		fontWeight: "bold",
 		marginBottom: 1,
 	},
-	newMsgContainer: {
+	newMsgdot: {
 		backgroundColor: color.primary,
-		width: 23,
-		height: 23,
-		borderRadius: 11.5,
-		justifyContent: "center",
+		width: 8,
+		height: 8,
+		borderRadius: 4,
+		marginLeft: 5,
+	},
+	unreadTimeText: {
+		marginBottom: 2,
+		color: "black",
+		fontWeight: "bold",
+	},
+	readStatusContainer: {
+		flexDirection: "row",
 		alignItems: "center",
-		padding: 2,
+	},
+	activeNameText: {
+		fontWeight: "bold",
 	},
 });
 

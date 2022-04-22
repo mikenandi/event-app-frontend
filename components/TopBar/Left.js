@@ -6,7 +6,9 @@ import color from "../colors";
 function Logo(props) {
 	return (
 		<View style={styles.container}>
-			<HeadingS style={styles.titleText}>gudsurvey</HeadingS>
+			<HeadingS style={styles.titleText}>
+				gud<HeadingS style={styles.surveyText}>survey</HeadingS>
+			</HeadingS>
 		</View>
 	);
 }
@@ -19,6 +21,9 @@ const styles = StyleSheet.create({
 		fontWeight: "bold",
 		color: "black",
 		fontFamily: "serif",
+	},
+	surveyText: {
+		fontWeight: "normal",
 	},
 });
 
