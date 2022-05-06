@@ -1,4 +1,4 @@
-import React, {memo} from "react";
+import React, {memo, useState} from "react";
 import {
 	View,
 	StyleSheet,
@@ -16,59 +16,145 @@ import {
 	Caption,
 } from "../../Typography";
 import color from "../../colors";
-import {FontAwesome5} from "@expo/vector-icons";
+import axios from "axios";
+import {useDispatch} from "react-redux";
+import {saveEmail, saveToken} from "../../Store/auth-store/userSlice";
 
 function Signup(props) {
+	// Saving up input data using use state.
+	const [password, set_password] = useState("");
+	const [email, set_email] = useState("");
+
+	// --useDispatch() from redux/react.
+	const dispatch = useDispatch();
+
+	// Error message.
+	// --For email
+	const [email_error, set_email_error] = useState("");
+	// --For password
+	const [password_error, set_password_error] = useState("");
+
+	// Function to check if a string is email or not.
+	const isEmail = (emailAdress) => {
+		let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+		if (emailAdress.match(regexEmail)) {
+			return true;
+		} else {
+			return false;
+		}
+	};
+
+	// Functionality to go to the code confirmation code page
+	// if the confirmation was true.
 	const handleSignup = () => {
+		// Sending request using axios.
+		if (password.length >= 6 && isEmail(email)) {
+			axios({
+				method: "POST",
+				url: "http://gudsurvey.herokuapp.com/api/v1/signup",
+				data: {
+					email: email,
+					password: password,
+					from: "landlord",
+				},
+			})
+				.then((response) => {
+					if (response.data.success) {
+						// --saving token & email temporarily to redux
+						dispatch(saveEmail(email));
+						dispatch(saveToken(response.data.auth_token.token));
+
+						// --going to confirm code page.
+						props.navigation.navigate("Confirm");
+					} else {
+						set_email_error("email already taken. ");
+					}
+				})
+				.catch((error) => {
+					console.log(error.response.data);
+				});
+		}
+
+		// Displaying error when the password length is less than 6.
+		if (password.length < 6) {
+			set_password_error("password must have 6 characters. ");
+		}
+
+		// Displaying error when the password length is less than 6.
+		if (password.length >= 6) {
+			set_password_error("");
+		}
+
+		// Dispaying if the user entered incorrect format of email addres.
+		if (!isEmail(email)) {
+			set_email_error("invalid email address. ");
+		}
+
+		// Dispaying if the user correct format of email addres.
+		if (isEmail(email)) {
+			set_email_error("");
+		}
+	};
+
+	// Functions to handle updating states of form inputs.
+	// --for email.
+	const handleInputEmail = (email) => {
+		set_email(email);
+	};
+	// --for password
+	const handleInputPassword = (password) => {
+		set_password(password);
+	};
+
+	// Going to sign in route.
+	const handleSignin = () => {
 		props.navigation.navigate("Login");
 	};
 
 	return (
 		<View style={styles.container}>
-			<StatusBar backgroundColor={color.lightgray} />
-			<ScrollView
-				contentContainerStyle={styles.contentContainerStyle}
-				showsVerticalScrollIndicator={false}>
-				<View>
-					<HeadingM>Sign up</HeadingM>
+			<StatusBar backgroundColor='white' />
+			<View>
+				<HeadingM>Sign up</HeadingM>
 
-					<Caption>Phone</Caption>
-					<TextInput
-						placeholder='phone'
-						style={styles.inputText}
-						textContentType='emailAddress'
-					/>
-					<Caption>Name</Caption>
-					<TextInput
-						placeholder='Name'
-						style={styles.inputText}
-						textContentType='emailAddress'
-					/>
-					<Caption>username</Caption>
-					<TextInput
-						placeholder='username'
-						style={styles.inputText}
-						textContentType='emailAddress'
-					/>
+				<Caption>email</Caption>
+				{!!email_error && (
+					<Caption style={styles.error_text}>{email_error}</Caption>
+				)}
 
-					<Caption>password</Caption>
-					<TextInput
-						placeholder='password'
-						style={styles.inputText}
-						secureTextEntry={true}
-						passwordRules='minlength: 8;'
-						textContentType='password'
-					/>
+				<TextInput
+					placeholder='email'
+					style={styles.inputText}
+					textContentType='emailAddress'
+					value={email}
+					onChangeText={handleInputEmail}
+				/>
 
+				<Caption>password</Caption>
+				{!!password_error && (
+					<Caption style={styles.error_text}>{password_error}</Caption>
+				)}
+
+				<TextInput
+					placeholder='password'
+					style={styles.inputText}
+					secureTextEntry={true}
+					passwordRules='minlength: 8;'
+					textContentType='password'
+					value={password}
+					onChangeText={handleInputPassword}
+				/>
+
+				<Pressable onPress={handleSignup}>
 					<ButtonText style={styles.loginButton}>sign up</ButtonText>
-					<View style={styles.questionContainer}>
-						<BodyS style={styles.question}>Have an account?</BodyS>
-						<Pressable style={styles.signupContainer} onPress={handleSignup}>
-							<Body style={styles.singupText}>Sign in</Body>
-						</Pressable>
-					</View>
+				</Pressable>
+				<View style={styles.questionContainer}>
+					<BodyS style={styles.question}>Have an account?</BodyS>
+					<Pressable style={styles.signupContainer} onPress={handleSignin}>
+						<Body style={styles.singupText}>Sign in</Body>
+					</Pressable>
 				</View>
-			</ScrollView>
+			</View>
 		</View>
 	);
 }
@@ -117,9 +203,7 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "baseline",
 	},
-	contentContainerStyle: {
-		marginTop: 32,
-	},
+	contentContainerStyle: {},
 	showPasswordContainer: {
 		flexDirection: "row",
 	},
@@ -129,6 +213,9 @@ const styles = StyleSheet.create({
 		marginHorizontal: 5,
 		borderRadius: 3,
 		backgroundColor: color.primary,
+	},
+	error_text: {
+		color: "red",
 	},
 });
 

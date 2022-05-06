@@ -27,7 +27,7 @@ export default function Listings() {
 
 	return (
 		<View style={styles.screen}>
-			<StatusBar backgroundColor={color.lightgray} />
+			<StatusBar backgroundColor='white' />
 			<FlatList
 				data={DATA}
 				renderItem={renderItem}

@@ -10,26 +10,77 @@ import {
 } from "../../Typography";
 import color from "../../colors";
 import {Ionicons} from "@expo/vector-icons";
+import axios from "axios";
 
 function ForgotPassword(props) {
+	// --email states using useState hook.
+	const [email, set_email] = useState("");
+	const [email_error, set_email_error] = useState("");
+
+	// --saving up the email data.
+	const handleEmailInput = () => {
+		set_email(email);
+	};
+
+	// --function to check if a string is email or not.
+	const isEmail = (emailAdress) => {
+		let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+		if (emailAdress.match(regexEmail)) {
+			return true;
+		} else {
+			return false;
+		}
+	};
+
+	// --function for sending five digit code.
+	const handleSendCode = () => {
+		if (isEmail(email)) {
+			axios({
+				method: "POST",
+				url: "http://gudsurvey.herokuapp.com/api/v1/password-recovery-email",
+				data: {
+					email: email,
+				},
+			})
+				.then((response) => {
+					console.log(response.data);
+				})
+				.catch((error) => {
+					if (error.response) {
+						console.log(error.response.data);
+					}
+				});
+		}
+	};
+
+	// --going to signup page.
 	const handleSignup = () => {
 		props.navigation.navigate("Signup");
 	};
 
 	return (
 		<View style={styles.container}>
-			<StatusBar backgroundColor={color.lightgray} />
+			<StatusBar backgroundColor='white' />
 			<View>
 				<HeadingM>Forgot password</HeadingM>
 
-				<Caption>username or email</Caption>
+				<Caption>email</Caption>
+				{/* --email error message */}
+				{email_error && <Caption>{email_error}</Caption>}
+
+				{/* --input for email. */}
 				<TextInput
 					placeholder='email'
 					style={styles.inputText}
 					textContentType='emailAddress'
+					value={email}
+					onChangeText={handleEmailInput}
 				/>
 
-				<ButtonText style={styles.loginButton}>reset</ButtonText>
+				{/* --button for sending code. */}
+				<Pressable onPress={handleSendCode}>
+					<ButtonText style={styles.loginButton}>send code</ButtonText>
+				</Pressable>
 				<View style={styles.questionContainer}>
 					<BodyS style={styles.question}>Don't have an account?</BodyS>
 					<Pressable style={styles.signupContainer} onPress={handleSignup}>

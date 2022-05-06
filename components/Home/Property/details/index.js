@@ -7,10 +7,12 @@ import {useDispatch, useSelector} from "react-redux";
 import PropertyImage from "./property-image";
 import TopBar from "./topbar";
 import TenantDetails from "./tenant-details";
+import {StatusBar} from "expo-status-bar";
 
 function Detail(props) {
 	return (
 		<View style={styles.screen}>
+			<StatusBar backgroundColor={color.lightgray} />
 			<TopBar />
 			<PropertyImage />
 			<TenantDetails />

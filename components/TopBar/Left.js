@@ -6,9 +6,7 @@ import color from "../colors";
 function Logo(props) {
 	return (
 		<View style={styles.container}>
-			<HeadingS style={styles.titleText}>
-				gud<HeadingS style={styles.surveyText}>survey</HeadingS>
-			</HeadingS>
+			<HeadingM style={styles.titleText}>gudsurvey</HeadingM>
 		</View>
 	);
 }
@@ -16,14 +14,14 @@ function Logo(props) {
 const styles = StyleSheet.create({
 	container: {
 		marginLeft: 10,
+		alignItems: "center",
+		justifyContent: "center",
 	},
 	titleText: {
-		fontWeight: "bold",
-		color: "black",
-		fontFamily: "serif",
-	},
-	surveyText: {
 		fontWeight: "normal",
+		color: "black",
+		textTransform: "lowercase",
+		fontFamily: "serif",
 	},
 });
 

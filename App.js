@@ -3,7 +3,6 @@ import {NavigationContainer} from "@react-navigation/native";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {Entypo, Foundation} from "@expo/vector-icons";
 import {Ionicons} from "@expo/vector-icons";
-import {MaterialCommunityIcons, AntDesign} from "@expo/vector-icons";
 import Home from "./components/Home";
 import Payments from "./components/Payment";
 import color from "./components/colors";
@@ -15,9 +14,11 @@ import Messages from "./components/Messages";
 import Login from "./components/Auth/Login";
 import Signup from "./components/Auth/Signup";
 import ForgotPassword from "./components/Auth/ForgotPassword";
+import ConfirmCode from "./components/Auth/Confirm-email";
 import {Provider} from "react-redux";
 import {store} from "./components/Store";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import * as SecureStore from "expo-secure-store";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -43,6 +44,13 @@ function MyAuth() {
 				name='Signup'
 				component={Signup}
 				options={{headerShown: false}}
+			/>
+			<Stack.Screen
+				name='Confirm'
+				component={ConfirmCode}
+				options={{
+					headerShown: false,
+				}}
 			/>
 		</Stack.Navigator>
 	);
@@ -115,11 +123,24 @@ function MyTabs() {
 }
 
 export default function App() {
+	// --storing token.
+	const [authToken, set_authToken] = React.useState("");
+
+	// --Checking for authentication token.
+	React.useEffect(() => {
+		SecureStore.getItemAsync("authToken")
+			.then((response) => {
+				set_authToken(response);
+				// set_authToken("");
+			})
+			.catch((error) => {});
+	}, []);
+
 	return (
 		<Provider store={store}>
 			<NavigationContainer>
 				<StatusBar backgroundColor={color.lightblue} />
-				{false ? <MyAuth /> : <MyTabs />}
+				{authToken ? <MyTabs /> : <MyAuth />}
 			</NavigationContainer>
 		</Provider>
 	);

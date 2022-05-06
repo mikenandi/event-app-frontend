@@ -7,6 +7,7 @@ import color from "../../colors";
 import {Ionicons} from "@expo/vector-icons";
 import {useDispatch} from "react-redux";
 import {hideRequest} from "../../Store/home-store/modalSlice-home";
+import {StatusBar} from "expo-status-bar";
 
 function Requests() {
 	const renderItem = ({item}) => {
@@ -24,6 +25,7 @@ function Requests() {
 	};
 	return (
 		<View style={styles.screen}>
+			<StatusBar backgroundColor={color.lightgray} />
 			<View style={styles.topBarcontainer}>
 				<Ionicons
 					name='arrow-back-outline'
