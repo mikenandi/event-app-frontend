@@ -1,27 +1,29 @@
 import {memo} from "react";
-import {View, StyleSheet} from "react-native";
+import {View, StyleSheet, Image} from "react-native";
 import {HeadingS, HeadingM} from "../Typography";
 import color from "../colors";
 
 function Logo(props) {
 	return (
 		<View style={styles.container}>
-			<HeadingM style={styles.titleText}>gudsurvey</HeadingM>
+			<Image
+				source={require("../../assets/gudsurvey_word.png")}
+				style={styles.logo}
+			/>
 		</View>
 	);
 }
 
 const styles = StyleSheet.create({
 	container: {
-		marginLeft: 10,
 		alignItems: "center",
 		justifyContent: "center",
 	},
-	titleText: {
-		fontWeight: "normal",
-		color: "black",
-		textTransform: "lowercase",
-		fontFamily: "serif",
+	logo: {
+		width: 120,
+		height: 60,
+		resizeMode: "contain",
+		marginLeft: 5,
 	},
 });
 

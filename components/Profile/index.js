@@ -59,7 +59,7 @@ function Profile(props) {
 						color='gray'
 						style={styles.icon}
 					/>
-					<Body style={styles.iconText}>Payments summary</Body>
+					<Body style={styles.iconText}>Payments</Body>
 				</View>
 			</View>
 			<View>

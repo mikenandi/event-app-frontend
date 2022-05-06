@@ -15,6 +15,7 @@ import Login from "./components/Auth/Login";
 import Signup from "./components/Auth/Signup";
 import ForgotPassword from "./components/Auth/ForgotPassword";
 import ConfirmCode from "./components/Auth/Confirm-email";
+import Splash from "./components/splash";
 import {Provider} from "react-redux";
 import {store} from "./components/Store";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
@@ -73,7 +74,7 @@ function MyTabs() {
 					tabBarIcon: ({color, size}) => (
 						<Entypo name='home' size={size} color={color} />
 					),
-					headerLeft: () => <Left title='gudsurvey' />,
+					headerLeft: () => <Left />,
 					headerRight: () => <Right />,
 					headerShown: true,
 				}}
@@ -113,7 +114,7 @@ function MyTabs() {
 					tabBarIcon: ({color, size}) => (
 						<Ionicons name='person' size={size} color={color} />
 					),
-					headerLeft: () => <Left title='Profile' />,
+					headerLeft: () => <Left />,
 					headerRight: () => <Right />,
 					headerShown: true,
 				}}
@@ -123,6 +124,9 @@ function MyTabs() {
 }
 
 export default function App() {
+	// --isloading state.
+	const [is_loading, set_is_loading] = React.useState(true);
+
 	// --storing token.
 	const [authToken, set_authToken] = React.useState("");
 
@@ -130,16 +134,30 @@ export default function App() {
 	React.useEffect(() => {
 		SecureStore.getItemAsync("authToken")
 			.then((response) => {
+				// --saving up the auth token.
 				set_authToken(response);
-				// set_authToken("");
+
+				// --checking up if length of token is greater than zero
+				// -- then home page should be shown.
+				if (response.length > 0) {
+					set_is_loading(false);
+				}
 			})
 			.catch((error) => {});
 	}, []);
 
+	// --when waiting for status of the splash screen.
+	if (is_loading) {
+		return <Splash />;
+	}
+
 	return (
+		// --wrapping our APP with store.
 		<Provider store={store}>
 			<NavigationContainer>
-				<StatusBar backgroundColor={color.lightblue} />
+				<StatusBar backgroundColor='white' />
+
+				{/* --checking if the token is availabe then show authentication if availabe show home screen. */}
 				{authToken ? <MyTabs /> : <MyAuth />}
 			</NavigationContainer>
 		</Provider>
