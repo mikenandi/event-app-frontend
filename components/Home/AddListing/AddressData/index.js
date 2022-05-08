@@ -87,42 +87,55 @@ function AddressData(props) {
 			</View>
 			<View style={styles.bottomContainer}>
 				<View style={styles.fetchedContainer}>
-					<View style={styles.labelDataContainer}>
-						<Ionicons name='pin-outline' size={30} color={color.primary} />
-						<View>
-							<BodyS style={styles.label}>country</BodyS>
-							<HeadingS>{location.country}</HeadingS>
+					{!!location.country && (
+						<View style={styles.labelDataContainer}>
+							<Ionicons name='pin-outline' size={30} color={color.primary} />
+							<View>
+								<BodyS style={styles.label}>country</BodyS>
+								<HeadingS>{location.country}</HeadingS>
+							</View>
 						</View>
-					</View>
-					<View style={styles.labelDataContainer}>
-						<Ionicons name='pin-outline' size={30} color={color.primary} />
-						<View>
-							<BodyS style={styles.label}>city</BodyS>
-							<HeadingS>{location.city}</HeadingS>
-						</View>
-					</View>
+					)}
 
-					<View style={styles.labelDataContainer}>
-						<Ionicons name='pin-outline' size={30} color={color.primary} />
-						<View>
-							<BodyS style={styles.label}>district</BodyS>
-							<HeadingS>{location.city_district}</HeadingS>
+					{!!location.city && (
+						<View style={styles.labelDataContainer}>
+							<Ionicons name='pin-outline' size={30} color={color.primary} />
+							<View>
+								<BodyS style={styles.label}>city</BodyS>
+								<HeadingS>{location.city}</HeadingS>
+							</View>
 						</View>
-					</View>
-					<View style={styles.labelDataContainer}>
-						<Ionicons name='pin-outline' size={30} color={color.primary} />
-						<View>
-							<BodyS style={styles.label}>ward</BodyS>
-							<HeadingS>{location.ward}</HeadingS>
+					)}
+
+					{!!location.city_district && (
+						<View style={styles.labelDataContainer}>
+							<Ionicons name='pin-outline' size={30} color={color.primary} />
+							<View>
+								<BodyS style={styles.label}>district</BodyS>
+								<HeadingS>{location.city_district}</HeadingS>
+							</View>
 						</View>
-					</View>
-					<View style={styles.labelDataContainer}>
-						<Ionicons name='pin-outline' size={30} color={color.primary} />
-						<View>
-							<BodyS style={styles.label}>House number</BodyS>
-							<HeadingS>{location.house_number}</HeadingS>
+					)}
+
+					{!!location.ward && (
+						<View style={styles.labelDataContainer}>
+							<Ionicons name='pin-outline' size={30} color={color.primary} />
+							<View>
+								<BodyS style={styles.label}>ward</BodyS>
+								<HeadingS>{location.ward}</HeadingS>
+							</View>
 						</View>
-					</View>
+					)}
+
+					{!!location.house_number && (
+						<View style={styles.labelDataContainer}>
+							<Ionicons name='pin-outline' size={30} color={color.primary} />
+							<View>
+								<BodyS style={styles.label}>House number</BodyS>
+								<HeadingS>{location.house_number}</HeadingS>
+							</View>
+						</View>
+					)}
 				</View>
 			</View>
 			<Modal transparent={false} animationType='fade' visible={visible}>

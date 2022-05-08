@@ -27,7 +27,7 @@ function TopBar(props) {
 			<Ionicons
 				name='arrow-back-outline'
 				size={24}
-				color='white'
+				color='black'
 				style={styles.icon}
 				onPress={handleBack}
 			/>
@@ -51,17 +51,17 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	icon: {
-		backgroundColor: color.primary,
+		backgroundColor: color.lightgray,
 		padding: 10,
 		borderRadius: 25,
 		marginLeft: 10,
 		opacity: 0.9,
 	},
 	nextText: {
-		backgroundColor: color.primary,
+		backgroundColor: color.lightgray,
 		paddingVertical: 10,
 		paddingHorizontal: 10,
-		color: "white",
+		color: "black",
 		fontWeight: "700",
 		borderRadius: 3,
 		marginRight: 10,

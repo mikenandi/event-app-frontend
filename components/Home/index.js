@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+// --MODULE IMPORTS.
+import React, {useState, useEffect} from "react";
 import {View, FlatList, Modal, StyleSheet} from "react-native";
 import List from "./Property";
 import DATA from "../data";
@@ -7,8 +8,27 @@ import color from "../colors";
 import {HeadingM} from "../Typography";
 import {useSelector, useDispatch} from "react-redux";
 import Details from "./Property/details";
+import {saveToken} from "../Store/auth-store/userSlice";
+import * as SecureStore from "expo-secure-store";
 
 export default function Listings() {
+	// --initiating dispatch
+	const dispatch = useDispatch();
+
+	// --getting bearer token and save it up to store.
+	useEffect(() => {
+		// --getting token from secure store.
+		SecureStore.getItemAsync("authToken")
+			.then((response) => {
+				// --saving up the auth token.
+				dispatch(saveToken(response));
+			})
+			.catch((error) => {
+				// console.log(error.message);
+			});
+	}, []);
+
+	// --Render item for tenant.
 	const renderItem = ({item}) => {
 		return (
 			<List
@@ -21,6 +41,7 @@ export default function Listings() {
 		);
 	};
 
+	// --variable that will make property details visible.
 	const visible = useSelector((state) => {
 		return state.showModalHome.detailVisible;
 	});
@@ -28,6 +49,8 @@ export default function Listings() {
 	return (
 		<View style={styles.screen}>
 			<StatusBar backgroundColor='white' />
+
+			{/* --Flatlist for maping out data and making them scrollable. */}
 			<FlatList
 				data={DATA}
 				renderItem={renderItem}
@@ -36,7 +59,7 @@ export default function Listings() {
 				showsVerticalScrollIndicator={true}
 			/>
 
-			{/* A modal to show the details of the property */}
+			{/* --A modal to show the details of the property */}
 			<Modal transparent={false} animationType='none' visible={visible}>
 				<Details />
 			</Modal>

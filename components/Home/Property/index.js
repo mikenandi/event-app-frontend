@@ -52,8 +52,8 @@ function Listing(props) {
 				<View style={styles.pinContainer}>
 					<Ionicons
 						name='ios-pin-outline'
-						size={24}
-						color={color.primary}
+						size={30}
+						color='gray'
 						style={styles.pinIcon}
 					/>
 					<View>
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
 		borderRadius: 0,
 		right: 3,
 		bottom: 3,
-		fontWeight: "bold",
+		fontWeight: "normal",
 	},
 	pinContainer: {
 		flexDirection: "row",
