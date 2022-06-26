@@ -1,6 +1,4 @@
-# landlord_app
-
-### the app that will enable the landlord to manage his/her properties on cloud.
+# Event management app.
 
 # Description
 
@@ -33,8 +31,6 @@
 - Store is the folder that consists all states of the app.
 
 - Topbar is the folder that consist the topbar components of the app.
-
-- Unusedcompents explain by themselves that they have not been used in the project.
 
 - Typography is the component that shows all typograpy components used in the project.
 
