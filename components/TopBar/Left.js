@@ -6,10 +6,7 @@ import color from "../colors";
 function Logo(props) {
 	return (
 		<View style={styles.container}>
-			<Image
-				source={require("../../assets/gudsurvey_word.png")}
-				style={styles.logo}
-			/>
+			<HeadingM style={styles.logoText}>Evento</HeadingM>
 		</View>
 	);
 }
@@ -19,11 +16,11 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 	},
-	logo: {
-		width: 120,
-		height: 60,
-		resizeMode: "contain",
-		marginLeft: 5,
+	logoText: {
+		marginLeft: 10,
+		color: color.primary,
+		fontWeight: "bold",
+		fontFamily: "serif",
 	},
 });
 

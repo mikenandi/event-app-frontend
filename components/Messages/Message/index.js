@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import {useDispatch, useSelector} from "react-redux";
 import color from "../../colors";
-import {showChat} from "../../Store/message-store/modalSlice";
+import {showChat} from "../../../Store/message-store/modalSlice";
 import {Caption, BodyS, Body, HeadingL, HeadingS} from "../../Typography";
 
 function Message(props) {

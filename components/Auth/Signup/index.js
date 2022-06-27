@@ -18,7 +18,6 @@ import {
 import color from "../../colors";
 import axios from "axios";
 import {useDispatch} from "react-redux";
-import {saveEmail, saveToken} from "../../Store/auth-store/userSlice";
 
 function Signup(props) {
 	// Saving up input data using use state.

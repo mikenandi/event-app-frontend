@@ -1,12 +1,12 @@
 {
 	"expo": {
-		"name": "gudsurvey_landlord",
-		"slug": "gudsurvey_landlord",
+		"name": "evento",
+		"slug": "event-planing-app",
 		"version": "1.0.0",
 		"orientation": "portrait",
 		"icon": "./assets/icon.png",
 		"splash": {
-			"image": "./assets/gudsurvey_blue.png",
+			"image": "./assets/splash.png",
 			"resizeMode": "contain",
 			"backgroundColor": "#ffffff"
 		},

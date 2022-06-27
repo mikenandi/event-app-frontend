@@ -12,7 +12,7 @@ function Splash(props) {
 
 			{/* --getting the splash screen while waiting for setting up the token. */}
 			<Image
-				source={require("../../assets/gudsurvey_blue.png")}
+				source={require("../../assets/splash.png")}
 				style={styles.logoImage}
 			/>
 		</View>

@@ -5,7 +5,6 @@ import color from "../../colors";
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 import {useSelector} from "react-redux";
-import {deletingToken} from "../../Store/auth-store/userSlice";
 
 function ConfirmCode(props) {
 	// --Error message store value.

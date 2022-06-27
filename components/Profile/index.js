@@ -8,8 +8,6 @@ import {Caption, BodyS, HeadingS, Body} from "../Typography";
 import color from "../colors";
 
 function Profile(props) {
-	const editProfileHandler = () => {};
-
 	return (
 		<View style={styles.screen}>
 			<View style={styles.avatarContainer}>

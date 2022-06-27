@@ -13,7 +13,7 @@ import color from "../../colors";
 import {Ionicons} from "@expo/vector-icons";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import {Feather} from "@expo/vector-icons";
-import {hideChat} from "../../Store/message-store/modalSlice";
+import {hideChat} from "../../../Store/message-store/modalSlice";
 import {useDispatch} from "react-redux";
 import {backgroundColor} from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 

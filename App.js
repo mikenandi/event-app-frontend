@@ -1,15 +1,16 @@
 import * as React from "react";
 import {NavigationContainer} from "@react-navigation/native";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import {Entypo, Foundation} from "@expo/vector-icons";
+import {Entypo} from "@expo/vector-icons";
 import {Ionicons} from "@expo/vector-icons";
 import Home from "./components/Home";
-import Payments from "./components/Payment";
 import color from "./components/colors";
 import {StatusBar, Text} from "react-native";
 import Left from "./components/TopBar/Left";
 import Right from "./components/TopBar/Right";
 import Profile from "./components/Profile";
+import Vendors from "./components/Vendors";
+import Budgeter from "./components/Budgeter";
 import Messages from "./components/Messages";
 import Login from "./components/Auth/Login";
 import Signup from "./components/Auth/Signup";
@@ -17,7 +18,7 @@ import ForgotPassword from "./components/Auth/ForgotPassword";
 import ConfirmCode from "./components/Auth/Confirm-email";
 import Splash from "./components/splash";
 import {Provider} from "react-redux";
-import {store} from "./components/Store";
+import {store} from "./Store";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import * as SecureStore from "expo-secure-store";
 
@@ -80,18 +81,6 @@ function MyTabs() {
 				}}
 			/>
 
-			{/* <Tab.Screen
-				name='Payments'
-				component={Payments}
-				options={{
-					title: "",
-					tabBarLabel: "",
-					tabBarIcon: ({color, size}) => (
-						<AntDesign name='swap' size={size} color={color} />
-					),
-					headerLeft: () => <Left title='Payments' />,
-				}}
-			/> */}
 			<Tab.Screen
 				name='Messages'
 				component={Messages}
@@ -106,13 +95,25 @@ function MyTabs() {
 				}}
 			/>
 			<Tab.Screen
-				name='Profile'
-				component={Profile}
+				name='Vendors'
+				component={Vendors}
 				options={{
 					title: "",
 					tabBarLabel: "",
 					tabBarIcon: ({color, size}) => (
-						<Ionicons name='person' size={size} color={color} />
+						<Entypo name='shop' size={size} color={color} />
+					),
+					headerLeft: () => <Left title='Payments' />,
+				}}
+			/>
+			<Tab.Screen
+				name='Budgeter'
+				component={Budgeter}
+				options={{
+					title: "",
+					tabBarLabel: "",
+					tabBarIcon: ({color, size}) => (
+						<Ionicons name='md-wallet-sharp' size={size} color={color} />
 					),
 					headerLeft: () => <Left />,
 					headerRight: () => <Right />,
@@ -125,7 +126,7 @@ function MyTabs() {
 
 export default function App() {
 	// --isloading state.
-	const [is_loading, set_is_loading] = React.useState(true);
+	const [is_loading, set_is_loading] = React.useState(false);
 
 	// --storing token.
 	const [authToken, set_authToken] = React.useState("");
@@ -158,7 +159,7 @@ export default function App() {
 				<StatusBar backgroundColor='white' />
 
 				{/* --checking if the token is availabe then show authentication if availabe show home screen. */}
-				{authToken ? <MyTabs /> : <MyAuth />}
+				{true ? <MyTabs /> : <MyAuth />}
 			</NavigationContainer>
 		</Provider>
 	);
