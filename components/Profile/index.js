@@ -1,130 +1,188 @@
-import React, {memo, useState} from "react";
-import {View, Text, StyleSheet, Image, TouchableOpacity} from "react-native";
-import {MaterialIcons} from "@expo/vector-icons";
-import {MaterialCommunityIcons} from "@expo/vector-icons";
-import {AntDesign} from "@expo/vector-icons";
-import {Feather} from "@expo/vector-icons";
-import {Caption, BodyS, HeadingS, Body} from "../Typography";
+import React, {memo} from "react";
+import {
+	View,
+	Button,
+	Image,
+	StyleSheet,
+	TouchableOpacity,
+	StatusBar,
+} from "react-native";
 import color from "../colors";
+import {Body, BodyS, HeadingM, HeadingS} from "../Typography";
+import {Entypo} from "@expo/vector-icons";
+import {MaterialCommunityIcons, Feather} from "@expo/vector-icons";
+import {Ionicons} from "@expo/vector-icons";
+import {useDispatch, useSelector} from "react-redux";
+import * as SecureStore from "expo-secure-store";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
+import {hideProfile} from "../../Store/homeStore/modalSlice";
 
 function Profile(props) {
+	// initializing dispatch.
+
+	const dispatch = useDispatch();
+	// const [profile, setProfile] = React.useState({});
+
+	const [isloading, set_isloading] = React.useState(false);
+
+	// function to change state of the visible property to hide the modal
+	const handleHide = () => {
+		dispatch(hideProfile());
+	};
+
+	const handleLogout = async () => {
+		try {
+			await SecureStore.deleteItemAsync("authToken");
+
+			set_isloading(true);
+
+			setTimeout(() => {
+				dispatch(hideProfile());
+				// dispatch(loggedOut());
+			}, 5000);
+
+			return;
+		} catch (error) {
+			return;
+		}
+	};
+
+	// if (isloading) return <Loading />;
+
 	return (
-		<View style={styles.screen}>
-			<View style={styles.avatarContainer}>
-				<Image
-					source={require("../../assets/tenant.jpeg")}
-					style={styles.avatar}
-				/>
-				<View>
-					<HeadingS>Michael Nandi</HeadingS>
-					<BodyS style={styles.showProfileText}>show profile</BodyS>
+		<View style={styles.container}>
+			<StatusBar backgroundColor={color.primary} />
+			<View style={styles.topbarContainer}>
+				<View style={styles.topbarLeftContainer}>
+					<TouchableOpacity activeOpacity={0.9} onPress={handleHide}>
+						<Ionicons name='arrow-back' size={30} color='white' />
+					</TouchableOpacity>
+					<HeadingM style={styles.headerText}>Profile</HeadingM>
 				</View>
-			</View>
-			<View style={styles.container}>
-				<View style={styles.rowContainer}>
-					<MaterialCommunityIcons
-						name='account-circle-outline'
-						size={24}
-						color='gray'
-						style={styles.icon}
-					/>
-					<Body style={styles.iconText}>Edit profile</Body>
-				</View>
-				<View style={styles.rowContainer}>
-					<MaterialCommunityIcons
-						name='wallet-plus-outline'
-						size={24}
-						color='gray'
-						style={styles.icon}
-					/>
-					<Body style={styles.iconText}>payouts</Body>
-				</View>
-			</View>
-			<View style={styles.container}>
-				<View style={styles.rowContainer}>
-					<MaterialCommunityIcons
-						name='account-group-outline'
-						size={24}
-						color='gray'
-						style={styles.icon}
-					/>
-					<Body style={styles.iconText}>Tenants</Body>
-				</View>
-				<View style={styles.rowContainer}>
-					<MaterialIcons
-						name='insert-chart-outlined'
-						size={24}
-						color='gray'
-						style={styles.icon}
-					/>
-					<Body style={styles.iconText}>Payments</Body>
-				</View>
+				<TouchableOpacity
+					activeOpacity={0.9}
+					onPress={handleLogout}
+					style={styles.logoutButton}>
+					<Body style={styles.logoutText}>Log out</Body>
+				</TouchableOpacity>
 			</View>
 			<View>
-				<View style={styles.rowContainer}>
-					<Feather
-						name='help-circle'
-						size={24}
-						color='black'
-						style={styles.icon}
-					/>
-					<Body style={styles.iconText}>help</Body>
+				<View style={styles.avatarContainer}>
+					<View style={styles.avatarIcon}>
+						<Ionicons name='person-outline' size={60} color={color.dimblack} />
+					</View>
+
+					<HeadingS style={styles.nameText}>name person</HeadingS>
+					<View style={styles.locationContainer}>
+						<Entypo name='location-pin' size={20} color={color.lightgray} />
+						<BodyS style={styles.locationText}>ward, region</BodyS>
+					</View>
 				</View>
-				<View style={styles.rowContainer}>
-					<AntDesign
-						name='setting'
-						size={24}
-						color='gray'
-						style={styles.icon}
-					/>
-					<Body style={styles.iconText}>settings</Body>
+				<View>
+					<View style={styles.detailContainer}>
+						<Ionicons name='person-outline' size={24} color={color.primary} />
+						<View style={styles.detailsTextContainer}>
+							<HeadingS>User Type</HeadingS>
+						</View>
+					</View>
+					<View style={styles.detailContainer}>
+						<MaterialCommunityIcons
+							name='email-outline'
+							size={24}
+							color={color.primary}
+						/>
+						<View style={styles.detailsTextContainer}>
+							<HeadingS>Email Address</HeadingS>
+							<BodyS>email</BodyS>
+						</View>
+					</View>
+
+					<View style={styles.detailContainer}>
+						<Ionicons name='ios-call-outline' size={24} color={color.primary} />
+						<View style={styles.detailsTextContainer}>
+							<HeadingS>Phone Number</HeadingS>
+							<BodyS>0787293023</BodyS>
+						</View>
+					</View>
 				</View>
-			</View>
-			<View style={styles.rowContainer}>
-				<Feather name='log-out' size={24} color='gray' style={styles.icon} />
-				<Body style={styles.iconText}>sign out</Body>
 			</View>
 		</View>
 	);
 }
+
 const styles = StyleSheet.create({
-	screen: {
+	container: {
 		flex: 1,
-		backgroundColor: "white",
+	},
+	topbarContainer: {
+		flexDirection: "row",
+		alignItems: "center",
+		justifyContent: "space-between",
+		backgroundColor: color.primary,
+		padding: 15,
+	},
+	headerText: {
+		marginLeft: 15,
+		color: "white",
 	},
 	avatar: {
-		width: 60,
-		height: 60,
-		borderRadius: 30,
-		marginRight: 10,
+		width: 120,
+		height: 120,
+		borderRadius: 80,
 	},
-	rowContainer: {
-		flexDirection: "row",
-		alignItems: "center",
-		marginLeft: 20,
-		marginVertical: 12,
-	},
-	container: {},
 	avatarContainer: {
-		paddingLeft: 10,
-		flexDirection: "row",
+		backgroundColor: color.primary,
+		padding: 10,
+		justifyContent: "center",
 		alignItems: "center",
-		paddingVertical: 10,
-		paddingVertical: 10,
-		borderBottomWidth: 2,
+		borderBottomRightRadius: 80,
+	},
+	locationContainer: {
+		flexDirection: "row",
+	},
+	locationText: {
+		color: color.lightgray,
+		fontFamily: "serif",
+		marginLeft: 5,
+	},
+	detailContainer: {
+		flexDirection: "row",
+		marginHorizontal: 20,
+		marginTop: 20,
+		justifyContent: "flex-start",
+		alignItems: "center",
+	},
+	detailsTextContainer: {
+		marginLeft: 10,
+		borderBottomWidth: 1,
+		width: "80%",
+		paddingBottom: 5,
 		borderBottomColor: color.lightgray,
 	},
-	icon: {
-		marginRight: 25,
-		color: "black",
+	topbarLeftContainer: {
+		flexDirection: "row",
+		alignItems: "center",
 	},
-	iconText: {
-		textTransform: "capitalize",
-	},
-	showProfileText: {
+	logoutText: {
 		color: color.primary,
 		fontWeight: "bold",
-		textTransform: "capitalize",
+	},
+	avatarIcon: {
+		width: 120,
+		height: 120,
+		borderRadius: 80,
+		backgroundColor: color.lightblue,
+		alignItems: "center",
+		justifyContent: "center",
+	},
+	logoutButton: {
+		padding: 10,
+		backgroundColor: "white",
+		borderRadius: 20,
+	},
+	nameText: {
+		color: color.lightgray,
 	},
 });
 

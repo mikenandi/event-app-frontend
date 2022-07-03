@@ -14,6 +14,7 @@ import Data from "../msgdata";
 import Message from "./Message";
 import {useSelector} from "react-redux";
 import Chat from "./Chat";
+import {EvilIcons, MaterialIcons} from "@expo/vector-icons";
 
 function Messages(props) {
 	const visible = useSelector((state) => {
@@ -31,6 +32,16 @@ function Messages(props) {
 				renderItem={renderItem}
 				keyExtractor={(item) => item.id}
 			/>
+
+			{/* floatin action button */}
+			<TouchableOpacity
+				style={styles.floatingActionButton}
+				activeOpacity={0.8}
+				onPress={() => {}}>
+				<MaterialIcons name='chat' size={24} color={color.primary} />
+			</TouchableOpacity>
+
+			{/* show a chat */}
 			<Modal animationType='fade' visible={visible} transparent={false}>
 				<Chat />
 			</Modal>
@@ -41,6 +52,15 @@ const styles = StyleSheet.create({
 	screen: {
 		flex: 1,
 		backgroundColor: "white",
+	},
+	floatingActionButton: {
+		position: "absolute",
+		bottom: 30,
+		right: 30,
+		flexDirection: "row",
+		backgroundColor: color.lightblue,
+		padding: 15,
+		borderRadius: 10,
 	},
 });
 

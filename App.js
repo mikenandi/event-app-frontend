@@ -10,7 +10,6 @@ import Left from "./components/TopBar/Left";
 import Right from "./components/TopBar/Right";
 import Profile from "./components/Profile";
 import Vendors from "./components/Vendors";
-import Budgeter from "./components/Budgeter";
 import Messages from "./components/Messages";
 import Login from "./components/Auth/Login";
 import Signup from "./components/Auth/Signup";
@@ -26,34 +25,81 @@ const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 function MyAuth() {
+	// setting loading state
+	const [isLoading, setIsLoading] = React.useState(true);
+
+	// inititializing dispatch
+	const dispatch = useDispatch();
+
+	const isLoggedOut = useSelector((state) => {
+		return state.auth.isLoggedOut;
+	});
+
+	React.useEffect(() => {
+		(async () => {
+			try {
+				let token = await SecureStore.getItemAsync("authToken");
+
+				if (!!token) {
+					set_isloading(false);
+					dispatch(loggedIn());
+
+					return;
+				}
+
+				set_isloading(false);
+
+				return;
+			} catch (error) {
+				return;
+			}
+		})();
+	}, []);
+
+	if (isLoading) return <Splash />;
+
 	return (
 		<Stack.Navigator initialRouteName='login'>
-			<Stack.Screen
-				name='Login'
-				component={Login}
-				options={{
-					headerShown: false,
-				}}
-			/>
-			<Stack.Screen
-				name='ForgotPassword'
-				component={ForgotPassword}
-				options={{
-					headerShown: false,
-				}}
-			/>
-			<Stack.Screen
-				name='Signup'
-				component={Signup}
-				options={{headerShown: false}}
-			/>
-			<Stack.Screen
-				name='Confirm'
-				component={ConfirmCode}
-				options={{
-					headerShown: false,
-				}}
-			/>
+			{isLoggedOut ? (
+				<>
+					<Stack.Screen
+						name='Login'
+						component={Login}
+						options={{
+							headerShown: false,
+						}}
+					/>
+					<Stack.Screen
+						name='ForgotPassword'
+						component={ForgotPassword}
+						options={{
+							headerShown: false,
+						}}
+					/>
+					<Stack.Screen
+						name='Signup'
+						component={Signup}
+						options={{headerShown: false}}
+					/>
+					<Stack.Screen
+						name='Confirm'
+						component={ConfirmCode}
+						options={{
+							headerShown: false,
+						}}
+					/>
+				</>
+			) : (
+				<>
+					<Stack.Screen
+						name='AppContents'
+						component={MyTabs}
+						options={{
+							headerShown: false,
+						}}
+					/>
+				</>
+			)}
 		</Stack.Navigator>
 	);
 }
@@ -63,7 +109,7 @@ function MyTabs() {
 		<Tab.Navigator
 			initialRouteName='homepage'
 			screenOptions={{
-				tabBarActiveTintColor: "black",
+				tabBarActiveTintColor: color.primary,
 				headerShown: true,
 			}}>
 			<Tab.Screen
@@ -104,20 +150,7 @@ function MyTabs() {
 						<Entypo name='shop' size={size} color={color} />
 					),
 					headerLeft: () => <Left title='Payments' />,
-				}}
-			/>
-			<Tab.Screen
-				name='Budgeter'
-				component={Budgeter}
-				options={{
-					title: "",
-					tabBarLabel: "",
-					tabBarIcon: ({color, size}) => (
-						<Ionicons name='md-wallet-sharp' size={size} color={color} />
-					),
-					headerLeft: () => <Left />,
 					headerRight: () => <Right />,
-					headerShown: true,
 				}}
 			/>
 		</Tab.Navigator>
@@ -125,41 +158,14 @@ function MyTabs() {
 }
 
 export default function App() {
-	// --isloading state.
-	const [is_loading, set_is_loading] = React.useState(false);
-
-	// --storing token.
-	const [authToken, set_authToken] = React.useState("");
-
-	// --Checking for authentication token.
-	React.useEffect(() => {
-		SecureStore.getItemAsync("authToken")
-			.then((response) => {
-				// --saving up the auth token.
-				set_authToken(response);
-
-				// --checking up if length of token is greater than zero
-				// -- then home page should be shown.
-				if (response.length > 0) {
-					set_is_loading(false);
-				}
-			})
-			.catch((error) => {});
-	}, []);
-
-	// --when waiting for status of the splash screen.
-	if (is_loading) {
-		return <Splash />;
-	}
-
 	return (
 		// --wrapping our APP with store.
 		<Provider store={store}>
 			<NavigationContainer>
 				<StatusBar backgroundColor='white' />
 
-				{/* --checking if the token is availabe then show authentication if availabe show home screen. */}
-				{true ? <MyTabs /> : <MyAuth />}
+				{/* the app wrapped with authentication screens. */}
+				<MyAuth />
 			</NavigationContainer>
 		</Provider>
 	);
