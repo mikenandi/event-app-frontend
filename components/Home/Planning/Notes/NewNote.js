@@ -17,16 +17,78 @@ import {
 } from "../../../Typography";
 import color from "../../../colors";
 import {EvilIcons, AntDesign} from "@expo/vector-icons";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {hideNewNote} from "../../../../Store/homeStore/modalSlice";
+import axios, {Axios} from "axios";
+import Loader from "../../../Loader";
 
 function NewNote(props) {
 	// initializing dispatch
 	const dispatch = useDispatch();
 
+	// setting up datates
+	const [errorMsg, setErrorMsg] = React.useState("");
+	const [isLoading, setIsLoading] = React.useState(false);
+	const [subject, setSubject] = React.useState("");
+	const [content, setContent] = React.useState("");
+
+	const eventId = useSelector((state) => {
+		return state.event.planEventId;
+	});
+
+	const handleSubjectInput = (subject) => {
+		setSubject(subject);
+	};
+
+	const handleContentInput = (content) => {
+		setContent(content);
+	};
+
+	const handleCreateNewNote = async () => {
+		try {
+			if (!subject || !content) {
+				setErrorMsg("fill all fields");
+
+				setTimeout(() => {
+					setErrorMsg("");
+				}, 5000);
+
+				return;
+			}
+
+			setIsLoading(true);
+
+			let response = await axios({
+				method: "POST",
+				url: "http://evento-tz-backend.herokuapp.com/api/v1/note/create",
+				data: {
+					eventId: eventId,
+					subject: subject,
+					content: content,
+				},
+			});
+
+			dispatch(hideNewNote());
+
+			return;
+		} catch (error) {
+			setErrorMsg("");
+
+			setTimeout(() => {
+				setErrorMsg("");
+			}, 5000);
+
+			setIsLoading(false);
+
+			return;
+		}
+	};
+
 	const handleBack = () => {
 		dispatch(hideNewNote());
 	};
+
+	if (isLoading) return <Loader />;
 
 	return (
 		<ScrollView>
@@ -45,7 +107,12 @@ function NewNote(props) {
 						{/* input for notes subject. */}
 						<View>
 							<Caption style={styles.label}>Subject</Caption>
-							<TextInput placeholder='subject' style={styles.textinput} />
+							<TextInput
+								placeholder='subject'
+								style={styles.textinput}
+								value={subject}
+								onChangeText={handleSubjectInput}
+							/>
 						</View>
 
 						{/* input for notes body. */}
@@ -55,16 +122,21 @@ function NewNote(props) {
 								placeholder='your note of the note'
 								style={styles.textinput}
 								multiline={true}
+								value={content}
+								onChangeText={handleContentInput}
 							/>
 						</View>
 					</View>
 
 					{/* done actions. */}
-					<View style={styles.buttonContainer}>
+					<TouchableOpacity
+						activeOpacity={0.8}
+						onPress={handleCreateNewNote}
+						style={styles.buttonContainer}>
 						<View style={styles.button}>
 							<ButtonText style={styles.buttonText}>Done</ButtonText>
 						</View>
-					</View>
+					</TouchableOpacity>
 				</View>
 			</View>
 		</ScrollView>

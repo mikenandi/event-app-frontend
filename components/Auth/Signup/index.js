@@ -14,24 +14,28 @@ import {
 	ButtonText,
 	HeadingM,
 	Caption,
+	HeadingL,
 } from "../../Typography";
 import color from "../../colors";
 import axios from "axios";
 import {useDispatch} from "react-redux";
+import {logIn} from "../../../Store/Auth/authSlice";
+import * as SecureStore from "expo-secure-store";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import Loader from "../../Loader";
 
 function Signup(props) {
 	// Saving up input data using use state.
-	const [password, set_password] = useState("");
-	const [email, set_email] = useState("");
+	const [password, setPassword] = useState("");
+	const [email, setEmail] = useState("");
+	const [fullname, setFullname] = useState("");
+	const [isLoading, setIsLoading] = useState(false);
 
 	// --useDispatch() from redux/react.
 	const dispatch = useDispatch();
 
 	// Error message.
-	// --For email
-	const [email_error, set_email_error] = useState("");
-	// --For password
-	const [password_error, set_password_error] = useState("");
+	const [error, setError] = useState("");
 
 	// Function to check if a string is email or not.
 	const isEmail = (emailAdress) => {
@@ -45,64 +49,84 @@ function Signup(props) {
 
 	// Functionality to go to the code confirmation code page
 	// if the confirmation was true.
-	const handleSignup = () => {
-		// Sending request using axios.
-		if (password.length >= 6 && isEmail(email)) {
-			axios({
+	const handleSignup = async () => {
+		try {
+			if (!(fullname && email && password)) {
+				setError("fill all field before submiting");
+				setTimeout(() => {
+					setError("");
+				}, 5000);
+
+				return;
+			}
+			// Dispaying if the user entered incorrect format of email addres.
+			if (!isEmail(email)) {
+				setError("invalid email address. ");
+
+				setTimeout(() => {
+					setError("");
+				}, 5000);
+
+				return;
+			}
+
+			// Displaying error when the password length is less than 6.
+			if (password.length < 6) {
+				setError("password must have 6 characters. ");
+
+				setTimeout(() => {
+					setError("");
+				}, 5000);
+
+				return;
+			}
+
+			setIsLoading(true);
+
+			let response = await axios({
 				method: "POST",
-				url: "http://gudsurvey.herokuapp.com/api/v1/signup",
+				url: "http://evento-tz-backend.herokuapp.com/api/v1/auth/signup",
 				data: {
 					email: email,
 					password: password,
-					from: "landlord",
+					fullname: fullname,
 				},
-			})
-				.then((response) => {
-					if (response.data.success) {
-						// --saving token & email temporarily to redux
-						dispatch(saveEmail(email));
-						dispatch(saveToken(response.data.auth_token.token));
+			});
+			//setting values
+			let authTokenProvided = response.data.data.auth_token;
+			let userIdProvided = response.data.data.user_id;
 
-						// --going to confirm code page.
-						props.navigation.navigate("Confirm");
-					} else {
-						set_email_error("email already taken. ");
-					}
-				})
-				.catch((error) => {
-					console.log(error.response.data);
-				});
-		}
+			await SecureStore.setItemAsync("authToken", authTokenProvided);
 
-		// Displaying error when the password length is less than 6.
-		if (password.length < 6) {
-			set_password_error("password must have 6 characters. ");
-		}
+			await AsyncStorage.setItem("userId", userIdProvided);
 
-		// Displaying error when the password length is less than 6.
-		if (password.length >= 6) {
-			set_password_error("");
-		}
+			dispatch(logIn({userId: userIdProvided, authToken: authTokenProvided}));
 
-		// Dispaying if the user entered incorrect format of email addres.
-		if (!isEmail(email)) {
-			set_email_error("invalid email address. ");
-		}
+			return;
+		} catch (error) {
+			setIsLoading(false);
 
-		// Dispaying if the user correct format of email addres.
-		if (isEmail(email)) {
-			set_email_error("");
+			setError(error.response.data.message);
+
+			setTimeout(() => {
+				setError("");
+			}, 5000);
 		}
 	};
 
 	// Functions to handle updating states of form inputs.
 	// --for email.
 	const handleInputEmail = (email) => {
-		set_email(email);
+		setEmail(email);
 	};
 	// --for password
 	const handleInputPassword = (password) => {
-		set_password(password);
+		setPassword(password);
+	};
+
+	// handle input fullname
+	const handleInputFullname = (fullname) => {
+		setFullname(fullname);
 	};
 
 	// Going to sign in route.
@@ -110,69 +134,84 @@ function Signup(props) {
 		props.navigation.navigate("Login");
 	};
 
+	if (isLoading) return <Loader />;
+
 	return (
-		<View style={styles.container}>
-			<StatusBar backgroundColor='white' />
-			<View>
-				<HeadingM>Sign up</HeadingM>
+		<ScrollView
+			style={styles.scrollContainer}
+			contentContainerStyle={styles.contentContainer}>
+			<View style={styles.container}>
+				<StatusBar backgroundColor='white' />
+				<View>
+					<HeadingM>Sign up</HeadingM>
 
-				<Caption>email</Caption>
-				{!!email_error && (
-					<Caption style={styles.error_text}>{email_error}</Caption>
-				)}
+					{!!error && <Caption style={styles.errorText}>{error}</Caption>}
 
-				<TextInput
-					placeholder='email'
-					style={styles.inputText}
-					textContentType='emailAddress'
-					value={email}
-					onChangeText={handleInputEmail}
-				/>
+					{/* input for fullname */}
+					<Caption style={styles.label}>fullname</Caption>
 
-				<Caption>password</Caption>
-				{!!password_error && (
-					<Caption style={styles.error_text}>{password_error}</Caption>
-				)}
+					<TextInput
+						placeholder='full name'
+						style={styles.inputText}
+						textContentType='emailAddress'
+						value={fullname}
+						onChangeText={handleInputFullname}
+					/>
 
-				<TextInput
-					placeholder='password'
-					style={styles.inputText}
-					secureTextEntry={true}
-					passwordRules='minlength: 8;'
-					textContentType='password'
-					value={password}
-					onChangeText={handleInputPassword}
-				/>
+					{/* input for email */}
+					<Caption style={styles.label}>email</Caption>
 
-				<Pressable onPress={handleSignup}>
-					<ButtonText style={styles.loginButton}>sign up</ButtonText>
-				</Pressable>
-				<View style={styles.questionContainer}>
-					<BodyS style={styles.question}>Have an account?</BodyS>
-					<Pressable style={styles.signupContainer} onPress={handleSignin}>
-						<Body style={styles.singupText}>Sign in</Body>
+					<TextInput
+						placeholder='email'
+						style={styles.inputText}
+						textContentType='emailAddress'
+						value={email}
+						onChangeText={handleInputEmail}
+					/>
+
+					{/* input for password */}
+					<Caption style={styles.label}>password</Caption>
+
+					<TextInput
+						placeholder='password'
+						style={styles.inputText}
+						secureTextEntry={true}
+						passwordRules='minlength: 8;'
+						textContentType='password'
+						value={password}
+						onChangeText={handleInputPassword}
+					/>
+
+					{/* button for signing up. */}
+					<Pressable onPress={handleSignup}>
+						<ButtonText style={styles.loginButton}>sign up</ButtonText>
 					</Pressable>
+					<View style={styles.questionContainer}>
+						<BodyS style={styles.question}>Have an account?</BodyS>
+						<Pressable style={styles.signupContainer} onPress={handleSignin}>
+							<Body style={styles.singupText}>Sign in</Body>
+						</Pressable>
+					</View>
 				</View>
 			</View>
-		</View>
+		</ScrollView>
 	);
 }
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
-		display: "flex",
+		backgroundColor: "white",
 		alignItems: "center",
 		justifyContent: "center",
-		backgroundColor: "white",
+		flex: 1,
 	},
 	inputText: {
 		padding: 10,
 		fontSize: 16,
 		letterSpacing: 0.5,
 		borderRadius: 3,
-		borderWidth: 1,
 		width: 250,
 		marginVertical: 5,
+		backgroundColor: color.lightgray,
 	},
 	loginButton: {
 		backgroundColor: color.primary,
@@ -181,6 +220,7 @@ const styles = StyleSheet.create({
 		fontWeight: "bold",
 		color: "white",
 		marginTop: 10,
+		borderRadius: 10,
 	},
 	forgotPasswordText: {
 		textAlign: "right",
@@ -201,6 +241,7 @@ const styles = StyleSheet.create({
 	questionContainer: {
 		flexDirection: "row",
 		alignItems: "baseline",
+		marginBottom: 10,
 	},
 	contentContainerStyle: {},
 	showPasswordContainer: {
@@ -213,8 +254,20 @@ const styles = StyleSheet.create({
 		borderRadius: 3,
 		backgroundColor: color.primary,
 	},
-	error_text: {
+	errorText: {
 		color: "red",
+		fontWeight: "bold",
+	},
+	contentContainer: {
+		flexGrow: 1,
+		justifyContent: "center",
+	},
+	scrollContainer: {
+		backgroundColor: "white",
+	},
+	label: {
+		marginTop: 10,
+		textTransform: "capitalize",
 	},
 });
 

@@ -20,14 +20,85 @@ import {EvilIcons, AntDesign} from "@expo/vector-icons";
 import {useDispatch} from "react-redux";
 import {useSelector} from "react-redux";
 import {hideRegisterVendor} from "../../Store/VendorStore/modalSlice";
+import axios from "axios";
+import Loader from "../Loader";
 
 function RegisterVendor(props) {
 	// initializing dispatch
 	const dispatch = useDispatch();
+	const [errorMsg, setErrorMsg] = React.useState("");
+	const [isLoading, setIsLoading] = React.useState(false);
+	const [bussinessName, setBussinessName] = React.useState("");
+	const [service, setService] = React.useState("");
+	const [phoneNumber, setPhoneNumber] = React.useState("");
+	const [firstPackPrice, setFirstPackPrice] = React.useState("");
+	const [firsPackDetails, setFirstPackDetails] = React.useState("");
+	const [secondPackPrice, setSecondPackPrice] = React.useState("");
+	const [secondPackDetails, setSecondPackDetails] = React.useState("");
+	const userId = useSelector((state) => {
+		return state.auth.userId;
+	});
 
 	const handleBack = () => {
 		dispatch(hideRegisterVendor());
 	};
+
+	const handleDone = async () => {
+		try {
+			if (
+				!service ||
+				!phoneNumber ||
+				!firsPackDetails ||
+				!firstPackPrice ||
+				!secondPackPrice ||
+				!secondPackDetails ||
+				!bussinessName
+			) {
+				setErrorMsg("fill all fields");
+
+				setTimeout(() => {
+					setErrorMsg("");
+				}, 5000);
+
+				return;
+			}
+
+			setIsLoading(true);
+
+			let response = await axios({
+				method: "POST",
+				url: "http://evento-tz-backend.herokuapp.com/api/v1/vendor/register-service",
+				data: {
+					userId: userId,
+					service: service,
+					firstPackagePrice: firstPackPrice,
+					firstPackageDescription: firsPackDetails,
+					secondPackagePrice: secondPackPrice,
+					secondPackageDescription: secondPackDetails,
+					phoneNumber: phoneNumber,
+					bussinessName: bussinessName,
+				},
+			});
+
+			dispatch(hideRegisterVendor());
+
+			return;
+		} catch (error) {
+			setIsLoading(false);
+
+			console.log(error.response.data);
+
+			setErrorMsg("oops error occured.");
+
+			setTimeout(() => {
+				setErrorMsg("");
+			}, 5000);
+
+			return;
+		}
+	};
+
+	if (isLoading) return <Loader />;
 
 	return (
 		<ScrollView>
@@ -43,19 +114,44 @@ function RegisterVendor(props) {
 					<View style={styles.formContainer}>
 						{/* input for service */}
 						<View>
+							{!!errorMsg && (
+								<Caption style={styles.labelError}>{errorMsg}</Caption>
+							)}
 							<Caption style={styles.label}>service</Caption>
-							<TextInput placeholder='price' style={styles.textinput} />
+							<TextInput
+								placeholder='service you offer'
+								style={styles.textinput}
+								value={service}
+								onChangeText={(value) => {
+									setService(value);
+								}}
+							/>
 						</View>
+
+						{/*  bussinessName */}
 						<View>
-							<Caption style={styles.label}>name</Caption>
-							<TextInput placeholder='name' style={styles.textinput} />
+							<Caption style={styles.label}>bussiness name</Caption>
+							<TextInput
+								placeholder='bussines name'
+								style={styles.textinput}
+								value={bussinessName}
+								onChangeText={(value) => {
+									setBussinessName(value);
+								}}
+							/>
 						</View>
+
+						{/* phone number  */}
 						<View>
 							<Caption style={styles.label}>phone number</Caption>
 							<TextInput
 								placeholder='phone number'
 								style={styles.textinput}
 								keyboardType='number-pad'
+								value={phoneNumber}
+								onChangeText={(value) => {
+									setPhoneNumber(value);
+								}}
 							/>
 						</View>
 						{/* input for package price body. */}
@@ -65,12 +161,23 @@ function RegisterVendor(props) {
 								placeholder='price'
 								style={styles.textinput}
 								keyboardType='number-pad'
+								value={firstPackPrice}
+								onChangeText={(value) => {
+									setFirstPackPrice(value);
+								}}
 							/>
 						</View>
 						{/* Description */}
 						<View>
 							<Caption style={styles.label}>Details</Caption>
-							<TextInput placeholder='description' style={styles.textinput} />
+							<TextInput
+								placeholder='description'
+								style={styles.textinput}
+								value={firsPackDetails}
+								onChangeText={(value) => {
+									setFirstPackDetails(value);
+								}}
+							/>
 						</View>
 						{/* second package price */}
 						<View>
@@ -79,35 +186,49 @@ function RegisterVendor(props) {
 								placeholder='price'
 								style={styles.textinput}
 								keyboardType='number-pad'
+								value={secondPackPrice}
+								onChangeText={(value) => {
+									setSecondPackPrice(value);
+								}}
 							/>
 						</View>
 						{/* Description */}
 						<View>
 							<Caption style={styles.label}>Details</Caption>
-							<TextInput placeholder='description' style={styles.textinput} />
-						</View>
-						{/* third package details */}
-						<View>
-							<Caption style={styles.label}>third Package price</Caption>
 							<TextInput
-								placeholder='price'
+								placeholder='description'
 								style={styles.textinput}
-								keyboardType='number-pad'
+								value={secondPackDetails}
+								onChangeText={(value) => {
+									setSecondPackDetails(value);
+								}}
 							/>
 						</View>
-						{/* Description */}
-						<View>
-							<Caption style={styles.label}>Details</Caption>
-							<TextInput placeholder='description' style={styles.textinput} />
-						</View>
+						{/*  bussinessName */}
+						{false && (
+							<View>
+								<Caption style={styles.label}>Details</Caption>
+								<TextInput
+									placeholder='description'
+									style={styles.textinput}
+									value={bussinessName}
+									onChangeText={(value) => {
+										setBussinessName(value);
+									}}
+								/>
+							</View>
+						)}
 					</View>
 
 					{/* done actions. */}
-					<View style={styles.buttonContainer}>
+					<TouchableOpacity
+						activeOpacity={0.7}
+						onPress={handleDone}
+						style={styles.buttonContainer}>
 						<View style={styles.button}>
 							<ButtonText style={styles.buttonText}>Done</ButtonText>
 						</View>
-					</View>
+					</TouchableOpacity>
 				</View>
 			</View>
 		</ScrollView>
@@ -142,6 +263,12 @@ const styles = StyleSheet.create({
 		fontWeight: "bold",
 		marginLeft: 10,
 		marginTop: 10,
+	},
+	labelError: {
+		fontWeight: "bold",
+		marginLeft: 10,
+		marginTop: 10,
+		color: "red",
 	},
 	formContainer: {
 		alignItems: "center",

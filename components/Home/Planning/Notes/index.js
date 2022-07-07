@@ -7,6 +7,7 @@ import {
 	ScrollView,
 	StatusBar,
 	Modal,
+	FlatList,
 } from "react-native";
 import {
 	Body,
@@ -29,10 +30,49 @@ import {useDispatch} from "react-redux";
 import {hideNotes, showNewNote} from "../../../../Store/homeStore/modalSlice";
 import {useSelector} from "react-redux";
 import NewNote from "./NewNote";
+import axios from "axios";
+import {
+	getEventData,
+	getNotesData,
+} from "../../../../Store/homeStore/eventSlice";
 
 function Tasks(props) {
 	// initializing dispatch
 	const dispatch = useDispatch();
+
+	const eventId = useSelector((state) => {
+		return state.event.planEventId;
+	});
+
+	const visible = useSelector((state) => {
+		return state.showModal.newNoteVisible;
+	});
+
+	const notesData = useSelector((state) => {
+		return state.event.notesData;
+	});
+
+	React.useEffect(() => {
+		(async () => {
+			try {
+				let response = await axios({
+					method: "GET",
+					url: "http://evento-tz-backend.herokuapp.com/api/v1/note/notes",
+					params: {
+						eventId: eventId,
+					},
+				});
+
+				let responseDataProvided = response.data.data;
+
+				dispatch(getNotesData(responseDataProvided));
+
+				return;
+			} catch (error) {
+				return;
+			}
+		})();
+	}, [visible]);
 
 	const handleHidePlanning = () => {
 		dispatch(hideNotes());
@@ -42,9 +82,37 @@ function Tasks(props) {
 		dispatch(showNewNote());
 	};
 
-	const visible = useSelector((state) => {
-		return state.showModal.newNoteVisible;
-	});
+	const renderItem = ({item}) => {
+		return (
+			<View style={styles.taskContainer}>
+				{/* icon for the task. */}
+				{true && (
+					<View style={styles.boxcontainer}>
+						<MaterialIcons
+							name='sticky-note-2'
+							size={22}
+							color={color.primary}
+						/>
+					</View>
+				)}
+
+				{/* task details. */}
+				<View style={styles.taskDetailsContainer}>
+					<Body style={styles.taskTitleText}>{item.subject}</Body>
+
+					<View>
+						<Body style={styles.descriptionText}>{item.content}</Body>
+					</View>
+
+					<View style={styles.captionContainer}>
+						<Caption style={styles.ovalShape}>
+							{item.created_at.substr(0, 10)}
+						</Caption>
+					</View>
+				</View>
+			</View>
+		);
+	};
 
 	return (
 		<View style={styles.screen}>
@@ -59,36 +127,12 @@ function Tasks(props) {
 			</View>
 
 			<View style={styles.container}>
-				<View style={styles.taskContainer}>
-					{/* icon for the task. */}
-					{true && (
-						<View style={styles.boxcontainer}>
-							<MaterialIcons
-								name='sticky-note-2'
-								size={22}
-								color={color.primary}
-							/>
-						</View>
-					)}
-
-					{/* task details. */}
-					<View style={styles.taskDetailsContainer}>
-						<Body style={styles.taskTitleText}>title of note</Body>
-
-						<View>
-							<Body style={styles.descriptionText}>
-								Lorem ipsum dolor sit amet consectetur adipisicing elit.
-								Obcaecati libero tempore adipisci voluptatem, nihil rerum cumque
-								debitis expedita voluptatum cupiditate? Illo, nisi asperiores
-								eius aspernatur porro error beatae eveniet! Nostrum.
-							</Body>
-						</View>
-
-						<View style={styles.captionContainer}>
-							<Caption style={styles.ovalShape}>11-06-2022</Caption>
-						</View>
-					</View>
-				</View>
+				<FlatList
+					data={notesData}
+					keyExtractor={(item) => item.id}
+					renderItem={renderItem}
+					contentContainerStyle={styles.flatlistContainer}
+				/>
 			</View>
 
 			{/* floationg action button */}
@@ -199,6 +243,9 @@ const styles = StyleSheet.create({
 	assigneeText: {
 		marginLeft: 10,
 		fontWeight: "normal",
+	},
+	flatlistContainer: {
+		paddingBottom: 60,
 	},
 });
 

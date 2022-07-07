@@ -7,6 +7,7 @@ import {
 	ScrollView,
 	StatusBar,
 	Modal,
+	FlatList,
 } from "react-native";
 import {Body, HeadingM, BodyS, HeadingS, ButtonText} from "../../../Typography";
 import color from "../../../colors";
@@ -25,6 +26,8 @@ import {
 } from "@expo/vector-icons";
 import RegisterGuest from "./RegisterGuest";
 import {useSelector} from "react-redux";
+import axios from "axios";
+import {getGuestData} from "../../../../Store/homeStore/eventSlice";
 
 function Event(props) {
 	// initializing dispatch
@@ -41,6 +44,61 @@ function Event(props) {
 	const handleRegisterGuest = () => {
 		dispatch(showRegisterGuest());
 	};
+
+	const guestData = useSelector((state) => {
+		return state.event.guestData;
+	});
+
+	const eventId = useSelector((state) => {
+		return state.event.planEventId;
+	});
+
+	// loading data
+	React.useEffect(() => {
+		(async () => {
+			try {
+				// console.log(eventId);
+				let response = await axios({
+					method: "GET",
+					url: "http://evento-tz-backend.herokuapp.com/api/v1/guest/guests",
+					params: {
+						eventId: eventId,
+					},
+				});
+
+				let dataProvided = response.data.data;
+
+				dispatch(getGuestData(dataProvided));
+
+				return;
+			} catch (error) {
+				console.log(error);
+				console.log(error.response);
+			}
+		})();
+	}, [visible]);
+
+	const Guest = (props) => {
+		return (
+			<View>
+				{/* guest container */}
+				<View style={styles.guestContainer}>
+					<View style={styles.avatar}>
+						<Fontisto name='person' size={24} color={color.primary} />
+					</View>
+					<View style={styles.detailsContainer}>
+						<Body>{props.fullname}</Body>
+						<BodyS>{props.email}</BodyS>
+					</View>
+				</View>
+			</View>
+		);
+	};
+
+	const renderItem = ({item}) => {
+		return <Guest email={item.email} fullname={item.fullname} />;
+	};
+
 	return (
 		<View style={styles.screen}>
 			<StatusBar backgroundColor='white' />
@@ -53,16 +111,18 @@ function Event(props) {
 			</View>
 
 			<View style={styles.container}>
-				{/* guest container */}
-				<View style={styles.guestContainer}>
-					<View style={styles.avatar}>
-						<Fontisto name='person' size={24} color={color.primary} />
+				{false && (
+					<View style={styles.summaryContainer}>
+						<HeadingS>Total guests</HeadingS>
+						<HeadingS>{guestData.length}</HeadingS>
 					</View>
-					<View style={styles.detailsContainer}>
-						<Body>Name Person</Body>
-						<BodyS>mike12og@gmail.com</BodyS>
-					</View>
-				</View>
+				)}
+
+				<FlatList
+					data={guestData}
+					keyExtractor={(item) => item.id}
+					renderItem={renderItem}
+				/>
 			</View>
 			{/* floating action button */}
 			<TouchableOpacity
@@ -125,6 +185,16 @@ const styles = StyleSheet.create({
 	},
 	guestText: {
 		marginLeft: 5,
+	},
+	summaryContainer: {
+		marginVertical: 10,
+		marginHorizontal: 20,
+		borderBottomWidth: 2,
+		borderBottomColor: color.primary,
+		flexDirection: "row",
+		padding: 10,
+		alignItems: "center",
+		justifyContent: "space-around",
 	},
 });
 

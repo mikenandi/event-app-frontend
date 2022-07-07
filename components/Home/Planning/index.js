@@ -19,6 +19,9 @@ import RemindersPlan from "./Plans/Reminders";
 import CreateInvitationsPlan from "./Plans/CreateInvitations";
 import GuestPlan from "./Plans/Guests";
 import {hidePlanning} from "../../../Store/homeStore/modalSlice";
+import {deactivePlanEventId} from "../../../Store/homeStore/eventSlice";
+import {useSelector} from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function Planning(props) {
 	// initializing dispatch
@@ -26,7 +29,42 @@ function Planning(props) {
 
 	const handleHidePlanning = () => {
 		dispatch(hidePlanning());
+		dispatch(deactivePlanEventId());
+		return;
 	};
+
+	const eventId = useSelector((state) => {
+		return state.event.planEventId;
+	});
+
+	// initiating async values if not created.
+	const intiateAsyncValuesForBudget = async () => {
+		let allSavedKeys = await AsyncStorage.getAllKeys();
+		let available = allSavedKeys.includes(eventId);
+		if (!available) {
+			let budgetData = {
+				numberOfGuestsExpected: "0",
+				pricePerPlate: "0",
+				drinksPricePerPerson: "0",
+				venueCost: "0",
+				decorations: "0",
+				transportations: "0",
+				mc: "0",
+				photography: "0",
+				marketing: "0",
+			};
+
+			let stringStoredValue = JSON.stringify(budgetData);
+			await AsyncStorage.setItem(eventId, stringStoredValue);
+
+			return;
+		}
+		return;
+	};
+
+	React.useEffect(async () => {
+		intiateAsyncValuesForBudget();
+	}, []);
 
 	return (
 		<ScrollView>
@@ -40,11 +78,11 @@ function Planning(props) {
 				</View>
 
 				<View style={styles.container}>
-					<GuestPlan />
-					<TaskPlan />
-					<BudgetPlan />
-					<NotesPlan />
-					<CreateInvitationsPlan />
+					<GuestPlan eventId={eventId} />
+					<TaskPlan eventId={eventId} />
+					<BudgetPlan eventId={eventId} />
+					<NotesPlan eventId={eventId} />
+					<CreateInvitationsPlan eventId={eventId} />
 				</View>
 			</View>
 		</ScrollView>

@@ -16,20 +16,93 @@ import {
 	Caption,
 } from "../../../Typography";
 import color from "../../../colors";
-import {EvilIcons, AntDesign} from "@expo/vector-icons";
+import {Ionicons} from "@expo/vector-icons";
 import {useDispatch} from "react-redux";
 import {
 	hideCreateEvent,
 	hideCreateTask,
 } from "../../../../Store/homeStore/modalSlice";
+import {useSelector} from "react-redux";
+import Loader from "../../../Loader";
+import axios from "axios";
 
 function CreateTask(props) {
 	// initializing dispatch
 	const dispatch = useDispatch();
+	//setting up states.
+	const [loading, setIsLoading] = React.useState(false);
+	const [errorMsg, setErrorMsg] = React.useState("");
+	const [title, setTitle] = React.useState("");
+	const [description, setDescription] = React.useState("");
+	const [assignedTo, setAssignedTo] = React.useState("me");
+	const [deadline, setDeadline] = React.useState("");
+
+	const eventId = useSelector((state) => {
+		return state.event.planEventId;
+	});
+
+	const handleTitleInput = (title) => {
+		setTitle(title);
+	};
+
+	const handleDescriptionInput = (desc) => {
+		setDescription(desc);
+	};
+
+	const handleAssignedToInput = (assignedTo) => {
+		setAssignedTo(assignedTo);
+	};
+
+	const handleDeadlineInput = (deadline) => {
+		setDeadline(deadline);
+	};
+
+	const handleCreateTask = async () => {
+		try {
+			if (!title || !description || !assignedTo || !deadline) {
+				setErrorMsg("fill all fields");
+
+				setTimeout(() => {
+					setErrorMsg("");
+				}, 5000);
+
+				return;
+			}
+
+			setIsLoading(true);
+
+			let response = await axios({
+				method: "POST",
+				url: "http://evento-tz-backend.herokuapp.com/api/v1/task/create",
+				data: {
+					eventId: eventId,
+					title: title,
+					description: description,
+					deadline: deadline,
+					assignedTo: assignedTo,
+				},
+			});
+
+			dispatch(hideCreateTask());
+			return;
+		} catch (error) {
+			setIsLoading(false);
+
+			setErrorMsg("error");
+
+			setTimeout(() => {
+				setErrorMsg("");
+			}, 5000);
+
+			return;
+		}
+	};
 
 	const handleBack = () => {
 		dispatch(hideCreateTask());
 	};
+
+	if (loading) return <Loader />;
 
 	return (
 		<ScrollView>
@@ -37,7 +110,7 @@ function CreateTask(props) {
 			<View style={styles.screen}>
 				<View style={styles.topBar}>
 					<TouchableOpacity activeOpcaity={0.8} onPress={handleBack}>
-						<AntDesign name='arrowleft' size={24} color='black' />
+						<Ionicons name='arrow-back' size={24} color='black' />
 					</TouchableOpacity>
 					<HeadingS style={styles.titleText}>Create Task</HeadingS>
 				</View>
@@ -47,8 +120,16 @@ function CreateTask(props) {
 					<View style={styles.formContainer}>
 						{/* input for name of the guest. */}
 						<View>
+							{!!errorMsg && (
+								<Caption style={styles.errorText}>{errorMsg}</Caption>
+							)}
 							<Caption style={styles.label}>Title of task</Caption>
-							<TextInput placeholder='title of task' style={styles.textinput} />
+							<TextInput
+								placeholder='title of task'
+								style={styles.textinput}
+								value={title}
+								onChangeText={handleTitleInput}
+							/>
 						</View>
 
 						{/*  input for email/ contacts of the guest. */}
@@ -57,28 +138,44 @@ function CreateTask(props) {
 							<TextInput
 								placeholder='description of task'
 								style={styles.textinput}
+								value={description}
+								onChangeText={handleDescriptionInput}
+								multiline
 							/>
 						</View>
 
 						{/* assigned to  */}
 						<View>
 							<Caption style={styles.label}>Assinged to</Caption>
-							<TextInput placeholder='Assigned to' style={styles.textinput} />
+							<TextInput
+								placeholder='Assigned to'
+								style={styles.textinput}
+								value={assignedTo}
+								onChangeText={handleAssignedToInput}
+							/>
 						</View>
 
 						{/*  input for email/ contacts of the guest. */}
 						<View>
 							<Caption style={styles.label}>Deadline</Caption>
-							<TextInput placeholder='Deadline' style={styles.textinput} />
+							<TextInput
+								placeholder='Deadline'
+								style={styles.textinput}
+								value={deadline}
+								onChangeText={handleDeadlineInput}
+							/>
 						</View>
 					</View>
 
 					{/* done actions. */}
-					<View style={styles.buttonContainer}>
+					<TouchableOpacity
+						activeOpacity={0.8}
+						onPress={handleCreateTask}
+						style={styles.buttonContainer}>
 						<View style={styles.button}>
 							<ButtonText style={styles.buttonText}>Done</ButtonText>
 						</View>
-					</View>
+					</TouchableOpacity>
 				</View>
 			</View>
 		</ScrollView>
@@ -131,6 +228,12 @@ const styles = StyleSheet.create({
 	},
 	formContainer: {
 		alignItems: "center",
+	},
+	errorText: {
+		color: "red",
+		fontWeight: "bold",
+		marginLeft: 10,
+		textTransform: "capitalize",
 	},
 });
 

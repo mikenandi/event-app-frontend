@@ -10,92 +10,101 @@ import {
 } from "../../Typography";
 import color from "../../colors";
 import axios from "axios";
+import * as SecureStore from "expo-secure-store";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {logIn} from "../../../Store/Auth/authSlice";
+import Loader from "../../Loader";
+import {useDispatch} from "react-redux";
 
 function Login(props) {
-	// --value for email
-	const [email, set_email] = useState("");
-	const [email_error, set_email_error] = useState("");
+	// initializing dispatch
+	const dispatch = useDispatch();
 
-	// --value for password
-	const [password, set_password] = useState("");
-	const [password_error, set_password_error] = useState("");
+	// setting up states.
+	const [email, setEmail] = useState("");
+	const [errorMsg, setErrorMsg] = useState("");
+	const [password, setPassword] = useState("");
+	const [isLoading, setIsLoading] = useState(false);
 
 	// --function for geting value of email.
 	const handleInputEmail = (email) => {
-		set_email(email);
+		setEmail(email);
 	};
+
 	// --function for getting value of password
 	const handleInputPassword = (password) => {
-		set_password(password);
+		setPassword(password);
 	};
 
 	// Function to check if a string is email or not.
 	const isEmail = (emailAdress) => {
 		let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-		if (emailAdress.match(regexEmail)) {
-			return true;
-		} else {
-			return false;
-		}
+		if (emailAdress.match(regexEmail)) return true;
+		else return false;
 	};
 
 	// Functionality to get home page
-	const handleLogin = () => {
-		// --Validating data before sending them.
-		if (password.length >= 6 && isEmail(email)) {
-			// --Sending HTTP request using axios.
-			axios({
+	const handleLogin = async () => {
+		try {
+			if (!(password && email)) {
+				setErrorMsg("fill all fields");
+
+				setTimeout(() => {
+					setErrorMsg("");
+				}, 5000);
+
+				return;
+			}
+
+			if (password.length < 6) {
+				setErrorMsg("length should be greater than 6");
+
+				setTimeout(() => {
+					setErrorMsg("");
+				}, 5000);
+
+				return;
+			}
+
+			if (!isEmail(email)) {
+				setErrorMsg("invalid email");
+
+				setTimeout(() => {
+					setErrorMsg("");
+				}, 5000);
+
+				return;
+			}
+
+			setIsLoading(true);
+
+			let response = await axios({
 				method: "POST",
-				url: "http://gudsurvey.herokuapp.com/api/v1/signin",
+				url: "http://evento-tz-backend.herokuapp.com/api/v1/auth/login",
 				data: {
 					email: email,
 					password: password,
 				},
-			})
-				.then((response) => {
-					// --Response was successfull
-					if (response.data.success) {
-						// --saving data in secure store.
-						let token = response.data.auth_token.token;
-						SecureStore.setItemAsync("authToken", token)
-							.then((response) => {})
-							.catch((error) => {});
-					}
-				})
-				.catch((error) => {
-					// --error was catched.
-					if (error.response) {
-						// --error message when a person entered a wrong email addres.
-						if (error.response.data.message === "Email not found. ") {
-							set_email_error("no account with such email.");
-						}
+			});
 
-						// --error message when a person entered wrong password.
-						if (error.response.data.message === "wrong password") {
-							set_password_error("you entered wrong password.");
-						}
-					}
-				});
-		}
+			let authTokenProvided = response.data.data.auth_token;
+			let userIdProvided = response.data.data.user_id;
 
-		// --Displaying error when the password length is less than 6.
-		if (password.length < 6) {
-			set_password_error("password must have 6 characters. ");
-		}
+			await SecureStore.setItemAsync("authToken", authTokenProvided);
 
-		// --Displaying error when the password length is less than 6.
-		if (password.length >= 6) {
-			set_password_error("");
-		}
+			await AsyncStorage.setItem("userId", userIdProvided);
 
-		// --Dispaying if the user entered incorrect format of email addres.
-		if (!isEmail(email)) {
-			set_email_error("invalid email address. ");
-		}
+			dispatch(logIn({userId: userIdProvided, authToken: authTokenProvided}));
+			return;
+		} catch (error) {
+			setIsLoading(false);
+			console.log(error.response.data.message);
+			setErrorMsg(error.response.data.message);
 
-		// --Dispaying if the user correct format of email addres.
-		if (isEmail(email)) {
-			set_email_error("");
+			setTimeout(() => {
+				setErrorMsg("");
+			}, 5000);
+			return;
 		}
 	};
 
@@ -109,19 +118,23 @@ function Login(props) {
 		props.navigation.navigate("ForgotPassword");
 	};
 
+	if (isLoading) return <Loader />;
+
+	// if (true) return <Loader />;
+
 	return (
 		<View style={styles.container}>
 			<StatusBar backgroundColor='white' />
 			<View>
 				<HeadingM>Sign in</HeadingM>
 
-				<Caption>email</Caption>
 				{/* --email error */}
-				{!!email_error && (
-					<Caption style={styles.errorMessage}>{email_error}</Caption>
+				{!!errorMsg && (
+					<Caption style={styles.errorMessage}>{errorMsg}</Caption>
 				)}
 
 				{/* --inputs for email address. */}
+				<Caption style={styles.label}>email</Caption>
 				<TextInput
 					placeholder='email'
 					style={styles.inputText}
@@ -129,14 +142,9 @@ function Login(props) {
 					onChangeText={handleInputEmail}
 				/>
 
-				<Caption>password</Caption>
-
-				{/* --password error. */}
-				{!!password_error && (
-					<Caption style={styles.errorMessage}>{password_error}</Caption>
-				)}
-
 				{/* --inputs for password. */}
+				<Caption style={styles.label}>password</Caption>
+
 				<TextInput
 					placeholder='password'
 					style={styles.inputText}
@@ -179,10 +187,10 @@ const styles = StyleSheet.create({
 		padding: 10,
 		fontSize: 16,
 		letterSpacing: 0.5,
-		borderRadius: 3,
-		borderWidth: 1,
+		borderRadius: 5,
 		width: 250,
 		marginVertical: 5,
+		backgroundColor: color.lightgray,
 	},
 	loginButton: {
 		backgroundColor: color.primary,
@@ -190,7 +198,8 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		fontWeight: "bold",
 		color: "white",
-		marginTop: 10,
+		marginTop: 20,
+		borderRadius: 10,
 	},
 	forgotPasswordText: {
 		textAlign: "right",
@@ -215,6 +224,12 @@ const styles = StyleSheet.create({
 	},
 	errorMessage: {
 		color: "red",
+		fontWeight: "bold",
+		textTransform: "capitalize",
+	},
+	label: {
+		marginTop: 10,
+		textTransform: "capitalize",
 	},
 });
 

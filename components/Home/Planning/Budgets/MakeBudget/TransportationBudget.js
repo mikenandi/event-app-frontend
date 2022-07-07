@@ -18,12 +18,41 @@ import {
 import color from "../../../../colors";
 import {EvilIcons, AntDesign} from "@expo/vector-icons";
 import {useDispatch} from "react-redux";
-import {hideNewNote} from "../../../../../Store/homeStore/modalSlice";
+import {
+	hideNewBudget,
+	hideNewNote,
+} from "../../../../../Store/homeStore/modalSlice";
 import {useSelector} from "react-redux";
+import {saveTrasnportationBudget} from "../../../../../Store/homeStore/eventSlice";
 
 function NewBudget(props) {
 	// initializing dispatch
 	const dispatch = useDispatch();
+
+	const [errorMsg, setErrorMsg] = React.useState("");
+	const [price, setPrice] = React.useState("");
+
+	const handleInput = (price) => {
+		setPrice(price);
+		return;
+	};
+
+	const handleDone = () => {
+		if (!price) {
+			setErrorMsg("enter price");
+
+			setTimeout(() => {
+				setErrorMsg("");
+			}, 5000);
+
+			return;
+		}
+
+		dispatch(saveTrasnportationBudget({transportations: price}));
+		dispatch(hideNewBudget());
+
+		return;
+	};
 
 	return (
 		<View style={styles.container}>
@@ -31,27 +60,27 @@ function NewBudget(props) {
 			<View style={styles.formContainer}>
 				{/* input for notes subject. */}
 				<View>
+					{!!errorMsg && <Caption style={styles.errorText}>{errorMsg}</Caption>}
 					<Caption style={styles.label}>total price</Caption>
 					<TextInput
 						placeholder='total price'
 						style={styles.textinput}
 						keyboardType='number-pad'
+						value={price}
+						onChangeText={handleInput}
 					/>
-				</View>
-
-				{/* input for notes body. */}
-				<View>
-					<Caption style={styles.label}>Descriptions</Caption>
-					<TextInput placeholder='description' style={styles.textinput} />
 				</View>
 			</View>
 
 			{/* done actions. */}
-			<View style={styles.buttonContainer}>
+			<TouchableOpacity
+				style={styles.buttonContainer}
+				activeOpacity={0.8}
+				onPress={handleDone}>
 				<View style={styles.button}>
 					<ButtonText style={styles.buttonText}>Done</ButtonText>
 				</View>
-			</View>
+			</TouchableOpacity>
 		</View>
 	);
 }
@@ -87,6 +116,12 @@ const styles = StyleSheet.create({
 	},
 	formContainer: {
 		alignItems: "center",
+	},
+	errorText: {
+		fontWeight: "bold",
+		marginLeft: 10,
+		marginTop: 10,
+		color: "red",
 	},
 });
 

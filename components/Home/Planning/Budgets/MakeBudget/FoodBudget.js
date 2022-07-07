@@ -18,12 +18,54 @@ import {
 import color from "../../../../colors";
 import {EvilIcons, AntDesign} from "@expo/vector-icons";
 import {useDispatch} from "react-redux";
-import {hideNewNote} from "../../../../../Store/homeStore/modalSlice";
+import {
+	hideNewBudget,
+	hideNewNote,
+} from "../../../../../Store/homeStore/modalSlice";
 import {useSelector} from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {saveFromFoodBudget} from "../../../../../Store/homeStore/eventSlice";
 
 function NewBudget(props) {
 	// initializing dispatch
 	const dispatch = useDispatch();
+	const [numberOfGuests, setNumberOfGuests] = React.useState("");
+	const [pricePerPlate, setPricePerPlate] = React.useState("");
+	const [errorMsg, setErrorMsg] = React.useState("");
+
+	const handleNumberOfGuestInput = (numberOfGuests) => {
+		setNumberOfGuests(numberOfGuests);
+	};
+
+	const handlePriceInput = (price) => {
+		setPricePerPlate(price);
+	};
+
+	const handleDone = async () => {
+		try {
+			if (!numberOfGuests || !pricePerPlate) {
+				setErrorMsg("fill all fields");
+
+				setTimeout(() => {
+					setErrorMsg("");
+				}, 5000);
+
+				return;
+			}
+
+			dispatch(
+				saveFromFoodBudget({
+					numberOfGuestsExpected: numberOfGuests,
+					pricePerPlate: pricePerPlate,
+				}),
+			);
+			dispatch(hideNewBudget());
+
+			return;
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	return (
 		<View style={styles.container}>
@@ -31,11 +73,14 @@ function NewBudget(props) {
 			<View style={styles.formContainer}>
 				{/* input for notes subject. */}
 				<View>
+					{!!errorMsg && <Caption style={styles.errorText}>{errorMsg}</Caption>}
 					<Caption style={styles.label}>Expected number</Caption>
 					<TextInput
 						placeholder='number of guests'
 						style={styles.textinput}
 						keyboardType='number-pad'
+						value={numberOfGuests}
+						onChangeText={handleNumberOfGuestInput}
 					/>
 				</View>
 
@@ -46,22 +91,29 @@ function NewBudget(props) {
 						placeholder='price per plate'
 						keyboardType='number-pad'
 						style={styles.textinput}
+						value={pricePerPlate}
+						onChangeText={handlePriceInput}
 					/>
 				</View>
 
 				{/* input for notes body. */}
-				<View>
-					<Caption style={styles.label}>Describe menu</Caption>
-					<TextInput placeholder='description' style={styles.textinput} />
-				</View>
+				{false && (
+					<View>
+						<Caption style={styles.label}>Describe menu</Caption>
+						<TextInput placeholder='description' style={styles.textinput} />
+					</View>
+				)}
 			</View>
 
 			{/* done actions. */}
-			<View style={styles.buttonContainer}>
+			<TouchableOpacity
+				activeOpacity={0.8}
+				onPress={handleDone}
+				style={styles.buttonContainer}>
 				<View style={styles.button}>
 					<ButtonText style={styles.buttonText}>Done</ButtonText>
 				</View>
-			</View>
+			</TouchableOpacity>
 		</View>
 	);
 }
@@ -97,6 +149,12 @@ const styles = StyleSheet.create({
 	},
 	formContainer: {
 		alignItems: "center",
+	},
+	errorText: {
+		fontWeight: "bold",
+		marginLeft: 10,
+		marginTop: 10,
+		color: "red",
 	},
 });
 

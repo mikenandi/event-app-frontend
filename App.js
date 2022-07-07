@@ -16,10 +16,13 @@ import Signup from "./components/Auth/Signup";
 import ForgotPassword from "./components/Auth/ForgotPassword";
 import ConfirmCode from "./components/Auth/Confirm-email";
 import Splash from "./components/splash";
-import {Provider} from "react-redux";
+import {Provider, useDispatch, useSelector} from "react-redux";
 import {store} from "./Store";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import * as SecureStore from "expo-secure-store";
+import {logIn} from "./Store/Auth/authSlice";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import Loader from "./components/Loader";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -31,23 +34,25 @@ function MyAuth() {
 	// inititializing dispatch
 	const dispatch = useDispatch();
 
-	const isLoggedOut = useSelector((state) => {
-		return state.auth.isLoggedOut;
+	const isLogedOut = useSelector((state) => {
+		return state.auth.isLogedOut;
 	});
 
 	React.useEffect(() => {
 		(async () => {
 			try {
-				let token = await SecureStore.getItemAsync("authToken");
+				let savedToken = await SecureStore.getItemAsync("authToken");
+				let savedUserId = await AsyncStorage.getItem("userId");
 
-				if (!!token) {
-					set_isloading(false);
-					dispatch(loggedIn());
+				if (!!savedToken) {
+					dispatch(logIn({authToken: savedToken, userId: savedUserId}));
+
+					setIsLoading(false);
 
 					return;
 				}
 
-				set_isloading(false);
+				setIsLoading(false);
 
 				return;
 			} catch (error) {
@@ -56,11 +61,11 @@ function MyAuth() {
 		})();
 	}, []);
 
-	if (isLoading) return <Splash />;
+	if (isLoading) return <Loader />;
 
 	return (
 		<Stack.Navigator initialRouteName='login'>
-			{isLoggedOut ? (
+			{isLogedOut ? (
 				<>
 					<Stack.Screen
 						name='Login'

@@ -17,6 +17,8 @@ import * as SecureStore from "expo-secure-store";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import {hideProfile} from "../../Store/homeStore/modalSlice";
+import {logOut} from "../../Store/Auth/authSlice";
+import Loader from "../Loader";
 
 function Profile(props) {
 	// initializing dispatch.
@@ -31,16 +33,15 @@ function Profile(props) {
 		dispatch(hideProfile());
 	};
 
-	const handleLogout = async () => {
+	const handleLogOut = async () => {
 		try {
 			await SecureStore.deleteItemAsync("authToken");
 
 			set_isloading(true);
-
-			setTimeout(() => {
-				dispatch(hideProfile());
-				// dispatch(loggedOut());
-			}, 5000);
+			dispatch(hideProfile());
+			dispatch(logOut());
+			console.log("passed in");
+			setTimeout(() => {}, 5000);
 
 			return;
 		} catch (error) {
@@ -48,7 +49,7 @@ function Profile(props) {
 		}
 	};
 
-	// if (isloading) return <Loading />;
+	if (isloading) return <Loader />;
 
 	return (
 		<View style={styles.container}>
@@ -62,7 +63,7 @@ function Profile(props) {
 				</View>
 				<TouchableOpacity
 					activeOpacity={0.9}
-					onPress={handleLogout}
+					onPress={handleLogOut}
 					style={styles.logoutButton}>
 					<Body style={styles.logoutText}>Log out</Body>
 				</TouchableOpacity>
@@ -73,19 +74,23 @@ function Profile(props) {
 						<Ionicons name='person-outline' size={60} color={color.dimblack} />
 					</View>
 
-					<HeadingS style={styles.nameText}>name person</HeadingS>
+					<HeadingS style={styles.nameText}>test name</HeadingS>
 					<View style={styles.locationContainer}>
 						<Entypo name='location-pin' size={20} color={color.lightgray} />
-						<BodyS style={styles.locationText}>ward, region</BodyS>
+						<BodyS style={styles.locationText}></BodyS>
 					</View>
 				</View>
 				<View>
-					<View style={styles.detailContainer}>
-						<Ionicons name='person-outline' size={24} color={color.primary} />
-						<View style={styles.detailsTextContainer}>
-							<HeadingS>User Type</HeadingS>
+					{true && (
+						<View style={styles.detailContainer}>
+							<Ionicons name='person-outline' size={24} color={color.primary} />
+							<View style={styles.detailsTextContainer}>
+								<HeadingS>Username</HeadingS>
+								<BodyS>test@gmail.com</BodyS>
+							</View>
 						</View>
-					</View>
+					)}
+
 					<View style={styles.detailContainer}>
 						<MaterialCommunityIcons
 							name='email-outline'
@@ -94,7 +99,7 @@ function Profile(props) {
 						/>
 						<View style={styles.detailsTextContainer}>
 							<HeadingS>Email Address</HeadingS>
-							<BodyS>email</BodyS>
+							<BodyS>test@gmail.com</BodyS>
 						</View>
 					</View>
 

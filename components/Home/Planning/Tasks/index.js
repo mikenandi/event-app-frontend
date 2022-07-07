@@ -7,6 +7,7 @@ import {
 	ScrollView,
 	StatusBar,
 	Modal,
+	FlatList,
 } from "react-native";
 import {
 	Body,
@@ -32,6 +33,8 @@ import {
 } from "../../../../Store/homeStore/modalSlice";
 import CreateTask from "./CreateTask";
 import {useSelector} from "react-redux";
+import axios from "axios";
+import {getTaskData} from "../../../../Store/homeStore/eventSlice";
 
 function Tasks(props) {
 	// initializing dispatch
@@ -41,13 +44,83 @@ function Tasks(props) {
 		dispatch(hideTasks());
 	};
 
-	const handleShowCreateTask = () => {
-		dispatch(showCreateTask());
-	};
+	const eventId = useSelector((state) => {
+		return state.event.planEventId;
+	});
+
+	const taskData = useSelector((state) => {
+		return state.event.taskData;
+	});
 
 	const visible = useSelector((state) => {
 		return state.showModal.createTaskVisible;
 	});
+
+	React.useEffect(() => {
+		(async () => {
+			try {
+				let response = await axios({
+					method: "GET",
+					url: "http://evento-tz-backend.herokuapp.com/api/v1/task/tasks",
+					params: {
+						eventId: eventId,
+					},
+				});
+
+				let responseProvided = response.data.data;
+
+				dispatch(getTaskData(responseProvided));
+
+				return;
+			} catch (error) {
+				console.log(error.response.data);
+			}
+		})();
+	}, [visible]);
+
+	const handleShowCreateTask = () => {
+		dispatch(showCreateTask());
+	};
+
+	// item to render for the flatlist.
+	const renderItem = ({item}) => {
+		return (
+			<View style={styles.taskContainer}>
+				{/* icon for the task. */}
+				{true && (
+					<View style={styles.boxcontainer}>
+						<MaterialCommunityIcons
+							name='timeline-text'
+							size={22}
+							color={color.primary}
+						/>
+					</View>
+				)}
+
+				{/* task details. */}
+				<View style={styles.taskDetailsContainer}>
+					<Body style={styles.taskTitleText}>{item.title}</Body>
+
+					<View>
+						<Body style={styles.descriptionText}>{item.description}</Body>
+						<View style={styles.assignedToContainer}>
+							<Ionicons
+								name='ios-return-down-forward-outline'
+								size={28}
+								color={color.primary}
+							/>
+							<BodyS style={styles.assigneeText}>{item.assigned_to}</BodyS>
+						</View>
+					</View>
+
+					<View style={styles.captionContainer}>
+						<Caption style={styles.ovalShape}>pending</Caption>
+						<Caption style={styles.ovalShape}>{item.deadline}</Caption>
+					</View>
+				</View>
+			</View>
+		);
+	};
 
 	return (
 		<View style={styles.screen}>
@@ -56,51 +129,18 @@ function Tasks(props) {
 
 			<View style={styles.topBar}>
 				<TouchableOpacity activeOpcaity={0.8} onPress={handleHidePlanning}>
-					<AntDesign name='arrowleft' size={24} color={color.dimblack} />
+					<Ionicons name='arrow-back' size={24} color='black' />
 				</TouchableOpacity>
 				<HeadingS style={styles.titleText}>Tasks</HeadingS>
 			</View>
 
 			<View style={styles.container}>
-				<View style={styles.taskContainer}>
-					{/* icon for the task. */}
-					{true && (
-						<View style={styles.boxcontainer}>
-							<MaterialCommunityIcons
-								name='timeline-text'
-								size={22}
-								color={color.primary}
-							/>
-						</View>
-					)}
-
-					{/* task details. */}
-					<View style={styles.taskDetailsContainer}>
-						<Body style={styles.taskTitleText}>title of task</Body>
-
-						<View>
-							<Body style={styles.descriptionText}>
-								Lorem ipsum dolor sit amet consectetur adipisicing elit.
-								Obcaecati libero tempore adipisci voluptatem, nihil rerum cumque
-								debitis expedita voluptatum cupiditate? Illo, nisi asperiores
-								eius aspernatur porro error beatae eveniet! Nostrum.
-							</Body>
-							<View style={styles.assignedToContainer}>
-								<Ionicons
-									name='ios-return-down-forward-outline'
-									size={28}
-									color={color.primary}
-								/>
-								<BodyS style={styles.assigneeText}>Myself</BodyS>
-							</View>
-						</View>
-
-						<View style={styles.captionContainer}>
-							<Caption style={styles.ovalShape}>pending</Caption>
-							<Caption style={styles.ovalShape}>11-06-2022</Caption>
-						</View>
-					</View>
-				</View>
+				<FlatList
+					data={taskData}
+					keyExtractor={(item) => item.id}
+					renderItem={renderItem}
+					contentContainerStyle={styles.flatlistContainer}
+				/>
 			</View>
 
 			{/* floationg action button */}
@@ -179,6 +219,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "white",
 		marginHorizontal: 10,
 		borderRadius: 10,
+		marginTop: 20,
 	},
 	assignedtoText: {
 		color: color.dimblack,
@@ -211,6 +252,9 @@ const styles = StyleSheet.create({
 	assigneeText: {
 		marginLeft: 10,
 		fontWeight: "normal",
+	},
+	flatlistContainer: {
+		paddingBottom: 80,
 	},
 });
 

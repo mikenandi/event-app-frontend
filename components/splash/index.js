@@ -1,10 +1,6 @@
 import React, {memo, useState} from "react";
 import {View, StyleSheet, StatusBar, Image} from "react-native";
 
-import color from "../colors";
-import {Ionicons} from "@expo/vector-icons";
-import axios from "axios";
-
 function Splash(props) {
 	return (
 		<View style={styles.screen}>

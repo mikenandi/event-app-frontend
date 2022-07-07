@@ -33,14 +33,22 @@ import {
 } from "../../../../Store/homeStore/modalSlice";
 import {useSelector} from "react-redux";
 import NewBudgets from "./MakeBudget";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {getBudgetData} from "../../../../Store/homeStore/eventSlice";
 
 function Budgets(props) {
 	// initializing dispatch
 	const dispatch = useDispatch();
 
-	const handleHidePlanning = () => {
+	const handleHidePlanning = async () => {
+		let stringStoredValue = JSON.stringify(budgetData);
+		await AsyncStorage.setItem(eventId, stringStoredValue);
 		dispatch(hideBudgets());
 	};
+
+	const eventId = useSelector((state) => {
+		return state.event.planEventId;
+	});
 
 	const handleNewNote = () => {};
 
@@ -79,6 +87,24 @@ function Budgets(props) {
 		dispatch(showNewBudget("marketing"));
 	};
 
+	const budgetData = useSelector((state) => {
+		return state.event.budgetData;
+	});
+
+	const wholeBudget = useSelector((state) => {
+		return state.event.budgetData;
+	});
+
+	React.useEffect(async () => {
+		(async () => {
+			let availableBudgets = await AsyncStorage.getItem(eventId);
+			let object = JSON.parse(availableBudgets);
+
+			dispatch(getBudgetData(object));
+			return;
+		})();
+	}, []);
+
 	return (
 		<View style={styles.screen}>
 			<StatusBar backgroundColor='white' />
@@ -88,23 +114,25 @@ function Budgets(props) {
 				<TouchableOpacity activeOpcaity={0.8} onPress={handleHidePlanning}>
 					<AntDesign name='arrowleft' size={24} color={color.dimblack} />
 				</TouchableOpacity>
-				<HeadingS style={styles.titleText}>Tasks</HeadingS>
+				<HeadingS style={styles.titleText}>Budget</HeadingS>
 			</View>
 
 			<View style={styles.container}>
 				{/* modal for total budget. */}
-				<View style={styles.totalBudgetContainer}>
-					<HeadingM>TZS 23000000</HeadingM>
-					<Body
-						style={{
-							color: color.grey,
-							fontWeight: "bold",
-							textTransform: "capitalize",
-							marginTop: 5,
-						}}>
-						total budget
-					</Body>
-				</View>
+				{false && (
+					<View style={styles.totalBudgetContainer}>
+						<HeadingM>TZS {wholeBudget}</HeadingM>
+						<Body
+							style={{
+								color: color.grey,
+								fontWeight: "bold",
+								textTransform: "capitalize",
+								marginTop: 5,
+							}}>
+							total budget
+						</Body>
+					</View>
+				)}
 
 				<ScrollView contentContainerStyle={styles.contentContainer}>
 					{/* budget for food */}
@@ -133,7 +161,11 @@ function Budgets(props) {
 									size={24}
 									color={color.primary}
 								/>
-								<HeadingS style={styles.descriptionText}>TZS 200000</HeadingS>
+								<HeadingS style={styles.descriptionText}>
+									TZS{" "}
+									{Number(budgetData.numberOfGuestsExpected) *
+										Number(budgetData.pricePerPlate)}
+								</HeadingS>
 							</View>
 						</View>
 					</TouchableOpacity>
@@ -164,7 +196,11 @@ function Budgets(props) {
 									size={24}
 									color={color.primary}
 								/>
-								<HeadingS style={styles.descriptionText}>TZS 200000</HeadingS>
+								<HeadingS style={styles.descriptionText}>
+									TZS{" "}
+									{Number(budgetData.numberOfGuestsExpected) *
+										Number(budgetData.drinksPricePerPerson)}
+								</HeadingS>
 							</View>
 						</View>
 					</TouchableOpacity>
@@ -195,41 +231,47 @@ function Budgets(props) {
 									size={24}
 									color={color.primary}
 								/>
-								<HeadingS style={styles.descriptionText}>TZS 200000</HeadingS>
+								<HeadingS style={styles.descriptionText}>
+									TZS {budgetData.venueCost}
+								</HeadingS>
 							</View>
 						</View>
 					</TouchableOpacity>
 
 					{/* budget for decorations */}
-					<TouchableOpacity
-						activeOpacity={0.8}
-						onPress={handleDecorationBudget}
-						style={styles.taskContainer}>
-						{/* icon for the task. */}
-						{true && (
-							<View style={styles.boxcontainer}>
-								<MaterialIcons
-									name='sticky-note-2'
-									size={28}
-									color={color.primary}
-								/>
-							</View>
-						)}
+					{false && (
+						<TouchableOpacity
+							activeOpacity={0.8}
+							onPress={handleDecorationBudget}
+							style={styles.taskContainer}>
+							{/* icon for the task. */}
+							{true && (
+								<View style={styles.boxcontainer}>
+									<MaterialIcons
+										name='sticky-note-2'
+										size={28}
+										color={color.primary}
+									/>
+								</View>
+							)}
 
-						{/* food budget. */}
-						<View style={styles.taskDetailsContainer}>
-							<Body style={styles.taskTitleText}>Decorations</Body>
+							{/* food budget. */}
+							<View style={styles.taskDetailsContainer}>
+								<Body style={styles.taskTitleText}>Decorations</Body>
 
-							<View style={styles.budgetValueContainer}>
-								<MaterialCommunityIcons
-									name='subdirectory-arrow-right'
-									size={24}
-									color={color.primary}
-								/>
-								<HeadingS style={styles.descriptionText}>TZS 200000</HeadingS>
+								<View style={styles.budgetValueContainer}>
+									<MaterialCommunityIcons
+										name='subdirectory-arrow-right'
+										size={24}
+										color={color.primary}
+									/>
+									<HeadingS style={styles.descriptionText}>
+										TZS {budgetData.decorations}
+									</HeadingS>
+								</View>
 							</View>
-						</View>
-					</TouchableOpacity>
+						</TouchableOpacity>
+					)}
 
 					{/* budget for transportations */}
 					<TouchableOpacity
@@ -257,103 +299,117 @@ function Budgets(props) {
 									size={24}
 									color={color.primary}
 								/>
-								<HeadingS style={styles.descriptionText}>TZS 200000</HeadingS>
+								<HeadingS style={styles.descriptionText}>
+									TZS {budgetData.transportations}
+								</HeadingS>
 							</View>
 						</View>
 					</TouchableOpacity>
 
 					{/* budget for MC */}
-					<TouchableOpacity
-						activeOpacity={0.8}
-						onPress={handleMcBudget}
-						style={styles.taskContainer}>
-						{/* icon for the task. */}
-						{true && (
-							<View style={styles.boxcontainer}>
-								<MaterialIcons
-									name='sticky-note-2'
-									size={28}
-									color={color.primary}
-								/>
-							</View>
-						)}
+					{false && (
+						<TouchableOpacity
+							activeOpacity={0.8}
+							onPress={handleMcBudget}
+							style={styles.taskContainer}>
+							{/* icon for the task. */}
+							{true && (
+								<View style={styles.boxcontainer}>
+									<MaterialIcons
+										name='sticky-note-2'
+										size={28}
+										color={color.primary}
+									/>
+								</View>
+							)}
 
-						{/* food budget. */}
-						<View style={styles.taskDetailsContainer}>
-							<Body style={styles.taskTitleText}>MC</Body>
+							{/* food budget. */}
+							<View style={styles.taskDetailsContainer}>
+								<Body style={styles.taskTitleText}>MC</Body>
 
-							<View style={styles.budgetValueContainer}>
-								<MaterialCommunityIcons
-									name='subdirectory-arrow-right'
-									size={24}
-									color={color.primary}
-								/>
-								<HeadingS style={styles.descriptionText}>TZS 200000</HeadingS>
+								<View style={styles.budgetValueContainer}>
+									<MaterialCommunityIcons
+										name='subdirectory-arrow-right'
+										size={24}
+										color={color.primary}
+									/>
+									<HeadingS style={styles.descriptionText}>
+										TZS {budgetData.mc}
+									</HeadingS>
+								</View>
 							</View>
-						</View>
-					</TouchableOpacity>
+						</TouchableOpacity>
+					)}
 
 					{/* budget for photography */}
-					<TouchableOpacity
-						activeOpacity={0.8}
-						onPress={handlePhotographBudget}
-						style={styles.taskContainer}>
-						{/* icon for the task. */}
-						{true && (
-							<View style={styles.boxcontainer}>
-								<MaterialIcons
-									name='sticky-note-2'
-									size={28}
-									color={color.primary}
-								/>
-							</View>
-						)}
+					{false && (
+						<TouchableOpacity
+							activeOpacity={0.8}
+							onPress={handlePhotographBudget}
+							style={styles.taskContainer}>
+							{/* icon for the task. */}
+							{true && (
+								<View style={styles.boxcontainer}>
+									<MaterialIcons
+										name='sticky-note-2'
+										size={28}
+										color={color.primary}
+									/>
+								</View>
+							)}
 
-						{/* food budget. */}
-						<View style={styles.taskDetailsContainer}>
-							<Body style={styles.taskTitleText}>photography</Body>
+							{/* food budget. */}
+							<View style={styles.taskDetailsContainer}>
+								<Body style={styles.taskTitleText}>photography</Body>
 
-							<View style={styles.budgetValueContainer}>
-								<MaterialCommunityIcons
-									name='subdirectory-arrow-right'
-									size={24}
-									color={color.primary}
-								/>
-								<HeadingS style={styles.descriptionText}>TZS 200000</HeadingS>
+								<View style={styles.budgetValueContainer}>
+									<MaterialCommunityIcons
+										name='subdirectory-arrow-right'
+										size={24}
+										color={color.primary}
+									/>
+									<HeadingS style={styles.descriptionText}>
+										TZS {budgetData.photography}
+									</HeadingS>
+								</View>
 							</View>
-						</View>
-					</TouchableOpacity>
+						</TouchableOpacity>
+					)}
 
 					{/* budget for marketing */}
-					<TouchableOpacity
-						activeOpacity={0.8}
-						onPress={handleMarketingBudget}
-						style={styles.taskContainer}>
-						{/* icon for the task. */}
-						{true && (
-							<View style={styles.boxcontainer}>
-								<MaterialIcons
-									name='sticky-note-2'
-									size={28}
-									color={color.primary}
-								/>
-							</View>
-						)}
+					{false && (
+						<TouchableOpacity
+							activeOpacity={0.8}
+							onPress={handleMarketingBudget}
+							style={styles.taskContainer}>
+							{/* icon for the task. */}
+							{true && (
+								<View style={styles.boxcontainer}>
+									<MaterialIcons
+										name='sticky-note-2'
+										size={28}
+										color={color.primary}
+									/>
+								</View>
+							)}
 
-						{/* food budget. */}
-						<View style={styles.taskDetailsContainer}>
-							<Body style={styles.taskTitleText}>marketing</Body>
+							{/* food budget. */}
+							<View style={styles.taskDetailsContainer}>
+								<Body style={styles.taskTitleText}>marketing</Body>
 
-							<View style={styles.budgetValueContainer}>
-								<MaterialCommunityIcons
-									name='subdirectory-arrow-right'
-									size={24}
-									color={color.primary}
-								/>
-								<HeadingS style={styles.descriptionText}>TZS 200000</HeadingS>
+								<View style={styles.budgetValueContainer}>
+									<MaterialCommunityIcons
+										name='subdirectory-arrow-right'
+										size={24}
+										color={color.primary}
+									/>
+									<HeadingS style={styles.descriptionText}>
+										TZS {budgetData.marketing}
+									</HeadingS>
+								</View>
 							</View>
-						</View>
-					</TouchableOpacity>
+						</TouchableOpacity>
+					)}
 				</ScrollView>
 			</View>
 

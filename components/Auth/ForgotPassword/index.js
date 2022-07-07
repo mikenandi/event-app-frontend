@@ -14,8 +14,8 @@ import axios from "axios";
 
 function ForgotPassword(props) {
 	// --email states using useState hook.
-	const [email, set_email] = useState("");
-	const [email_error, set_email_error] = useState("");
+	const [email, set_email] = React.useState("");
+	const [email_error, set_email_error] = React.useState("");
 
 	// --saving up the email data.
 	const handleEmailInput = () => {
@@ -66,7 +66,7 @@ function ForgotPassword(props) {
 
 				<Caption>email</Caption>
 				{/* --email error message */}
-				{email_error && <Caption>{email_error}</Caption>}
+				{!!email_error && <Caption>{email_error}</Caption>}
 
 				{/* --input for email. */}
 				<TextInput
