@@ -16,8 +16,8 @@ const initialState = {
 		mc: "",
 		photography: "",
 		marketing: "",
+		totalBudget: 0,
 	},
-	totalBudget: 0,
 };
 
 const eventSlice = createSlice({
@@ -59,9 +59,9 @@ const eventSlice = createSlice({
 				actions.payload.numberOfGuestsExpected;
 			state.budgetData.pricePerPlate = actions.payload.pricePerPlate;
 
-			state.totalBudget =
+			state.budgetData.totalBudget =
 				Number(state.budgetData.numberOfGuestsExpected) *
-					Number(state.budgetData.drinksPricePerPerson) +
+					Number(state.budgetData.pricePerPlate) +
 				Number(state.budgetData.numberOfGuestsExpected) *
 					Number(state.budgetData.drinksPricePerPerson) +
 				Number(state.budgetData.venueCost) +
@@ -71,9 +71,9 @@ const eventSlice = createSlice({
 			state.budgetData.drinksPricePerPerson =
 				actions.payload.drinksPricePerPerson;
 
-			state.totalBudget =
+			state.budgetData.totalBudget =
 				Number(state.budgetData.numberOfGuestsExpected) *
-					Number(state.budgetData.drinksPricePerPerson) +
+					Number(state.budgetData.pricePerPlate) +
 				Number(state.budgetData.numberOfGuestsExpected) *
 					Number(state.budgetData.drinksPricePerPerson) +
 				Number(state.budgetData.venueCost) +
@@ -94,9 +94,9 @@ const eventSlice = createSlice({
 		saveVenueBudget: (state, actions) => {
 			state.budgetData.venueCost = actions.payload.venueCost;
 
-			state.totalBudget =
+			state.budgetData.totalBudget =
 				Number(state.budgetData.numberOfGuestsExpected) *
-					Number(state.budgetData.drinksPricePerPerson) +
+					Number(state.budgetData.pricePerPlate) +
 				Number(state.budgetData.numberOfGuestsExpected) *
 					Number(state.budgetData.drinksPricePerPerson) +
 				Number(state.budgetData.venueCost) +
@@ -105,9 +105,9 @@ const eventSlice = createSlice({
 		saveTrasnportationBudget: (state, actions) => {
 			state.budgetData.transportations = actions.payload.transportations;
 
-			state.totalBudget =
+			state.budgetData.totalBudget =
 				Number(state.budgetData.numberOfGuestsExpected) *
-					Number(state.budgetData.drinksPricePerPerson) +
+					Number(state.budgetData.pricePerPlate) +
 				Number(state.budgetData.numberOfGuestsExpected) *
 					Number(state.budgetData.drinksPricePerPerson) +
 				Number(state.budgetData.venueCost) +

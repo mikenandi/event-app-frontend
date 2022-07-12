@@ -24,7 +24,7 @@ function Profile(props) {
 	// initializing dispatch.
 
 	const dispatch = useDispatch();
-	// const [profile, setProfile] = React.useState({});
+	const [profile, setProfile] = React.useState({});
 
 	const [isloading, set_isloading] = React.useState(false);
 
@@ -33,6 +33,31 @@ function Profile(props) {
 		dispatch(hideProfile());
 	};
 
+	const userId = useSelector((state) => {
+		return state.auth.userId;
+	});
+
+	React.useEffect(() => {
+		(async function () {
+			try {
+				let response = await axios({
+					method: "GET",
+					url: "http://evento-tz-backend.herokuapp.com/api/v1/user/profile",
+					params: {
+						userId: userId,
+					},
+				});
+
+				setProfile(response.data.data);
+
+				return;
+			} catch (error) {
+				console.log(error.response.data);
+				return;
+			}
+		})();
+	}, []);
+
 	const handleLogOut = async () => {
 		try {
 			await SecureStore.deleteItemAsync("authToken");
@@ -40,7 +65,7 @@ function Profile(props) {
 			set_isloading(true);
 			dispatch(hideProfile());
 			dispatch(logOut());
-			console.log("passed in");
+
 			setTimeout(() => {}, 5000);
 
 			return;
@@ -74,9 +99,12 @@ function Profile(props) {
 						<Ionicons name='person-outline' size={60} color={color.dimblack} />
 					</View>
 
-					<HeadingS style={styles.nameText}>test name</HeadingS>
+					<HeadingS style={styles.nameText}>your profile</HeadingS>
 					<View style={styles.locationContainer}>
-						<Entypo name='location-pin' size={20} color={color.lightgray} />
+						{false && (
+							<Entypo name='location-pin' size={20} color={color.lightgray} />
+						)}
+
 						<BodyS style={styles.locationText}></BodyS>
 					</View>
 				</View>
@@ -85,8 +113,18 @@ function Profile(props) {
 						<View style={styles.detailContainer}>
 							<Ionicons name='person-outline' size={24} color={color.primary} />
 							<View style={styles.detailsTextContainer}>
-								<HeadingS>Username</HeadingS>
-								<BodyS>test@gmail.com</BodyS>
+								<HeadingS>Full name</HeadingS>
+								<BodyS>{profile.fullname}</BodyS>
+							</View>
+						</View>
+					)}
+
+					{true && (
+						<View style={styles.detailContainer}>
+							<Ionicons name='person-outline' size={24} color={color.primary} />
+							<View style={styles.detailsTextContainer}>
+								<HeadingS>username</HeadingS>
+								<BodyS>{profile.email}</BodyS>
 							</View>
 						</View>
 					)}
@@ -99,17 +137,23 @@ function Profile(props) {
 						/>
 						<View style={styles.detailsTextContainer}>
 							<HeadingS>Email Address</HeadingS>
-							<BodyS>test@gmail.com</BodyS>
+							<BodyS>{profile.email}</BodyS>
 						</View>
 					</View>
 
-					<View style={styles.detailContainer}>
-						<Ionicons name='ios-call-outline' size={24} color={color.primary} />
-						<View style={styles.detailsTextContainer}>
-							<HeadingS>Phone Number</HeadingS>
-							<BodyS>0787293023</BodyS>
+					{false && (
+						<View style={styles.detailContainer}>
+							<Ionicons
+								name='ios-call-outline'
+								size={24}
+								color={color.primary}
+							/>
+							<View style={styles.detailsTextContainer}>
+								<HeadingS>Phone Number</HeadingS>
+								<BodyS>0787293023</BodyS>
+							</View>
 						</View>
-					</View>
+					)}
 				</View>
 			</View>
 		</View>

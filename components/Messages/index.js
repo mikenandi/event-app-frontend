@@ -15,20 +15,53 @@ import Message from "./Message";
 import {useSelector} from "react-redux";
 import Chat from "./Chat";
 import {EvilIcons, MaterialIcons} from "@expo/vector-icons";
+import axios from "axios";
+import {io} from "socket.io-client";
+import {useDispatch} from "react-redux";
+import {saveVendorsData} from "../../Store/message-store/VendorSlice";
+
+const socket = io.connect("http://evento-chatt.herokuapp.com");
 
 function Messages(props) {
+	const dispatch = useDispatch();
 	const visible = useSelector((state) => {
 		return state.showModalMessage.chatVisible;
 	});
 
+	const userId = useSelector((state) => {
+		return state.auth.userId;
+	});
+
+	const vendors = useSelector((state) => {
+		return state.vendorMsg.vendors;
+	});
+
+	React.useEffect(() => {
+		(async function () {
+			await socket.emit("find_all_vendors");
+
+			await socket.on("vendors_data", function (data) {
+				dispatch(saveVendorsData(data));
+				return;
+			});
+		})();
+	}, []);
+
 	const renderItem = ({item}) => {
-		return <Message name={item.tenantName} read={item.read} msg={item.msg} />;
+		return (
+			<Message
+				name={item.bussiness_name}
+				id={item.id}
+				msg={item.msg}
+				socket={socket}
+			/>
+		);
 	};
 
 	return (
 		<View style={styles.screen}>
 			<FlatList
-				data={Data}
+				data={vendors}
 				renderItem={renderItem}
 				keyExtractor={(item) => item.id}
 			/>
@@ -43,7 +76,7 @@ function Messages(props) {
 
 			{/* show a chat */}
 			<Modal animationType='fade' visible={visible} transparent={false}>
-				<Chat />
+				<Chat socket={socket} />
 			</Modal>
 		</View>
 	);

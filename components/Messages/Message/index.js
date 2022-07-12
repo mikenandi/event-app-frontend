@@ -11,41 +11,56 @@ import {useDispatch, useSelector} from "react-redux";
 import color from "../../colors";
 import {showChat} from "../../../Store/message-store/modalSlice";
 import {Caption, BodyS, Body, HeadingL, HeadingS} from "../../Typography";
+import {saveVendor} from "../../../Store/message-store/VendorSlice";
 
 function Message(props) {
 	const dispatch = useDispatch();
 
 	const handleChat = () => {
+		let room_name = "vendor_room";
+
+		props.socket.emit("join_room", room_name);
+
+		dispatch(saveVendor(props.id));
 		dispatch(showChat());
 	};
 
 	return (
 		<TouchableOpacity activeOpacity={0.7} onPress={handleChat}>
 			<View style={styles.messagecontainer}>
-				<Image
-					source={require("../../../assets/tenant.jpeg")}
-					style={styles.avatar}
-				/>
+				{true ? (
+					<View style={styles.avatar} />
+				) : (
+					<Image
+						source={require("../../../assets/tenant.jpeg")}
+						style={styles.avatar}
+					/>
+				)}
+
 				<View>
 					<View style={styles.rowContainer}>
 						<Body style={props.read ? styles.activeNameText : styles.nameText}>
 							{props.name}
 						</Body>
 						<View style={styles.readStatusContainer}>
-							<Caption
-								style={props.read ? styles.unreadTimeText : styles.timeText}>
-								Wed
-							</Caption>
-							{props.read && <View style={styles.newMsgdot}></View>}
+							{false && (
+								<Caption
+									style={false ? styles.unreadTimeText : styles.timeText}>
+									Wed
+								</Caption>
+							)}
+
+							{false && <View style={styles.newMsgdot}></View>}
 						</View>
 					</View>
 
 					<View style={styles.rowContainer}>
 						<BodyS
 							style={props.read ? styles.briefActive : styles.briefInactive}>
-							{props.msg.length > 70
+							talk to this vendor
+							{/* {props.msg.length > 70
 								? props.msg.slice(0, 35).concat("...")
-								: props.msg}
+								: props.msg} */}
 						</BodyS>
 					</View>
 				</View>
@@ -57,8 +72,9 @@ const styles = StyleSheet.create({
 	avatar: {
 		height: 40,
 		width: 40,
-		borderRadius: 20,
+		borderRadius: 25,
 		marginRight: 10,
+		backgroundColor: color.primary,
 	},
 	messagecontainer: {
 		flexDirection: "row",

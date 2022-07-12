@@ -43,6 +43,7 @@ function Budgets(props) {
 	const handleHidePlanning = async () => {
 		let stringStoredValue = JSON.stringify(budgetData);
 		await AsyncStorage.setItem(eventId, stringStoredValue);
+
 		dispatch(hideBudgets());
 	};
 
@@ -91,10 +92,6 @@ function Budgets(props) {
 		return state.event.budgetData;
 	});
 
-	const wholeBudget = useSelector((state) => {
-		return state.event.budgetData;
-	});
-
 	React.useEffect(async () => {
 		(async () => {
 			let availableBudgets = await AsyncStorage.getItem(eventId);
@@ -119,9 +116,9 @@ function Budgets(props) {
 
 			<View style={styles.container}>
 				{/* modal for total budget. */}
-				{false && (
+				{true && (
 					<View style={styles.totalBudgetContainer}>
-						<HeadingM>TZS {wholeBudget}</HeadingM>
+						<HeadingM>TZS {budgetData.totalBudget}</HeadingM>
 						<Body
 							style={{
 								color: color.grey,

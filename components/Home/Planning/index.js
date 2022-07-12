@@ -81,7 +81,7 @@ function Planning(props) {
 					<GuestPlan eventId={eventId} />
 					<TaskPlan eventId={eventId} />
 					<BudgetPlan eventId={eventId} />
-					<NotesPlan eventId={eventId} />
+					{false && <NotesPlan eventId={eventId} />}
 					<CreateInvitationsPlan eventId={eventId} />
 				</View>
 			</View>

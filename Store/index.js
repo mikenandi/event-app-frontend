@@ -5,6 +5,8 @@ import vendorModalReducer from "./VendorStore/modalSlice";
 import authReducer from "./Auth/authSlice";
 import eventReducer from "./homeStore/eventSlice";
 import vendorReducer from "./VendorStore/vendorSlice";
+import vendorMessageReducer from "./message-store/VendorSlice";
+import convReducer from "./message-store/convSlice";
 
 export const store = configureStore({
 	reducer: {
@@ -14,6 +16,8 @@ export const store = configureStore({
 		auth: authReducer,
 		event: eventReducer,
 		vendor: vendorReducer,
+		vendorMsg: vendorMessageReducer,
+		conv: convReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({

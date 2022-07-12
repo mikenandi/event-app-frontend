@@ -19,6 +19,7 @@
 		"@react-navigation/native-stack": "^6.2.5",
 		"@reduxjs/toolkit": "^1.7.2",
 		"axios": "^0.26.1",
+		"crypto": "^1.0.1",
 		"dotenv": "^16.0.0",
 		"expo": "~44.0.0",
 		"expo-location": "^14.0.2",
@@ -37,7 +38,9 @@
 		"react-native-screens": "^3.13.1",
 		"react-native-web": "0.17.1",
 		"react-redux": "^7.2.6",
-		"redux": "^4.1.2"
+		"redux": "^4.1.2",
+		"sails.io.js": "^1.2.1",
+		"socket.io-client": "^4.5.1"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.12.9"

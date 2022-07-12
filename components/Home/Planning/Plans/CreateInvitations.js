@@ -15,6 +15,7 @@ import {showInvitations} from "../../../../Store/homeStore/modalSlice";
 import {FontAwesome} from "@expo/vector-icons";
 import {useSelector} from "react-redux";
 import CreateInvitations from "../CreateInvitations";
+import axios from "axios";
 
 function CreateInvitaions(props) {
 	// initializing dispatch
@@ -38,7 +39,7 @@ function CreateInvitaions(props) {
 				<View style={styles.boxcontainer}>
 					<FontAwesome name='send' size={30} color='white' />
 				</View>
-				<HeadingS style={styles.buttonText}>Create invitations</HeadingS>
+				<HeadingS style={styles.buttonText}>Send invitations</HeadingS>
 			</TouchableOpacity>
 
 			{/* modal for budget */}

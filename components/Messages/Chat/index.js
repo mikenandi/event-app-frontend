@@ -7,6 +7,7 @@ import {
 	TouchableOpacity,
 	StatusBar,
 	TextInput,
+	FlatList,
 } from "react-native";
 import {Caption, BodyS, HeadingL, HeadingS, Body} from "../../Typography";
 import color from "../../colors";
@@ -16,12 +17,58 @@ import {Feather} from "@expo/vector-icons";
 import {hideChat} from "../../../Store/message-store/modalSlice";
 import {useDispatch} from "react-redux";
 import {backgroundColor} from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
+import {useSelector} from "react-redux";
 
 function Chat(props) {
 	const dispatch = useDispatch();
+	const [message, setMessage] = React.useState("");
+	const [msgList, setMsgList] = React.useState([]);
 
 	const handleBack = () => {
 		dispatch(hideChat());
+	};
+
+	const userId = useSelector((state) => {
+		return state.auth.userId;
+	});
+
+	const handleSendMessage = async () => {
+		let data = {
+			id: Date.now().toString(),
+			message: message,
+			author: userId,
+			room: "vendor_room",
+		};
+		await props.socket.emit("send_message", data);
+
+		setMsgList((list) => [...list, data]);
+		setMessage("");
+		return;
+	};
+
+	React.useEffect(() => {
+		props.socket.on("receive_message", (data) => {
+			setMsgList((list) => [...list, data]);
+		});
+
+		return () => {
+			setMsgList([]);
+		};
+	}, [props.socket]);
+
+	const renderItem = ({item}) => {
+		return (
+			<View
+				style={
+					item.author === userId
+						? styles.incomingContainer
+						: styles.outGoingContainer
+				}>
+				<View style={styles.incomingMessageContainer}>
+					<Body>{item.message}</Body>
+				</View>
+			</View>
+		);
 	};
 
 	return (
@@ -44,30 +91,49 @@ function Chat(props) {
 
 				<MaterialCommunityIcons name='dots-vertical' size={24} color='black' />
 			</View>
-			<View style={styles.incomingContainer}>
-				<View style={styles.incomingMessageContainer}>
-					<Body>incomming message</Body>
+
+			<FlatList
+				data={msgList}
+				keyExtractor={(item) => item.id}
+				renderItem={renderItem}
+			/>
+			{false && (
+				<View style={styles.incomingContainer}>
+					<View style={styles.incomingMessageContainer}>
+						<Body>incomming message</Body>
+					</View>
 				</View>
-			</View>
-			<View style={styles.outGoingContainer}>
-				<View style={styles.outGoingMessageContainer}>
-					<Body style={styles.outgoingText}>out going message</Body>
+			)}
+
+			{false && (
+				<View style={styles.outGoingContainer}>
+					<View style={styles.outGoingMessageContainer}>
+						<Body style={styles.outgoingText}>out going message</Body>
+					</View>
 				</View>
-			</View>
+			)}
+
 			<View style={styles.messageContainer}>
 				<TextInput
 					placeholder='message'
 					style={styles.messageInput}
 					multiline={true}
+					value={message}
+					onChangeText={(value) => {
+						setMessage(value);
+					}}
 				/>
-				<View style={styles.sendContainer}>
+				<TouchableOpacity
+					onPress={handleSendMessage}
+					activeOpacity={0.8}
+					style={styles.sendContainer}>
 					<Ionicons
 						name='send-sharp'
 						size={20}
 						color={color.primary}
 						style={styles.icon}
 					/>
-				</View>
+				</TouchableOpacity>
 			</View>
 		</View>
 	);
